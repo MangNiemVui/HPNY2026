@@ -194,9 +194,7 @@ try {
 }
 
 return { savedToFirestore: true, emailed };
-
-
-
+}
 // expose to window
 window.AppServices = {
   initFirebaseIfNeeded,
