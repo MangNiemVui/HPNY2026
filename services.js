@@ -148,10 +148,12 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
         window.EMAILJS_SERVICE_ID,
         window.EMAILJS_TEMPLATE_ID,
         {
-          to_email: window.OWNER_EMAIL || "",
-          viewer_label: viewerLabel || viewerKey || "Ẩn danh",
-          target_label: targetLabel || targetKey || "",
-          message: message || ""
+          from_name: viewerLabel || viewerKey || "Ẩn danh",
+        from_key: viewerKey || "",
+        card_target: targetLabel || targetKey || "",
+        time: new Date().toLocaleString("vi-VN"),
+        email: window.OWNER_EMAIL || "",   // nếu bạn muốn Reply-To
+        message: message || ""
         }
       );
       emailed = true;
