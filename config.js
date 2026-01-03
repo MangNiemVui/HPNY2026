@@ -16,7 +16,7 @@ window.OWNER_KEY = "bethucute";
 window.OWNER_UID = "pZkAh7riPDVnHTTwWV4V77tTnBk2";
 
 // EmailJS (từ ảnh bạn gửi)
-window.EMAILJS_PUBLIC_KEY = "BkywBTvqF7dlOrqnh";
+window.EMAILJS_PUBLIC_KEY = "-D5u4gYUh6xQBOcry";
 window.EMAILJS_SERVICE_ID = "service_s5ecpfq";
 window.EMAILJS_TEMPLATE_ID = "template_zpr88bw";
 
