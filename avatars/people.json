@@ -39,7 +39,7 @@
     "pass": "15122003",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-    "extraLine": "🎓 Chúc bạn tốt nghiệp thạc sĩ thành công!"
+    "firstWish": "🎓 Chúc bạn tốt nghiệp thạc sĩ thành công!"
   },
   {
     "key": "cholongnach",
@@ -68,7 +68,7 @@
     "pass": "23032001",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-    "extraLine": "💼 Chúc chị tìm được công việc tốt nhiều tiền!"
+    "firstWish": "💼 Chúc chị tìm được công việc tốt nhiều tiền, lun lun xinh đẹp như giờ nha...hihihihi!"
   },
   {
     "key": "baodepgai",
@@ -83,7 +83,7 @@
     "pass": "08112001",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-    "extraLine": "💎 Chúc bà mau làm phú bà!"
+    "firstWish": "💎 Chúc bà mau làm phú bà, phú bà, phú bà cái gì quan trọng nhắc lạilại!"
   },
   {
     "key": "cotbao",
