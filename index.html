@@ -737,7 +737,7 @@
           <span class="pill">Chạm / click để bắn pháo hoa 🎆</span>
           <select id="musicSelect" class="musicSelect" aria-label="Chọn nhạc"></select>
           <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
-          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc"><span class="ico" aria-hidden="true">🔊</span><span class="txt">Bật nhạc</span></button>
+          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc"><span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span></button>
           <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
         </div>
       </div>
@@ -849,7 +849,7 @@
       const txt = btnMusic.querySelector(".txt");
       if (!ico || !txt) {
         // fallback for old markup
-        btnMusic.textContent = label || (state ? "🎵 Tắt nhạc" : "🔊 Bật nhạc");
+        btnMusic.textContent = label || (state ? "⏸ Tạm dừng" : "▶️ Phát nhạc");
         return;
       }
       if (label){
@@ -859,11 +859,13 @@
         return;
       }
       if (state){
-        ico.textContent = "🎵";
-        txt.textContent = "Tắt nhạc";
+        // playing
+        ico.textContent = "⏸";
+        txt.textContent = "Tạm dừng";
       }else{
-        ico.textContent = "🔊";
-        txt.textContent = "Bật nhạc";
+        // paused
+        ico.textContent = "▶️";
+        txt.textContent = "Phát nhạc";
       }
     }
 
