@@ -140,22 +140,24 @@ async function deleteWish(docId){
 
 async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, message }){
   await initFirebaseIfNeeded();
+  let savedToFirestore = false;
+  let emailed = false;
 
   // 1) Save to Firestore
-  const payload = {
-    ownerKey: window.OWNER_KEY || "",
-    viewerKey, viewerLabel,
-    targetKey, targetLabel,
-    message,
-    createdAt: serverTimestamp()
-  };
+   try {
+    await addDoc(collection(db, "wishes"), {
+      ownerKey: window.OWNER_KEY || "",
+      viewerKey, viewerLabel,
+      targetKey, targetLabel,
+      message,
+      createdAt: serverTimestamp()
+    });
+    savedToFirestore = true;
+  } catch (e) {
+    console.warn("Firestore addDoc failed => still try EmailJS:", e);
+  }
 
-  await addDoc(collection(db, "wishes"), payload);
-
-   // 2) Try EmailJS
   // 2) Try EmailJS
-let emailed = false;
-
 try {
   const EJ =
     (window.emailjs && window.emailjs.default && typeof window.emailjs.default.send === "function")
@@ -175,6 +177,7 @@ try {
         card_target: targetLabel || targetKey || "",
         time: new Date().toLocaleString("vi-VN"),
         message: message || "",
+        to_email: "phanthu27112002@gmail.com",
         // nếu template bạn có field reply-to hoặc to_email động thì dùng:
         // to_email: window.OWNER_EMAIL || "",
         // reply_to: window.OWNER_EMAIL || "",
