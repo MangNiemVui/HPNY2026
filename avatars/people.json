@@ -35,19 +35,11 @@
     "firstWish": "💼 Chúc chị tìm được công việc tốt nhiều tiền, lun lun xinh đẹp như giờ nha...hihihihi!"
   },
   {
-    "key": "cogaitamlinh",
-    "label": "Nguyễn Ngọc",
-    "pass": "11102002",
+    "key": "baisau",
+    "label": "Thảo chó",
+    "pass": "07052002",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"]
-  },
-  {
-    "key": "dangthu",
-    "label": "Đặng Thư",
-    "pass": "15122003",
-    "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"],
-    "firstWish": "🎓 Chúc em tốt nghiệp thạc sĩ thành công!"
   },
   {
     "key": "cholongnach",
@@ -62,6 +54,35 @@
     "pass": "12062002",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"]
+  },
+  {
+    "key": "lovisong2",
+    "label": "Như Ngọc",
+    "pass": "22052000",
+    "role": "guest",
+    "exts": ["jpg", "png", "webp", "jpeg"]
+  },
+  {
+    "key": "chanhiu",
+    "label": "Châu Anh",
+    "pass": "02072002",
+    "role": "guest",
+    "exts": ["jpg", "png", "webp", "jpeg"]
+  },
+  {
+    "key": "cogaitamlinh",
+    "label": "Nguyễn Ngọc",
+    "pass": "11102002",
+    "role": "guest",
+    "exts": ["jpg", "png", "webp", "jpeg"]
+  },
+  {
+    "key": "dangthu",
+    "label": "Đặng Thư",
+    "pass": "15122003",
+    "role": "guest",
+    "exts": ["jpg", "png", "webp", "jpeg"],
+    "firstWish": "🎓 Chúc em tốt nghiệp thạc sĩ thành công!"
   },
   {
     "key": "nhuy",
@@ -97,34 +118,12 @@
     "label": "Chíp",
     "pass": "16062003",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"],
-    "aliasName": "chíp"
+    "exts": ["jpg", "png", "webp", "jpeg"]
   },
   {
     "key": "thuyhiencocuocgoikhac",
     "label": "Thúy Hiền",
     "pass": "18122002",
-    "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
-  },
-  {
-    "key": "lovisong2",
-    "label": "Như Ngọc",
-    "pass": "22052000",
-    "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
-  },
-  {
-    "key": "baisau",
-    "label": "Thảo chó",
-    "pass": "07052002",
-    "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
-  },
-  {
-    "key": "chanhiu",
-    "label": "Châu Anh",
-    "pass": "02072002",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"]
   },
