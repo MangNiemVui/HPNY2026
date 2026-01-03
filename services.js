@@ -152,14 +152,19 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
 
   await addDoc(collection(db, "wishes"), payload);
 
-  // 2) Try EmailJS
+   // 2) Try EmailJS
   let emailed = false;
   try{
-    if (window.emailjs && window.EMAILJS_PUBLIC_KEY && window.EMAILJS_SERVICE_ID && window.EMAILJS_TEMPLATE_ID){
-      // ✅ init chuẩn, ổn định
-      window.emailjs.init(window.EMAILJS_PUBLIC_KEY);
+    // ✅ lấy đúng object emailjs (có thể nằm ở .default)
+    const EJ = window.emailjs?.send ? window.emailjs : window.emailjs?.default;
 
-      await window.emailjs.send(
+    if (EJ && window.EMAILJS_PUBLIC_KEY && window.EMAILJS_SERVICE_ID && window.EMAILJS_TEMPLATE_ID){
+
+      // ✅ init bằng string cho chắc
+      EJ.init(window.EMAILJS_PUBLIC_KEY);
+
+      // ✅ truyền public key vào tham số thứ 4 để chắc chắn không bị mất key
+      await EJ.send(
         window.EMAILJS_SERVICE_ID,
         window.EMAILJS_TEMPLATE_ID,
         {
@@ -168,13 +173,19 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
           card_target: targetLabel || targetKey || "",
           time: new Date().toLocaleString("vi-VN"),
           message: message || "",
-          email: "" // nếu bạn dùng Reply-To: {{email}} thì điền email tại đây
-        }
+          email: window.OWNER_EMAIL || "" // (optional) dùng cho Reply-To nếu template có {{email}}
+        },
+        window.EMAILJS_PUBLIC_KEY
       );
 
       emailed = true;
     } else {
-      console.warn("EmailJS missing config or script not loaded");
+      console.warn("EmailJS missing config or script not loaded", {
+        hasEJ: !!EJ,
+        pub: !!window.EMAILJS_PUBLIC_KEY,
+        service: !!window.EMAILJS_SERVICE_ID,
+        tpl: !!window.EMAILJS_TEMPLATE_ID,
+      });
     }
   }catch(e){
     console.warn("EmailJS send failed:", e);
@@ -182,8 +193,6 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
     console.warn("text:", e?.text);
   }
 
-  return { savedToFirestore: true, emailed };
-}
 
 // expose to window
 window.AppServices = {
