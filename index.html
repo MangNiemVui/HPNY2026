@@ -553,7 +553,7 @@
         <div class="side">
           <div class="bubble">
             <div class="blob" aria-hidden="true"></div>
-            <img id="avatarImg" class="avatarImg" src="avatars/default.png" alt="Ảnh người nhận" />
+            <img id="avatarImg" class="avatarImg" src="./avatars/default.png" alt="Ảnh người nhận" />
           </div>
         </div>
       </div>
@@ -593,7 +593,7 @@
     </div>
   </div>
 
-  <!-- ✅ Success overlay (PHẢI để ngoài <script>) -->
+  <!-- ✅ Success overlay -->
   <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true" aria-label="Gửi lời chúc thành công">
     <div class="successCard">
       <div class="successTick"><span>✅</span></div>
@@ -613,11 +613,12 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  <!-- ✅ QUAN TRỌNG: trên GitHub Pages nên dùng ./ để không lệch path -->
+  <!-- config + services -->
   <script src="./config.js"></script>
   <script type="module" src="./services.js"></script>
 
-  <script>
+  <!-- ✅ MAIN SCRIPT (module để đảm bảo chạy sau services.js) -->
+  <script type="module">
     // ===== Year =====
     const yearText = document.getElementById("yearText");
     const yearInput = document.getElementById("yearInput");
@@ -657,7 +658,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
 
     async function loadPlaylist(){
       try{
-        const res = await fetch("music/playlist.json", { cache: "no-store" });
+        const res = await fetch("./music/playlist.json", { cache: "no-store" });
         if (!res.ok) throw new Error("Cannot load music/playlist.json");
         PLAYLIST = await res.json();
         musicSelect.innerHTML = PLAYLIST.map((t, i) => `<option value="${i}">${t.title}</option>`).join("");
@@ -676,7 +677,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
       if (!PLAYLIST.length) return;
       trackIndex = (i + PLAYLIST.length) % PLAYLIST.length;
       musicSelect.value = String(trackIndex);
-      music.src = `music/${PLAYLIST[trackIndex].file}`;
+      music.src = `./music/${PLAYLIST[trackIndex].file}`;
       music.volume = 0.9;
       if (musicOn && autoplay) music.play().catch(()=>{});
     }
@@ -762,7 +763,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
     const wishEl = document.getElementById("wish");
     const avatarImg = document.getElementById("avatarImg");
 
-    // ===== 40+ lời chúc random chung =====
+    // ===== Global wishes =====
     const GLOBAL_WISHES = [
       "Chúc {name} năm {year} bình an, vui khỏe và gặp nhiều điều tốt đẹp bất ngờ! ✨",
       "Năm {year} chúc {name} mọi dự định đều thuận lợi, làm đâu thắng đó! 🚀",
@@ -783,30 +784,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
       "Chúc {name} {year} sáng tạo bùng nổ, ý tưởng ra như suối! 💡🌊",
       "Năm {year} chúc {name} điềm tĩnh trước bão, bình yên trong tim! 🌿",
       "Chúc {name} {year} mỗi ngày đều có lý do để vui! 😄✨",
-      "Năm {year} chúc {name} mở mắt ra là thấy may mắn! 🍀👀",
-      "Chúc {name} {year} gặp nhiều cơ hội tốt, nắm là trúng! 🎯💫",
-      "Năm {year} chúc {name} đam mê dẫn đường, kiên trì đưa tới đích! 🧭🏁",
-      "Chúc {name} {year} mọi kế hoạch đều chạy “mượt” như ý! ✅",
-      "Năm {year} chúc {name} chill hết cỡ, vui hết nấc! 🎶😎",
-      "Chúc {name} {year} đi xa có bạn, về nhà có yêu thương! 🧳💞",
-      "Năm {year} chúc {name} bớt căng, thêm thảnh thơi! 🧘‍♀️",
-      "Chúc {name} {year} những điều tốt tự tìm đến, điều xấu tự đi lạc! 😝🍀",
-      "Năm {year} chúc {name} yêu bản thân nhiều hơn mỗi ngày! 💖",
-      "Chúc {name} {year} làm gì cũng “đúng tiến độ”, đạt gì cũng “đúng đích”! ⏳🎯",
-      "Năm {year} chúc {name} mưa cũng hóa nắng, buồn cũng hóa vui! ☔☀️",
-      "Chúc {name} {year} tinh thần vững vàng, trái tim ấm áp! ❤️‍🔥",
-      "Năm {year} chúc {name} mọi sự nhẹ nhàng như gió, dịu dàng như mây! ☁️🌸",
-      "Chúc {name} {year} thân khỏe – tâm an – trí sáng! 🌿🧠",
-      "Năm {year} chúc {name} bước nào cũng có người nâng đỡ! 🤝✨",
-      "Chúc {name} {year} kiếm được nhiều tiền nhưng vẫn ngủ đủ giấc! 💸😴",
-      "Năm {year} chúc {name} có thêm nhiều trải nghiệm đáng nhớ! 🗺️✨",
-      "Chúc {name} {year} vui vẻ trong điều nhỏ, hạnh phúc trong điều thường! 🌷",
-      "Năm {year} chúc {name} mọi nỗ lực đều được đền đáp xứng đáng! 🏆",
-      "Chúc {name} {year} nói ít trúng nhiều, làm ít hiệu quả cao! 😆✅",
-      "Năm {year} chúc {name} gặp quý nhân, tránh tiểu nhân! 🧿🍀",
-      "Chúc {name} {year} mỗi ngày đều có chút “wow”! ✨😆",
-      "Năm {year} chúc {name} luôn được trân trọng và yêu thương đúng cách! 💗",
-      "Chúc {name} {year} bình an là chính, vui vẻ là nhất! 🕊️",
+      "Năm {year} chúc {name} bình an là chính, vui vẻ là nhất! 🕊️",
       "Năm {year} chúc {name} sống nhẹ nhàng mà vẫn rực rỡ! 🌸🌟"
     ];
 
@@ -816,7 +794,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
     let lastWishIndex = -1;
 
     let session = { loggedIn:false, viewer:null, target:null };
-    const firstWishShown = new Set(); // track firstWish per key
+    const firstWishShown = new Set();
 
     function escapeHtml(s){
       return String(s).replace(/[&<>"']/g, m => ({
@@ -883,7 +861,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
         ownerBody.innerHTML = `
           <div class="ownerRow">
             <div><b>⚠️ ${escapeHtml(e.message || "Lỗi services")}</b></div>
-            <div class="ownerMeta">Mở DevTools → Console/Network để xem file services.js có bị 404 hoặc lỗi JS không.</div>
+            <div class="ownerMeta">Mở DevTools → Console/Network để xem services.js có lỗi/404 không.</div>
           </div>`;
         return;
       }
@@ -917,6 +895,9 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
                 • Kết thúc: ${escapeHtml(fmtTime(v.endedAt))}
               </div>
               <div class="ownerMeta">UA: ${escapeHtml(String(v.userAgent||"").slice(0,120))}</div>
+              <div class="row" style="justify-content:flex-end">
+                <button class="btnSecondary" type="button" data-del-view="${escapeHtml(v.id)}">🗑 Xoá</button>
+              </div>
             </div>
           `).join("");
         } else {
@@ -933,6 +914,9 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
                 • ${escapeHtml(fmtTime(w.createdAt))}
               </div>
               <div style="white-space:pre-wrap">${escapeHtml(w.message || "")}</div>
+              <div class="row" style="justify-content:flex-end">
+                <button class="btnSecondary" type="button" data-del-wish="${escapeHtml(w.id)}">🗑 Xoá</button>
+              </div>
             </div>
           `).join("");
         }
@@ -941,11 +925,41 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
         ownerBody.innerHTML = `
           <div class="ownerRow">
             <div><b>⚠️ Không tải được dữ liệu</b></div>
-            <div class="ownerMeta">Kiểm tra Firestore Rules (owner-only read) hoặc Owner chưa login.</div>
+            <div class="ownerMeta">Kiểm tra Firestore Rules (read/delete owner-only) hoặc Owner chưa login.</div>
           </div>
         `;
       }
     }
+
+    // ✅ One-time event delegation for delete buttons
+    ownerBody.addEventListener("click", async (e) => {
+      const bView = e.target.closest("[data-del-view]");
+      const bWish = e.target.closest("[data-del-wish]");
+      if (!bView && !bWish) return;
+
+      if (!isOwnerAuthed()){
+        alert("Bạn chưa Owner Login.");
+        return;
+      }
+
+      const ok = confirm("Xoá dữ liệu này? Không khôi phục được.");
+      if (!ok) return;
+
+      try{
+        await ensureServices();
+        if (bView){
+          const id = bView.getAttribute("data-del-view");
+          await window.AppServices.deleteView(id);
+        } else {
+          const id = bWish.getAttribute("data-del-wish");
+          await window.AppServices.deleteWish(id);
+        }
+        await renderOwnerTab();
+      }catch(err){
+        console.warn(err);
+        alert("Xoá thất bại. Kiểm tra Firestore Rules / Owner Login.");
+      }
+    });
 
     function randomWish(pool){
       let idx;
@@ -1001,21 +1015,21 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
     function tryLoadAvatarFromCandidates(candidates){
       let i = 0;
       const tryNext = () => {
-        if (i >= candidates.length){ avatarImg.src = "avatars/default.png"; return; }
+        if (i >= candidates.length){ avatarImg.src = "./avatars/default.png"; return; }
         avatarImg.onerror = tryNext;
         avatarImg.src = candidates[i++];
       };
       tryNext();
     }
     function setAvatar(person){
-      if (!person){ avatarImg.src = "avatars/default.png"; return; }
+      if (!person){ avatarImg.src = "./avatars/default.png"; return; }
       const exts = person.exts || ["jpg","png","webp","jpeg"];
-      const candidates = exts.map(ext => `avatars/${person.key}.${ext}`);
+      const candidates = exts.map(ext => `./avatars/${person.key}.${ext}`);
       tryLoadAvatarFromCandidates(candidates);
     }
 
     async function loadPeople(){
-      const res = await fetch("avatars/people.json", { cache: "no-store" });
+      const res = await fetch("./avatars/people.json", { cache: "no-store" });
       if (!res.ok) throw new Error("Cannot load avatars/people.json");
       const data = await res.json();
       if (!Array.isArray(data)) throw new Error("people.json must be an array");
@@ -1026,7 +1040,6 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
         pass: String(p.pass || "").trim(),
         role: String(p.role || "guest").trim(),
         exts: Array.isArray(p.exts) ? p.exts : ["jpg","png","webp","jpeg"],
-
         wishes: Array.isArray(p.wishes) ? p.wishes : null,
         firstWish: p.firstWish ? String(p.firstWish) : "",
         useGlobalRandomOnly: !!p.useGlobalRandomOnly,
@@ -1116,7 +1129,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
       updateOwnerUI();
 
       wishEl.textContent = "🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.";
-      avatarImg.src = "avatars/default.png";
+      avatarImg.src = "./avatars/default.png";
 
       btnOwnerView.disabled = true;
       btnLogout.classList.add("hidden");
@@ -1197,7 +1210,7 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
       }catch(e){
         console.warn(e);
         alert("❌ Owner login lỗi.\nMsg: " + (e.message || e) +
-          "\n\nNếu là auth/unauthorized-domain: Firebase Console → Authentication → Settings → Authorized domains → Add: mangniemvui.github.io");
+          "\n\nNếu là unauthorized-domain: Firebase Console → Auth → Settings → Authorized domains → Add: mangniemvui.github.io");
       }finally{
         updateOwnerUI();
       }
@@ -1216,22 +1229,15 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
     btnTabWishes.addEventListener("click", () => { ownerTab = "wishes"; renderOwnerTab(); });
     btnRefreshOwner.addEventListener("click", () => renderOwnerTab());
 
-    // ===== Success overlay handlers =====
+    // Success overlay
     const successPage = document.getElementById("successPage");
     const btnSuccessClose = document.getElementById("btnSuccessClose");
-
-    function showSuccessPage(){
-      successPage.classList.remove("hidden");
-      burst(innerWidth*0.5, innerHeight*0.28, 160);
-    }
-    function hideSuccessPage(){
-      successPage.classList.add("hidden");
-    }
-
+    function showSuccessPage(){ successPage.classList.remove("hidden"); burst(innerWidth*0.5, innerHeight*0.28, 160); }
+    function hideSuccessPage(){ successPage.classList.add("hidden"); }
     btnSuccessClose.addEventListener("click", hideSuccessPage);
     successPage.addEventListener("click", (e) => { if (e.target === successPage) hideSuccessPage(); });
 
-    // Send wish to owner (Firestore + EmailJS)
+    // Send wish
     btnSendWish.addEventListener("click", async () => {
       const message = (wishMsg.value || "").trim();
       if (!message){ setStatus("⚠️ Bạn chưa nhập lời chúc.", true); return; }
@@ -1248,13 +1254,12 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
           message
         });
 
-        // ✅ Thành công CHỈ khi email gửi được
         if (result && result.emailed){
           wishMsg.value = "";
           setStatus("✅ Đã gửi email thành công! 💌", false);
           showSuccessPage();
         } else {
-          setStatus("❌ Không gửi thư thành công. Kiểm tra EmailJS (service/template/public key) và Console (F12).", true);
+          setStatus("❌ Không gửi thư thành công. Kiểm tra EmailJS và Console (F12).", true);
         }
       }catch(e){
         console.warn(e);
