@@ -27,6 +27,14 @@
     "firstWish": "Chúc cậu lun vui vẻ hạnh phúc nhé🤩. Mong năm nay cậu tốt nghiệp thành công rực  rỡ . Mong mọi việc cậu mong đều thành công và thuận lợi. Ùmmm những gì mà mình muốn nói chắc cậu đã xem qua hết rồi kkk. Mình rất thích một câu nói \"Tôi cho bạn biết tôi thích bạn không  hẳn là muốn ở bên cạnh bạn,chỉ là mong rằng sau này bạn khi gặp thăng trầm của cuộc đời thì đừng nản chí, bởi ít nhất đã có một người bị sức hút của bạn mà hấp dẫn. Trước đây như thế ,về sau cũng như vậy\" Mong cậu lun tự tin, xinh đẹp và tỏa sáng nhé...Lời cuối thấy hoa nở là tốt rồi nên cậu ở bên ai cũng được, cậu vui là mình yên lòng rồi💕. Nói xàm đủ rồi nhó bấm đổi lời chúc để nhận nhiều lời chúc hay nhé 😂😎"
   },
   {
+    "key": "tramkelly",
+    "label": "Chị gái gia trường",
+    "pass": "23032001",
+    "role": "guest",
+    "exts": ["jpg", "png", "webp", "jpeg"],
+    "firstWish": "💼 Chúc chị tìm được công việc tốt nhiều tiền, lun lun xinh đẹp như giờ nha...hihihihi!"
+  },
+  {
     "key": "cogaitamlinh",
     "label": "Nguyễn Ngọc",
     "pass": "11102002",
@@ -63,14 +71,6 @@
     "exts": ["jpg", "png", "webp", "jpeg"]
   },
   {
-    "key": "tramkelly",
-    "label": "Trâm Kelly",
-    "pass": "23032001",
-    "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"],
-    "firstWish": "💼 Chúc chị tìm được công việc tốt nhiều tiền, lun lun xinh đẹp như giờ nha...hihihihi!"
-  },
-  {
     "key": "baodepgai",
     "label": "Huỳnh Như",
     "pass": "02052003",
@@ -87,14 +87,14 @@
   },
   {
     "key": "cotbao",
-    "label": "Bùi Ngọc Tiến",
+    "label": "Tiến",
     "pass": "22122002",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"]
   },
   {
     "key": "xuanmai",
-    "label": "Xuân Mai",
+    "label": "Chíp",
     "pass": "16062003",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
