@@ -6,8 +6,45 @@
   <title>Thiệp Năm Mới 🎆</title>
 
   <style>
+    .successPage{
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      padding:18px;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+    }
+    .successCard{
+      width:min(520px, 92vw);
+      border-radius: 22px;
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 55px rgba(28,34,64,.20);
+      padding: 18px 16px;
+      text-align:center;
+    }
+    .successTick{
+      width: 92px; height: 92px;
+      border-radius: 999px;
+      margin: 4px auto 12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(255,122,182,.35), rgba(126,231,255,.35));
+      border: 1px solid rgba(28,34,64,.10);
+      box-shadow: 0 14px 30px rgba(255,122,182,.14);
+    }
+    .successTick span{ font-size: 52px; line-height: 1; }
+    .successTitle{ font-weight: 950; font-size: 18px; margin: 0 0 8px; }
+    .successText{
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(28,34,64,.78);
+      margin: 0 0 14px;
+      white-space: pre-wrap;
+    }
+
     :root{
-      --bg1:#ffe6f2; --bg2:#e8fbff;
+      --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
       --ink:#1c2240; --muted: rgba(28,34,64,.72);
       --card: rgba(255,255,255,.72); --card2: rgba(255,255,255,.55);
       --stroke: rgba(28,34,64,.10); --shadow: 0 18px 50px rgba(28,34,64,.14);
@@ -23,11 +60,21 @@
       background:
         radial-gradient(1200px 800px at 18% 18%, rgba(255,122,182,.22), transparent 60%),
         radial-gradient(1000px 700px at 80% 25%, rgba(126,231,255,.22), transparent 58%),
+        radial-gradient(900px 700px at 65% 85%, rgba(255,231,153,.25), transparent 58%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
     }
 
     canvas#fx{position:fixed; inset:0; width:100vw; height:100vh; display:block; pointer-events:none;}
-    .sparkles{position:fixed; inset:0; opacity:.75; pointer-events:none; mix-blend-mode: soft-light;}
+    .sparkles{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(1.5px 1.5px at 22% 30%, rgba(255,255,255,.9) 40%, transparent 45%),
+        radial-gradient(1.2px 1.2px at 62% 12%, rgba(255,255,255,.9) 40%, transparent 45%),
+        radial-gradient(1.6px 1.6px at 82% 52%, rgba(255,255,255,.9) 40%, transparent 45%),
+        radial-gradient(1.1px 1.1px at 35% 75%, rgba(255,255,255,.85) 40%, transparent 45%),
+        radial-gradient(1.3px 1.3px at 12% 62%, rgba(255,255,255,.85) 40%, transparent 45%);
+      opacity:.75; pointer-events:none; filter: blur(.15px); mix-blend-mode: soft-light;
+    }
 
     .wrap{position:fixed; inset:0; display:grid; place-items:center; padding:12px;}
     .card{
@@ -36,7 +83,7 @@
       background: linear-gradient(180deg, var(--card), var(--card2));
       border: 1px solid var(--stroke);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       overflow:hidden;
       position:relative;
       display:flex;
@@ -73,17 +120,28 @@
       font-weight:900; color:#fff;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       box-shadow: 0 10px 22px rgba(255,122,182,.18);
+      transition: transform .12s ease, filter .12s ease;
+      white-space:nowrap;
     }
+    .btnMusic:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .btnMusic:active{ transform: translateY(0px) scale(.99); }
+
     .btnSecondary{
       padding: 8px 12px;
       border-radius:999px;
       border: 1px solid rgba(28,34,64,.12);
       background: rgba(255,255,255,.65);
       color: rgba(28,34,64,.85);
+      box-shadow:none;
       font-weight:900;
       cursor:pointer;
     }
-    .hidden{display:none !important;}
+    .ownerBtn{
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+    }
 
     .musicSelect{
       padding: 8px 10px;
@@ -127,38 +185,73 @@
       background: rgba(255,255,255,.75);
       color: var(--ink); outline:none;
     }
+    input::placeholder{color: rgba(28,34,64,.55)}
+    input:disabled{opacity:.6; cursor:not-allowed;}
     button{
       padding:12px 14px; border-radius:14px; border:0; cursor:pointer;
       font-weight:900; color:#fff;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       box-shadow: 0 10px 25px rgba(255,122,182,.18);
+      transition: transform .12s ease, filter .12s ease;
+      white-space:nowrap;
     }
-    button:disabled{opacity:.55; cursor:not-allowed;}
+    button:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    button:active{ transform: translateY(0px) scale(.99); }
+    button:disabled{opacity:.55; cursor:not-allowed; transform:none; filter:none;}
 
     .side{display:flex; align-items:center; justify-content:center; padding:6px 0 0;}
     .bubble{
       width: min(340px, 82vw); aspect-ratio: 1/1;
       border-radius:24px;
-      background: rgba(255,255,255,.55);
+      background: radial-gradient(220px 220px at 30% 30%, rgba(255,122,182,.20), rgba(255,255,255,.35));
       border: 1px solid rgba(28,34,64,.10);
       display:grid; place-items:center;
       position:relative; overflow:hidden;
     }
+    .blob{
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(126,231,255,.28), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,122,182,.24), transparent 40%),
+        radial-gradient(circle at 60% 20%, rgba(255,231,153,.25), transparent 45%);
+      filter: blur(14px);
+      animation: floaty 5s ease-in-out infinite;
+    }
+    @keyframes floaty{0%,100%{transform:translate(-2%,-1%) rotate(-2deg)} 50%{transform:translate(2%,1%) rotate(2deg)}}
     .avatarImg{
+      position: relative;
       width: 78%; height: 78%;
       border-radius: 999px;
       object-fit: cover;
       border: 1px solid rgba(28,34,64,.10);
+      box-shadow: 0 10px 25px rgba(28,34,64,.10);
       background: rgba(255,255,255,.75);
     }
 
-    /* LOCK overlay */
+    .foot{
+      padding: 0 18px 16px;
+      color: rgba(28,34,64,.68);
+      font-size: 12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .toggle{display:inline-flex; align-items:center; gap:8px; user-select:none; white-space:nowrap;}
+    .toggle input{ width: 18px; height: 18px; }
+    .year{
+      font-weight: 950;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* LOCK */
     .lock{
       position:absolute; inset:0;
       display:flex; align-items:center; justify-content:center;
       padding:18px;
       background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(28,34,64,.10);
       z-index: 20;
     }
     .lockPanel{
@@ -168,52 +261,200 @@
       border: 1px solid rgba(28,34,64,.12);
       box-shadow: 0 18px 50px rgba(28,34,64,.16);
       padding: 16px;
+      max-height: calc(100svh - 56px);
+      overflow:auto;
     }
-    .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+    .lockTitle{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:10px; flex-wrap:wrap; margin-bottom:8px;
+    }
+    .lockTitle h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+      line-height:1.2;
+      word-break: break-word;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px; border-radius:999px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.65);
+      font-size: 12px; color: rgba(28,34,64,.75);
+      white-space:nowrap;
+    }
+    .mini{font-size:12px; color: rgba(28,34,64,.68); line-height:1.45; margin:0 0 10px;}
     .status{
       margin-top:10px;
       padding:10px 12px; border-radius:14px;
       border: 1px solid rgba(28,34,64,.12);
       background: rgba(255,255,255,.72);
       font-size: 13px; color: rgba(28,34,64,.85);
-      min-height: 42px; display:flex; align-items:center;
+      min-height: 42px; display:flex; align-items:center; gap:10px;
     }
     .status.bad{
       border-color: rgba(255,77,109,.35);
       background: rgba(255,77,109,.08);
       color: rgba(155, 20, 55, .95);
     }
+    .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+    .btnDanger{background: linear-gradient(90deg, var(--danger), #ff9a7a);}
+
+    .selectWrap{position:relative; flex: 1 1 280px; min-width:260px;}
+    .selectBtn{
+      width:100%;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border: 1px solid rgba(28,34,64,.14);
+      background: rgba(255,255,255,.75);
+      color: var(--ink);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .selectBtn small{font-weight:600; color: rgba(28,34,64,.55)}
+    .menu{
+      position:absolute;
+      top: calc(100% + 8px);
+      left:0; right:0;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 40px rgba(28,34,64,.18);
+      overflow:hidden;
+      z-index: 50;
+    }
+    .menuHead{padding:10px; border-bottom: 1px solid rgba(28,34,64,.10); background: rgba(255,255,255,.85);}
+    .menuList{max-height: 260px; overflow:auto;}
+    .item{
+      padding: 10px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      cursor:pointer;
+    }
+    .item:hover{ background: rgba(126,231,255,.18); }
+    .item .left{display:flex; flex-direction:column; gap:2px;}
+    .item .name{font-weight:800;}
+    .item .meta{font-size:12px; color: rgba(28,34,64,.62);}
+    .item .tag{
+      font-size: 11px; font-weight:800;
+      padding: 6px 8px; border-radius:999px;
+      border: 1px solid rgba(28,34,64,.10);
+      background: rgba(255,255,255,.8);
+      color: rgba(28,34,64,.78);
+      white-space:nowrap;
+    }
+    .hidden{display:none !important;}
+
+    /* Wish send */
+    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
+    .wishSendHead{font-weight:800;margin-bottom:8px}
+    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
+    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
+    .muted{opacity:.75}
 
     /* Owner modal */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
     .modal.hidden{display:none}
     .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .modalTitle{font-weight:900;font-size:16px}
+    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .modalBody{font-size:14px;line-height:1.45}
     .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
     .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
     .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
 
-    /* Success overlay */
-    .successPage{
+    /* Tap audio overlay */
+    .tapAudio{
       position:fixed; inset:0;
       display:grid; place-items:center;
-      padding:18px;
       background: rgba(255,255,255,.55);
       backdrop-filter: blur(10px);
-      z-index: 99999;
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 18px;
     }
-    .successCard{
-      width:min(520px, 92vw);
-      border-radius: 22px;
-      background: rgba(255,255,255,.86);
+    .tapCard{
+      width: min(420px, 92vw);
+      border-radius: 20px;
+      background: rgba(255,255,255,.85);
       border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 55px rgba(28,34,64,.20);
-      padding: 18px 16px;
+      box-shadow: 0 18px 50px rgba(28,34,64,.18);
+      padding: 16px;
       text-align:center;
     }
-    .successTick{width:92px;height:92px;border-radius:999px;margin:4px auto 12px;display:grid;place-items:center;background:rgba(126,231,255,.25)}
-    .successTick span{font-size:52px;line-height:1}
-    .successTitle{font-weight:950;font-size:18px;margin:0 0 8px}
-    .successText{font-size:14px;line-height:1.55;color:rgba(28,34,64,.78);margin:0 0 14px;white-space:pre-wrap}
+    .tapTitle{font-weight:950; font-size:18px; margin-bottom:6px;}
+    .tapSub{font-size:13px; color: rgba(28,34,64,.72); line-height:1.45; margin-bottom:12px;}
+    .tapBtn{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color:#fff;
+      font-weight:950;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(255,122,182,.18);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 520px){
+      .wrap{padding:0; place-items:stretch;}
+      .card{width:100%; max-height:100svh; border-radius:0;}
+      .topbar{padding:10px 12px;}
+      .badge{font-size:12px}
+      .pill{display:none}
+      .side{order:-1; padding:4px 0 0;}
+      .bubble{width: min(240px, 70vw); border-radius:20px;}
+      .avatarImg{width:84%; height:84%;}
+
+      .actions{
+        display:grid;
+        grid-template-columns: 1fr auto auto auto;
+        gap:8px;
+        align-items:center;
+        width:100%;
+      }
+      .musicSelect{
+        width:100%;
+        min-width:0;
+        max-width:none;
+        height:36px;
+        font-size:13px;
+        padding:8px 10px;
+      }
+      .btnMusic{
+        width:36px;
+        height:36px;
+        padding:0;
+        border-radius:12px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        font-size:16px;
+      }
+      .btnMusic .txt{display:none;}
+      .ownerBtn{grid-column: 1 / -1; height:36px;}
+
+      .row input, .row button, #btnWish{width:100%; flex: 1 1 100%;}
+      textarea#wishMsg{min-height:96px}
+
+      .lockPanel{max-height: calc(100svh - 24px);}
+      .lockTitle h2{font-size:16px;}
+      .row2 > *{width:100%; flex: 1 1 100%;}
+      .selectWrap{min-width:0;}
+    }
+
+    /* iOS safe area */
+    @supports (padding: max(0px)) {
+      .wrap{
+        padding: max(0px, env(safe-area-inset-top))
+                 max(0px, env(safe-area-inset-right))
+                 max(0px, env(safe-area-inset-bottom))
+                 max(0px, env(safe-area-inset-left));
+      }
+      @media (max-width: 520px){
+        .wrap{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;}
+      }
+    }
   </style>
 </head>
 
@@ -224,80 +465,105 @@
   <div class="wrap">
     <div class="card">
 
-      <!-- LOCK -->
       <div class="lock" id="lock">
         <div class="lockPanel">
-          <h3 style="margin:0 0 8px">🔒 Mở thiệp bằng TÊN + MẬT KHẨU</h3>
+          <div class="lockTitle">
+            <h2>🔒 Mở thiệp bằng TÊN + MẬT KHẨU</h2>
+            <span class="chip" id="chip">Chưa mở</span>
+          </div>
+
+          <p class="mini">
+            Chọn người cần xem, nhập mật khẩu rồi bấm <b>Mở thiệp</b>.
+            Nếu bạn đăng nhập <b>Owner</b>, bạn có thể xem thiệp của người khác mà không cần mật khẩu của họ.
+          </p>
 
           <div class="row2">
-            <select id="personSelect" class="musicSelect" style="max-width:none; flex:1">
-              <option value="">Chọn người…</option>
-            </select>
+            <div class="selectWrap" id="selectWrap">
+              <button class="selectBtn" id="selectBtn" type="button">
+                <span id="selectText"><small>Chọn người…</small></span>
+                <span>▾</span>
+              </button>
+              <div class="menu hidden" id="menu">
+                <div class="menuHead">
+                  <input id="search" placeholder="Tìm tên hoặc key…" />
+                </div>
+                <div class="menuList" id="menuList"></div>
+              </div>
+            </div>
 
             <input id="pass" type="password" placeholder="Mật khẩu" />
           </div>
 
           <div class="row2">
             <button id="btnUnlock">Mở thiệp ✨</button>
+            <button class="btnSecondary" id="btnOwnerView" type="button" disabled>Xem thiệp người này (Owner)</button>
             <button class="btnSecondary" id="btnHint" type="button">Tip đặt ảnh</button>
+          </div>
+
+          <div class="row2">
+            <button class="btnDanger hidden" id="btnLogout" type="button">Đăng xuất</button>
           </div>
 
           <div class="status" id="status">👉 Chọn người + nhập mật khẩu để bắt đầu.</div>
         </div>
       </div>
 
-      <!-- TOPBAR -->
       <div class="topbar">
         <div class="badge" id="badge">🐴 Thiệp Năm Mới • Pastel Cute</div>
-
         <div class="actions">
           <span class="pill">Chạm / click để bắn pháo hoa 🎆</span>
-
           <select id="musicSelect" class="musicSelect" aria-label="Chọn nhạc"></select>
           <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
-          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc"><span class="ico">▶️</span></button>
+          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc">
+            <span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span>
+          </button>
           <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
 
-          <button class="btnSecondary hidden" id="btnLogout" type="button">Đăng xuất</button>
-
-          <button class="btnSecondary hidden" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
-          <button class="btnSecondary hidden" id="btnOwnerLogout" type="button">🔓 Owner Logout</button>
-          <button class="btnSecondary hidden" id="btnOwnerDashboard" type="button">📊 Dashboard</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogout" type="button">🔓 Owner Logout</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerDashboard" type="button">📊 Dashboard</button>
         </div>
       </div>
 
-      <!-- CONTENT -->
       <div class="content">
         <div>
-          <h1>Chúc Mừng Năm Mới <span id="yearText">2026</span> ✨</h1>
+          <h1>Chúc Mừng Năm Mới <span class="year" id="yearText">2026</span> ✨</h1>
           <p class="sub" id="subLine">Mở khóa xong bạn sẽ thấy lời chúc dành riêng cho bạn 🎁</p>
 
           <div class="wishBox">
             <p class="wish" id="wish">🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.</p>
 
             <div class="row">
-              <input id="viewerName" placeholder="Tên" disabled />
+              <input id="viewerName" placeholder="Tên (tự điền sau khi mở)" disabled />
               <input id="yearInput" maxlength="6" inputmode="numeric" placeholder="Năm (vd: 2026)" />
               <button id="btnWish" disabled>Đổi lời chúc</button>
             </div>
 
-            <div style="margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)">
-              <div style="font-weight:800;margin-bottom:8px">💌 Gửi lời chúc đến chủ sở hữu</div>
-              <textarea id="wishMsg" rows="3" placeholder="Nhập lời chúc..." style="width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none"></textarea>
+            <div class="wishSend">
+              <div class="wishSendHead">💌 Bạn có muốn gửi lời chúc đến chủ sở hữu không?</div>
+              <textarea id="wishMsg" rows="3" placeholder="Bạn hãy nhập vào đây gửi lời chúc đến chủ sở hữu nhé..."></textarea>
               <div class="row">
                 <button class="btnSecondary" id="btnSendWish" type="button" disabled>Gửi lời chúc</button>
-                <small style="opacity:.75">* Lưu Firestore + gửi EmailJS (nếu cấu hình OK).</small>
+                <small class="muted" id="wishSendHint">* Bấm “Gửi” để lưu Firestore + gửi EmailJS (nếu đã cấu hình).</small>
               </div>
             </div>
-
           </div>
         </div>
 
         <div class="side">
           <div class="bubble">
+            <div class="blob" aria-hidden="true"></div>
             <img id="avatarImg" class="avatarImg" src="./avatars/default.png" alt="Ảnh người nhận" />
           </div>
         </div>
+      </div>
+
+      <div class="foot">
+        <label class="toggle">
+          <input type="checkbox" id="auto" checked />
+          Tự động bắn pháo hoa
+        </label>
+        <span>Tip: bật nhạc rồi chạm màn hình để nổ dày hơn ✨</span>
       </div>
     </div>
   </div>
@@ -305,26 +571,37 @@
   <!-- Owner Dashboard Modal -->
   <div id="ownerModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Owner Dashboard">
     <div class="modalCard">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px">
-        <div style="font-weight:900">📊 Owner Dashboard</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+      <div class="modalHead">
+        <div class="modalTitle">📊 Owner Dashboard</div>
+        <div class="modalBtns">
           <button class="btnSecondary" id="btnTabViews" type="button">Lượt xem</button>
           <button class="btnSecondary" id="btnTabWishes" type="button">Lời chúc</button>
           <button class="btnSecondary" id="btnRefreshOwner" type="button">Làm mới</button>
-          <button id="btnCloseOwner" type="button">Đóng</button>
+          <button class="btn" id="btnCloseOwner" type="button">Đóng</button>
         </div>
       </div>
-      <div id="ownerBody">Đang tải...</div>
+      <div id="ownerBody" class="modalBody">Đang tải...</div>
     </div>
   </div>
 
-  <!-- Success overlay -->
-  <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true">
+  <!-- Tap audio overlay -->
+  <div id="tapAudio" class="tapAudio hidden" role="button" aria-label="Chạm để bật nhạc">
+    <div class="tapCard">
+      <div class="tapTitle">🔊 Chạm để bật nhạc</div>
+      <div class="tapSub">iPhone cần thao tác 1 lần để cho phép phát nhạc 🎶</div>
+      <div class="tapBtn">Chạm ngay ✨</div>
+    </div>
+  </div>
+
+  <!-- ✅ Success overlay -->
+  <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true" aria-label="Gửi lời chúc thành công">
     <div class="successCard">
       <div class="successTick"><span>✅</span></div>
       <h3 class="successTitle">Gửi lời chúc thành công!</h3>
-      <p class="successText">Cảm ơn bạn năm qua đã ở bên cạnh tôi nhé.
-Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
+      <p class="successText">
+Cảm ơn bạn năm qua đã ở bên cạnh tôi nhé.
+Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
+      </p>
       <div class="row" style="justify-content:center">
         <button id="btnSuccessClose" type="button">Quay lại thiệp</button>
       </div>
@@ -336,16 +613,15 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  <!-- config must be BEFORE modules -->
+  <!-- config + services -->
   <script src="./config.js"></script>
   <script type="module" src="./services.js"></script>
 
+  <!-- ✅ MAIN SCRIPT (module để đảm bảo chạy sau services.js) -->
   <script type="module">
-    const $ = (id) => document.getElementById(id);
-
     // ===== Year =====
-    const yearText = $("yearText");
-    const yearInput = $("yearInput");
+    const yearText = document.getElementById("yearText");
+    const yearInput = document.getElementById("yearInput");
     const defaultYear = new Date().getFullYear();
     yearText.textContent = String(defaultYear);
     yearInput.value = String(defaultYear);
@@ -355,45 +631,219 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
       if (v) yearText.textContent = v;
     });
 
+    // ===== Music =====
+    const music = document.getElementById("music");
+    const btnMusic = document.getElementById("btnMusic");
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+    const musicSelect = document.getElementById("musicSelect");
+    const tapAudio = document.getElementById("tapAudio");
+
+    let PLAYLIST = [];
+    let trackIndex = 0;
+    let musicOn = false;
+    let userChangedTrack = false;
+
+    function setMusicButton(state, label){
+      const ico = btnMusic.querySelector(".ico");
+      const txt = btnMusic.querySelector(".txt");
+      if (label){
+        ico.textContent = "❗";
+        txt.textContent = label.replace(/^❗\s*/,'');
+        return;
+      }
+      if (state){ ico.textContent = "⏸"; txt.textContent = "Tạm dừng"; }
+      else { ico.textContent = "▶️"; txt.textContent = "Phát nhạc"; }
+    }
+
+    async function loadPlaylist(){
+      try{
+        const res = await fetch("./music/playlist.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Cannot load music/playlist.json");
+        PLAYLIST = await res.json();
+        musicSelect.innerHTML = PLAYLIST.map((t, i) => `<option value="${i}">${t.title}</option>`).join("");
+        trackIndex = 0;
+        userChangedTrack = false;
+        setTrack(trackIndex, false);
+      }catch(e){
+        console.warn(e);
+        PLAYLIST = [];
+        musicSelect.innerHTML = `<option value="">(Không có playlist)</option>`;
+        setMusicButton(false, "❗ Chưa có nhạc");
+      }
+    }
+
+    function setTrack(i, autoplay=true){
+      if (!PLAYLIST.length) return;
+      trackIndex = (i + PLAYLIST.length) % PLAYLIST.length;
+      musicSelect.value = String(trackIndex);
+      music.src = `./music/${PLAYLIST[trackIndex].file}`;
+      music.volume = 0.9;
+      if (musicOn && autoplay) music.play().catch(()=>{});
+    }
+    function showTapOverlay(){ tapAudio.classList.remove("hidden"); }
+    function hideTapOverlay(){ tapAudio.classList.add("hidden"); }
+
+    async function tryPlayFromGesture(){
+      if (!PLAYLIST.length) return false;
+      try{
+        if (!music.src) setTrack(trackIndex, false);
+        await music.play();
+        musicOn = true;
+        setMusicButton(true);
+        hideTapOverlay();
+        return true;
+      }catch(err){
+        console.warn(err);
+        return false;
+      }
+    }
+    async function toggleMusic(){
+      if (!PLAYLIST.length){ setMusicButton(false, "❗ Chưa có nhạc"); return; }
+      if (!musicOn){
+        const ok = await tryPlayFromGesture();
+        if (!ok){ showTapOverlay(); setMusicButton(false); }
+        else { burst(innerWidth*0.5, innerHeight*0.25, 140); }
+      }else{
+        music.pause();
+        musicOn = false;
+        setMusicButton(false);
+      }
+    }
+    btnMusic.addEventListener("click", toggleMusic);
+    btnPrev.addEventListener("click", () => { userChangedTrack = true; setTrack(trackIndex - 1, true); });
+    btnNext.addEventListener("click", () => { userChangedTrack = true; setTrack(trackIndex + 1, true); });
+    musicSelect.addEventListener("change", (e) => {
+      userChangedTrack = true;
+      const i = parseInt(e.target.value, 10);
+      if (!Number.isNaN(i)) setTrack(i, true);
+    });
+    tapAudio.addEventListener("click", async () => {
+      const ok = await tryPlayFromGesture();
+      if (ok) burst(innerWidth*0.5, innerHeight*0.25, 120);
+    });
+
     // ===== UI refs =====
-    const lock = $("lock");
-    const statusEl = $("status");
-    const badge = $("badge");
-    const subLine = $("subLine");
+    const lock = document.getElementById("lock");
+    const statusEl = document.getElementById("status");
+    const chip = document.getElementById("chip");
+    const badge = document.getElementById("badge");
+    const subLine = document.getElementById("subLine");
 
-    const personSelect = $("personSelect");
-    const pass = $("pass");
-    const btnUnlock = $("btnUnlock");
-    const btnHint = $("btnHint");
-    const btnLogout = $("btnLogout");
+    const selectWrap = document.getElementById("selectWrap");
+    const selectBtn = document.getElementById("selectBtn");
+    const selectText = document.getElementById("selectText");
+    const menu = document.getElementById("menu");
+    const menuList = document.getElementById("menuList");
+    const search = document.getElementById("search");
 
-    const btnOwnerLogin = $("btnOwnerLogin");
-    const btnOwnerLogout = $("btnOwnerLogout");
-    const btnOwnerDashboard = $("btnOwnerDashboard");
+    const pass = document.getElementById("pass");
+    const btnUnlock = document.getElementById("btnUnlock");
+    const btnOwnerView = document.getElementById("btnOwnerView");
+    const btnHint = document.getElementById("btnHint");
+    const btnLogout = document.getElementById("btnLogout");
 
-    const ownerModal = $("ownerModal");
-    const ownerBody = $("ownerBody");
-    const btnCloseOwner = $("btnCloseOwner");
-    const btnTabViews = $("btnTabViews");
-    const btnTabWishes = $("btnTabWishes");
-    const btnRefreshOwner = $("btnRefreshOwner");
+    const btnOwnerLogin = document.getElementById("btnOwnerLogin");
+    const btnOwnerLogout = document.getElementById("btnOwnerLogout");
+    const btnOwnerDashboard = document.getElementById("btnOwnerDashboard");
+
+    const wishMsg = document.getElementById("wishMsg");
+    const btnSendWish = document.getElementById("btnSendWish");
+
+    const ownerModal = document.getElementById("ownerModal");
+    const ownerBody = document.getElementById("ownerBody");
+    const btnCloseOwner = document.getElementById("btnCloseOwner");
+    const btnTabViews = document.getElementById("btnTabViews");
+    const btnTabWishes = document.getElementById("btnTabWishes");
+    const btnRefreshOwner = document.getElementById("btnRefreshOwner");
     let ownerTab = "views";
 
-    const viewerName = $("viewerName");
-    const btnWish = $("btnWish");
-    const wishEl = $("wish");
-    const avatarImg = $("avatarImg");
+    const viewerName = document.getElementById("viewerName");
+    const btnWish = document.getElementById("btnWish");
+    const wishEl = document.getElementById("wish");
+    const avatarImg = document.getElementById("avatarImg");
 
-    const wishMsg = $("wishMsg");
-    const btnSendWish = $("btnSendWish");
+    // ===== Global wishes =====
+    // ✅ GIỮ NGUYÊN 40 CÂU CỦA BẠN Ở ĐÂY (mình để demo vài câu)
+   const GLOBAL_WISHES = [
+  // 🇻🇳 VN + 🇺🇸 EN + 🇰🇷 KR (đã trộn lộn xộn)
+  "Chúc {name} năm {year} luôn bình an và được yêu thương thật nhiều 💖",
+  "May {year} bring you calm days and bright nights, {name}. ✨",
+  "{year}년에는 {name}님에게 행복이 가득하길 바라요 🌸",
+  "Năm {year} chúc {name} mọi điều tốt đẹp tự tìm đến! 🍀",
+  "Wishing you a year full of gentle wins, {name}. 💪",
+  "{name}님, {year}년은 웃음이 더 많아지는 한 해가 되길 😊",
+  "Chúc {name} {year} tiền vào như nước, tiền ra nhỏ giọt thôi nha 💰😄",
+  "New year, new energy—go shine, {name}! 🌟",
+  "{year}년, {name}님 꿈이 하나씩 이루어지길 🎯",
+  "Năm {year} chúc {name} sức khỏe dồi dào, tinh thần lúc nào cũng sáng! 🔋",
+  "May your {year} be full of good surprises, {name}. 🎁",
+  "{name}님, {year}년엔 좋은 사람들과 좋은 일만 가득하길 🫶",
+  "Chúc {name} {year} mọi deadline đều qua nhẹ như lông hồng ⏳🪽",
+  "In {year}, may you feel proud of yourself more often, {name}. 🌈",
+  "{year}년에도 {name}님이 원하는 길로 쭉 나아가길 🚀",
+  "Năm {year} chúc {name} đi đâu cũng gặp điều lành, về đâu cũng thấy yên 🏡✨",
+  "May {year} be kind to you, {name}. 🤍",
+  "{name}님, {year}년에는 마음이 늘 편안하길 🌿",
+  "Chúc {name} năm {year} rực rỡ theo cách của riêng mình 🌟",
+  "Wishing {name} a {year} filled with love, laughter, and peace. 🕊️",
 
-    // Success overlay
-    const successPage = $("successPage");
-    const btnSuccessClose = $("btnSuccessClose");
-    function showSuccessPage(){ successPage.classList.remove("hidden"); }
-    function hideSuccessPage(){ successPage.classList.add("hidden"); }
-    btnSuccessClose.addEventListener("click", hideSuccessPage);
-    successPage.addEventListener("click", (e) => { if (e.target === successPage) hideSuccessPage(); });
+  "Năm {year} chúc {name} làm đâu thắng đó, thuận lợi đủ đường 🚀",
+  "May your hard work pay off beautifully in {year}, {name}. 📈",
+  "{year}년엔 {name}님에게 행운이 자주 찾아오길 🍀",
+  "Chúc {name} {year} cười nhiều hơn, lo ít hơn, yêu đời hơn 😊🌷",
+  "You’ve got this, {name}—make {year} your year. 💥",
+  "{name}님, {year}년엔 좋은 소식만 들리길 💌",
+  "Năm {year} chúc {name} tình cảm ấm áp, gia đình bình an 💖",
+  "May {year} bring you the right people and the right moments, {name}. 🎯",
+  "{year}년에는 {name}님 하루하루가 반짝이길 ✨",
+  "Chúc {name} {year} học gì hiểu đó, làm gì cũng tới 📚✅",
+  "Hope {year} gives you more reasons to smile, {name}. 😄",
+  "{name}님, {year}년엔 건강이 최고예요! 💪",
+  "Năm {year} chúc {name} may mắn tới tấp, niềm vui ngập tràn 🎉",
+  "May your heart feel lighter in {year}, {name}. 🌿",
+  "{year}년에도 {name}님이 사랑받는 사람인 거 잊지 마요 💗",
+  "Chúc {name} {year} công việc hanh thông, lương thưởng tăng đều 💼📈",
+  "Wishing you cozy moments and big dreams in {year}, {name}. ☕🌙",
+  "{name}님, {year}년엔 모든 일이 술술 풀리길 🌈",
+  "Năm {year} chúc {name} mỗi ngày đều có lý do để vui 😄✨",
+  "May {year} be your fresh start, {name}. 🌸",
+
+  "Chúc {name} {year} sáng tạo bùng nổ, ý tưởng ra như suối 💡🌊",
+  "May you find joy in the little things this {year}, {name}. 🌼",
+  "{name}님, {year}년엔 새로운 시작이 기분 좋게 이어지길 🌱",
+  "Năm {year} chúc {name} bình an là chính, vui vẻ là nhất 🕊️",
+  "Wishing you steady growth and soft happiness in {year}, {name}. 🌿",
+  "{year}년, {name}님에게 좋은 기회가 꼭 오길 ✨",
+  "Chúc {name} {year} gặp đúng người, đúng việc, đúng thời điểm 🎯",
+  "May your dreams feel closer in {year}, {name}. 🌙",
+  "{name}님, {year}년엔 웃는 날이 더 많아지길 😊",
+  "Năm {year} chúc {name} mọi chuyện khó rồi sẽ hóa dễ 🌈",
+  "Wishing you confidence and courage in {year}, {name}. 💪",
+  "{year}년에도 {name}님이 원하는 걸 당당히 선택하길 🌟",
+  "Chúc {name} năm {year} ngủ ngon, ăn ngon, sống chill hết nấc 🌙🍜",
+  "May {year} bring you peace of mind, {name}. 🧘",
+  "{name}님, {year}년엔 마음의 여유가 생기길 ☁️",
+  "Năm {year} chúc {name} sống nhẹ nhàng mà vẫn rực rỡ 🌸🌟",
+  "Wishing {name} a {year} full of warm memories. 📸",
+  "{year}년, {name}님에게 따뜻한 순간이 많이 남길 💛",
+  "Chúc {name} {year} luôn tự tin, mạnh mẽ và được trân trọng 💗",
+  "May {year} surprise you with happiness, {name}. 🎉"
+];
+
+    // ===== People + session =====
+    let PEOPLE = [];
+    let selectedPerson = null;
+    let lastWishIndex = -1;
+
+    let session = { loggedIn:false, viewer:null, target:null };
+    const firstWishShown = new Set();
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
 
     function setStatus(msg, bad=false){
       statusEl.textContent = msg;
@@ -401,25 +851,158 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
     }
 
     async function ensureServices(){
-      if (!window.AppServices) throw new Error("AppServices chưa sẵn sàng (services.js lỗi/404?)");
+      if (!window.AppServices){
+        throw new Error("AppServices chưa sẵn sàng (services.js chưa load hoặc lỗi).");
+      }
       await window.AppServices.initFirebaseIfNeeded?.();
     }
 
-    // ===== Data =====
-    const GLOBAL_WISHES = [
-      "Chúc {name} năm {year} bình an, vui khỏe và gặp nhiều điều tốt đẹp bất ngờ! ✨",
-      "Năm {year} chúc {name} mọi dự định đều thuận lợi, làm đâu thắng đó! 🚀",
-      "Chúc {name} {year} tiền vào như nước, tiền ra nhỏ giọt thôi nha! 💰😄",
-      "Năm {year} chúc {name} ngủ ngon, ăn ngon, tinh thần lúc nào cũng sáng! 🌙🍜",
-      "Chúc {name} {year} gặp đúng người, đúng việc, đúng thời điểm! 🎯",
-      "Năm {year} chúc {name} cười nhiều hơn, lo ít hơn, yêu đời hơn! 😊🌷"
-    ];
+    function isOwnerRole(){
+      return !!(session.loggedIn && session.viewer && session.viewer.role === "owner");
+    }
+    function isOwnerAuthed(){
+      try{ return window.AppServices?.isOwnerAuthed?.() === true; }
+      catch{ return false; }
+    }
+    function updateOwnerUI(){
+      const ownerRole = isOwnerRole();
+      const authed = isOwnerAuthed();
+      btnOwnerLogin.classList.toggle("hidden", !ownerRole || authed);
+      btnOwnerLogout.classList.toggle("hidden", !ownerRole || !authed);
+      btnOwnerDashboard.classList.toggle("hidden", !ownerRole || !authed);
+    }
 
-    let PEOPLE = [];
-    let selectedPerson = null;
-    let lastWishIndex = -1;
+    function openOwnerModal(){
+      ownerModal.classList.remove("hidden");
+      renderOwnerTab();
+    }
+    function closeOwnerModal(){
+      ownerModal.classList.add("hidden");
+    }
 
-    let session = { loggedIn:false, viewer:null, target:null };
+    function formatDuration(sec){
+      sec = Math.max(0, Number(sec||0));
+      const m = Math.floor(sec/60);
+      const s = sec%60;
+      if (m <= 0) return s + "s";
+      return m + "m " + s + "s";
+    }
+    function fmtTime(ts){
+      try{
+        if (!ts) return "";
+        if (typeof ts.toDate === "function") return ts.toDate().toLocaleString();
+        if (ts.seconds) return new Date(ts.seconds*1000).toLocaleString();
+        return new Date(ts).toLocaleString();
+      }catch{ return ""; }
+    }
+
+    async function renderOwnerTab(){
+      ownerBody.textContent = "Đang tải...";
+      try{
+        await ensureServices();
+      }catch(e){
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>⚠️ ${escapeHtml(e.message || "Lỗi services")}</b></div>
+            <div class="ownerMeta">Mở DevTools → Console/Network để xem services.js có lỗi/404 không.</div>
+          </div>`;
+        return;
+      }
+
+      if (!isOwnerAuthed()){
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>🔐 Bạn chưa đăng nhập Google Owner</b></div>
+            <div class="ownerMeta">Bấm “Owner Login” ở góc trên để đăng nhập.</div>
+          </div>
+        `;
+        return;
+      }
+
+      try{
+        if (ownerTab === "views"){
+          const list = await window.AppServices.getLatestViews(200);
+          const ownerKey = window.OWNER_KEY || "";
+          const filtered = list.filter(v => (v.ownerKey||"") === ownerKey);
+          if (!filtered.length){ ownerBody.textContent = "Chưa có lượt xem nào."; return; }
+
+          ownerBody.innerHTML = filtered.map(v => `
+            <div class="ownerRow">
+              <div class="ownerMeta">
+                <span class="pillMini">👀 ${escapeHtml(v.viewerLabel || v.viewerKey || "Ẩn danh")}</span>
+                xem thiệp: <b>${escapeHtml(v.targetLabel || v.targetKey || "")}</b>
+                • thời lượng: <b>${formatDuration(v.durationSec || 0)}</b>
+              </div>
+              <div class="ownerMeta">
+                Bắt đầu: ${escapeHtml(fmtTime(v.startedAt))}
+                • Kết thúc: ${escapeHtml(fmtTime(v.endedAt))}
+              </div>
+              <div class="ownerMeta">UA: ${escapeHtml(String(v.userAgent||"").slice(0,120))}</div>
+              <div class="row" style="justify-content:flex-end">
+                <button class="btnSecondary" type="button" data-del-view="${escapeHtml(v.id)}">🗑 Xoá</button>
+              </div>
+            </div>
+          `).join("");
+        } else {
+          const list = await window.AppServices.getLatestWishes(200);
+          const ownerKey = window.OWNER_KEY || "";
+          const filtered = list.filter(w => (w.ownerKey||"") === ownerKey);
+          if (!filtered.length){ ownerBody.textContent = "Chưa có lời chúc nào."; return; }
+
+          ownerBody.innerHTML = filtered.map(w => `
+            <div class="ownerRow">
+              <div class="ownerMeta">
+                <span class="pillMini">💌 ${escapeHtml(w.viewerLabel || w.viewerKey || "Ẩn danh")}</span>
+                gửi khi đang xem thiệp: <b>${escapeHtml(w.targetLabel || w.targetKey || "")}</b>
+                • ${escapeHtml(fmtTime(w.createdAt))}
+              </div>
+              <div style="white-space:pre-wrap">${escapeHtml(w.message || "")}</div>
+              <div class="row" style="justify-content:flex-end">
+                <button class="btnSecondary" type="button" data-del-wish="${escapeHtml(w.id)}">🗑 Xoá</button>
+              </div>
+            </div>
+          `).join("");
+        }
+      }catch(e){
+        console.warn(e);
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>⚠️ Không tải được dữ liệu</b></div>
+            <div class="ownerMeta">Kiểm tra Firestore Rules (read/delete owner-only) hoặc Owner chưa login.</div>
+          </div>
+        `;
+      }
+    }
+
+    // ✅ One-time event delegation for delete buttons
+    ownerBody.addEventListener("click", async (e) => {
+      const bView = e.target.closest("[data-del-view]");
+      const bWish = e.target.closest("[data-del-wish]");
+      if (!bView && !bWish) return;
+
+      if (!isOwnerAuthed()){
+        alert("Bạn chưa Owner Login.");
+        return;
+      }
+
+      const ok = confirm("Xoá dữ liệu này? Không khôi phục được.");
+      if (!ok) return;
+
+      try{
+        await ensureServices();
+        if (bView){
+          const id = bView.getAttribute("data-del-view");
+          await window.AppServices.deleteView(id);
+        } else {
+          const id = bWish.getAttribute("data-del-wish");
+          await window.AppServices.deleteWish(id);
+        }
+        await renderOwnerTab();
+      }catch(err){
+        console.warn(err);
+        alert("Xoá thất bại. Kiểm tra Firestore Rules / Owner Login.");
+      }
+    });
 
     function randomWish(pool){
       let idx;
@@ -429,22 +1012,63 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
       return pool[idx];
     }
 
-    function formatWish(template, name){
+    function getDisplayNameForTarget(t){
+      if (!t) return "bạn";
+      const override = (t.nameOverride || "").trim();
+      return override || t.label || "bạn";
+    }
+
+    function formatWish(template, displayName){
+      const name = (displayName || "bạn").trim();
       const year = (yearInput.value || yearText.textContent || defaultYear).trim();
       return template.replaceAll("{name}", name).replaceAll("{year}", year);
     }
 
-    function setAvatar(person){
-      if (!person){ avatarImg.src = "./avatars/default.png"; return; }
-      const exts = person.exts || ["jpg","png","webp","jpeg"];
+    function buildWishText(template, target){
+      const name = getDisplayNameForTarget(target);
+      let text = formatWish(template, name);
+      const suffix = (target?.suffix || "").trim();
+      if (suffix) text += " " + suffix;
+      return text;
+    }
+
+    function getWishPoolForTarget(target){
+      if (!target) return GLOBAL_WISHES;
+      if (target.useGlobalRandomOnly) return GLOBAL_WISHES;
+      if (Array.isArray(target.wishes) && target.wishes.length) return target.wishes;
+      return GLOBAL_WISHES;
+    }
+
+    function showRandomWish(){
+      if (!session.loggedIn || !session.target) return;
+      const pool = getWishPoolForTarget(session.target);
+      const t = randomWish(pool);
+      wishEl.textContent = buildWishText(t, session.target);
+      burst(lastPointer.x || (innerWidth*0.5), lastPointer.y || (innerHeight*0.35), 120);
+    }
+
+    function showInitialWishIfAny(target){
+      if (!target?.firstWish) return false;
+      if (firstWishShown.has(target.key)) return false;
+      firstWishShown.add(target.key);
+      wishEl.textContent = buildWishText(target.firstWish, target);
+      return true;
+    }
+
+    function tryLoadAvatarFromCandidates(candidates){
       let i = 0;
-      const candidates = exts.map(ext => `./avatars/${person.key}.${ext}`);
       const tryNext = () => {
         if (i >= candidates.length){ avatarImg.src = "./avatars/default.png"; return; }
         avatarImg.onerror = tryNext;
         avatarImg.src = candidates[i++];
       };
       tryNext();
+    }
+    function setAvatar(person){
+      if (!person){ avatarImg.src = "./avatars/default.png"; return; }
+      const exts = person.exts || ["jpg","png","webp","jpeg"];
+      const candidates = exts.map(ext => `./avatars/${person.key}.${ext}`);
+      tryLoadAvatarFromCandidates(candidates);
     }
 
     async function loadPeople(){
@@ -459,71 +1083,137 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
         pass: String(p.pass || "").trim(),
         role: String(p.role || "guest").trim(),
         exts: Array.isArray(p.exts) ? p.exts : ["jpg","png","webp","jpeg"],
+        wishes: Array.isArray(p.wishes) ? p.wishes : null,
+        firstWish: p.firstWish ? String(p.firstWish) : "",
+        useGlobalRandomOnly: !!p.useGlobalRandomOnly,
+        suffix: p.suffix ? String(p.suffix) : "",
+        nameOverride: p.nameOverride ? String(p.nameOverride) : ""
       })).filter(p => p.key && p.label && p.pass);
-
-      personSelect.innerHTML =
-        `<option value="">Chọn người…</option>` +
-        PEOPLE.map(p => `<option value="${p.key}">${p.label} (@${p.key})</option>`).join("");
-
-      personSelect.addEventListener("change", () => {
-        selectedPerson = PEOPLE.find(x => x.key === personSelect.value) || null;
-      });
     }
 
-    function isOwnerRole(){
-      return session.loggedIn && session.viewer?.role === "owner";
+    function openMenu(){
+      menu.classList.remove("hidden");
+      search.value = "";
+      renderMenu("");
+      setTimeout(() => search.focus(), 0);
     }
-    function isOwnerAuthed(){
-      try{ return window.AppServices?.isOwnerAuthed?.() === true; }catch{ return false; }
+    function closeMenu(){ menu.classList.add("hidden"); }
+
+    function renderMenu(q){
+      const query = (q || "").trim().toLowerCase();
+      const list = PEOPLE.filter(p =>
+        p.label.toLowerCase().includes(query) || p.key.toLowerCase().includes(query)
+      );
+      menuList.innerHTML = list.map(p => `
+        <div class="item" data-key="${p.key}">
+          <div class="left">
+            <div class="name">${escapeHtml(p.label)}</div>
+            <div class="meta">@${escapeHtml(p.key)}</div>
+          </div>
+          <div class="tag">${p.role === "owner" ? "OWNER" : "GUEST"}</div>
+        </div>
+      `).join("") || `
+        <div class="item">
+          <div class="left">
+            <div class="name">Không tìm thấy</div>
+            <div class="meta">Thử gõ tên hoặc key</div>
+          </div>
+        </div>`;
     }
-    function updateOwnerUI(){
-      const ownerRole = isOwnerRole();
-      const authed = isOwnerAuthed();
-      btnOwnerLogin.classList.toggle("hidden", !ownerRole || authed);
-      btnOwnerLogout.classList.toggle("hidden", !ownerRole || !authed);
-      btnOwnerDashboard.classList.toggle("hidden", !ownerRole || !authed);
+
+    function pickPersonByKey(key){
+      const p = PEOPLE.find(x => x.key === key);
+      if (!p) return;
+      selectedPerson = p;
+      selectText.innerHTML = `<span>${escapeHtml(p.label)} <small>(@${escapeHtml(p.key)})</small></span>`;
+      closeMenu();
+      btnOwnerView.disabled = !(session.loggedIn && session.viewer && session.viewer.role === "owner");
+    }
+
+    selectBtn.addEventListener("click", () => {
+      if (menu.classList.contains("hidden")) openMenu();
+      else closeMenu();
+    });
+    search.addEventListener("input", () => renderMenu(search.value));
+    menuList.addEventListener("click", (e) => {
+      const item = e.target.closest(".item");
+      if (!item) return;
+      const key = item.getAttribute("data-key");
+      if (key) pickPersonByKey(key);
+    });
+    document.addEventListener("click", (e) => {
+      if (!selectWrap.contains(e.target)) closeMenu();
+    });
+
+    function lockCard(msg){
+      session = { loggedIn:false, viewer:null, target:null };
+      firstWishShown.clear();
+
+      userChangedTrack = false;
+      try{ music.pause(); }catch(e){}
+      musicOn = false;
+      setMusicButton(false);
+
+      try{ window.AppServices?.stopView?.(); }catch(e){}
+
+      lock.classList.remove("hidden");
+      chip.textContent = "Chưa mở";
+      badge.textContent = "🐴 Thiệp Năm Mới • Pastel Cute";
+      subLine.textContent = "Mở khóa xong bạn sẽ thấy lời chúc dành riêng cho bạn 🎁";
+
+      viewerName.value = "";
+      viewerName.disabled = true;
+      btnWish.disabled = true;
+
+      btnSendWish.disabled = true;
+      wishMsg.value = "";
+      wishMsg.disabled = true;
+
+      updateOwnerUI();
+
+      wishEl.textContent = "🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.";
+      avatarImg.src = "./avatars/default.png";
+
+      btnOwnerView.disabled = true;
+      btnLogout.classList.add("hidden");
+      setStatus(msg || "👉 Chọn người + nhập mật khẩu để bắt đầu.", false);
     }
 
     function applySessionUI(){
       const v = session.viewer;
       const t = session.target;
 
-      badge.textContent = isOwnerRole() ? "👑 Owner Mode • Pastel Cute" : "🐴 Thiệp Năm Mới • Pastel Cute";
-      subLine.textContent = isOwnerRole()
-        ? "👑 Owner: có thể xem dashboard + xoá dữ liệu."
-        : "Chúc bạn một năm mới rực rỡ và thật bình an 🌸";
+      chip.textContent = v.role === "owner" ? "Đã mở • Owner" : "Đã mở";
+      badge.textContent = v.role === "owner" ? "👑 Owner Mode • Pastel Cute" : "🐴 Thiệp Năm Mới • Pastel Cute";
 
       viewerName.value = t.label;
+      viewerName.disabled = true;
+
       btnWish.disabled = false;
-      btnSendWish.disabled = false;
+      btnOwnerView.disabled = !(v.role === "owner" && selectedPerson);
       btnLogout.classList.remove("hidden");
+
+      subLine.textContent = (v.role === "owner")
+        ? "👑 Owner: có thể xem thiệp người khác (không cần mật khẩu của họ)."
+        : "Chúc bạn một năm mới rực rỡ và thật bình an 🌸";
 
       setAvatar(t);
 
-      const template = randomWish(GLOBAL_WISHES);
-      wishEl.textContent = formatWish(template, t.label);
+      const didShowFirst = showInitialWishIfAny(t);
+      if (!didShowFirst){
+        const pool = getWishPoolForTarget(t);
+        const template = randomWish(pool);
+        wishEl.textContent = buildWishText(template, t);
+      }
 
       lock.classList.add("hidden");
 
-      try{ window.AppServices?.startView?.(session.viewer, session.target); }catch{}
+      btnSendWish.disabled = false;
+      wishMsg.disabled = false;
+
+      try{ window.AppServices?.startView?.(session.viewer, session.target); }catch(e){}
       updateOwnerUI();
-    }
-
-    function lockCard(msg){
-      session = { loggedIn:false, viewer:null, target:null };
-      lock.classList.remove("hidden");
-      btnWish.disabled = true;
-      btnSendWish.disabled = true;
-      btnLogout.classList.add("hidden");
-
-      viewerName.value = "";
-      wishMsg.value = "";
-      wishEl.textContent = "🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.";
-      avatarImg.src = "./avatars/default.png";
-      setStatus(msg || "👉 Chọn người + nhập mật khẩu để bắt đầu.", false);
-
-      updateOwnerUI();
-      try{ window.AppServices?.stopView?.(); }catch{}
+      burst(innerWidth*0.5, innerHeight*0.28, 180);
     }
 
     btnUnlock.addEventListener("click", () => {
@@ -535,134 +1225,68 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
         setStatus("❌ Sai mật khẩu. Thử lại nha!", true);
         return;
       }
-
       session.loggedIn = true;
       session.viewer = selectedPerson;
       session.target = selectedPerson;
-
       setStatus("✅ Mở thiệp thành công! 🎉", false);
       applySessionUI();
     });
 
+    btnOwnerView.addEventListener("click", () => {
+      if (!session.loggedIn || !session.viewer || session.viewer.role !== "owner"){
+        setStatus("❌ Chỉ Owner mới dùng được.", true);
+        return;
+      }
+      if (!selectedPerson){ setStatus("⚠️ Chọn người cần xem trước đã.", true); return; }
+      session.target = selectedPerson;
+      applySessionUI();
+    });
+
     btnLogout.addEventListener("click", () => lockCard("👋 Đã đăng xuất."));
-
-    btnWish.addEventListener("click", () => {
-      if (!session.loggedIn || !session.target) return;
-      wishEl.textContent = formatWish(randomWish(GLOBAL_WISHES), session.target.label);
-    });
-
-    btnHint.addEventListener("click", () => {
-      setStatus("Tip: Ảnh phải đúng key. Ví dụ: ./avatars/bethucute.jpg và có ./avatars/default.png", false);
-    });
 
     // Owner Login/Logout/Dashboard
     btnOwnerLogin.addEventListener("click", async () => {
       try{
         await ensureServices();
         const info = await window.AppServices.ownerGoogleLogin();
-        alert("✅ Owner Google Login OK\nUID: " + (info.uid||"") + "\nEmail: " + (info.email||""));
+        alert("✅ Owner Google Login OK\nUID: " + (info.uid || "") + "\nEmail: " + (info.email || ""));
       }catch(e){
         console.warn(e);
-        alert("❌ Owner login lỗi: " + (e?.message || e));
+        alert("❌ Owner login lỗi.\nMsg: " + (e.message || e) +
+          "\n\nNếu là unauthorized-domain: Firebase Console → Auth → Settings → Authorized domains → Add: mangniemvui.github.io");
       }finally{
         updateOwnerUI();
       }
     });
 
     btnOwnerLogout.addEventListener("click", async () => {
-      try{ await window.AppServices.ownerGoogleLogout(); }catch{}
+      try{ await window.AppServices.ownerGoogleLogout(); }catch(e){}
       updateOwnerUI();
     });
 
-    function openOwnerModal(){ ownerModal.classList.remove("hidden"); renderOwnerTab(); }
-    function closeOwnerModal(){ ownerModal.classList.add("hidden"); }
-
-    btnOwnerDashboard.addEventListener("click", openOwnerModal);
+    btnOwnerDashboard.addEventListener("click", () => openOwnerModal());
     btnCloseOwner.addEventListener("click", closeOwnerModal);
     ownerModal.addEventListener("click", (e) => { if (e.target === ownerModal) closeOwnerModal(); });
 
-    async function renderOwnerTab(){
-      ownerBody.textContent = "Đang tải...";
-      try{
-        await ensureServices();
-        if (!isOwnerAuthed()){
-          ownerBody.innerHTML = `<div class="ownerRow"><b>🔐 Bạn chưa Owner Login</b></div>`;
-          return;
-        }
-
-        if (ownerTab === "views"){
-          const list = await window.AppServices.getLatestViews(200);
-          const ownerKey = window.OWNER_KEY || "";
-          const filtered = list.filter(v => (v.ownerKey||"") === ownerKey);
-
-          ownerBody.innerHTML = filtered.map(v => `
-            <div class="ownerRow">
-              <div class="ownerMeta">
-                <span class="pillMini">👀 ${(v.viewerLabel||v.viewerKey||"Ẩn danh")}</span>
-                xem: <b>${(v.targetLabel||v.targetKey||"")}</b>
-              </div>
-              <div class="ownerMeta">ID: ${v.id}</div>
-              <div class="row" style="justify-content:flex-end">
-                <button class="btnSecondary" type="button" data-del-view="${v.id}">🗑 Xoá</button>
-              </div>
-            </div>
-          `).join("") || "Chưa có lượt xem.";
-        } else {
-          const list = await window.AppServices.getLatestWishes(200);
-          const ownerKey = window.OWNER_KEY || "";
-          const filtered = list.filter(w => (w.ownerKey||"") === ownerKey);
-
-          ownerBody.innerHTML = filtered.map(w => `
-            <div class="ownerRow">
-              <div class="ownerMeta">
-                <span class="pillMini">💌 ${(w.viewerLabel||w.viewerKey||"Ẩn danh")}</span>
-                đang xem: <b>${(w.targetLabel||w.targetKey||"")}</b>
-              </div>
-              <div style="white-space:pre-wrap">${(w.message||"")}</div>
-              <div class="ownerMeta">ID: ${w.id}</div>
-              <div class="row" style="justify-content:flex-end">
-                <button class="btnSecondary" type="button" data-del-wish="${w.id}">🗑 Xoá</button>
-              </div>
-            </div>
-          `).join("") || "Chưa có lời chúc.";
-        }
-      }catch(e){
-        console.warn(e);
-        ownerBody.innerHTML = `<div class="ownerRow"><b>⚠️ Lỗi load dữ liệu</b><div class="ownerMeta">${e?.message || e}</div></div>`;
-      }
-    }
-
-    ownerBody.addEventListener("click", async (e) => {
-      const bView = e.target.closest("[data-del-view]");
-      const bWish = e.target.closest("[data-del-wish]");
-      if (!bView && !bWish) return;
-
-      if (!confirm("Xoá dữ liệu này? Không khôi phục được.")) return;
-
-      try{
-        await ensureServices();
-        if (!isOwnerAuthed()) throw new Error("Not owner authed");
-
-        if (bView){
-          await window.AppServices.deleteView(bView.getAttribute("data-del-view"));
-        } else {
-          await window.AppServices.deleteWish(bWish.getAttribute("data-del-wish"));
-        }
-        await renderOwnerTab();
-      }catch(err){
-        console.warn(err);
-        alert("Xoá thất bại: " + (err?.message || err));
-      }
-    });
-
     btnTabViews.addEventListener("click", () => { ownerTab = "views"; renderOwnerTab(); });
     btnTabWishes.addEventListener("click", () => { ownerTab = "wishes"; renderOwnerTab(); });
-    btnRefreshOwner.addEventListener("click", renderOwnerTab);
+    btnRefreshOwner.addEventListener("click", () => renderOwnerTab());
 
-    // Send wish (✅ đã fix dấu đóng đầy đủ)
+    // Success overlay
+    const successPage = document.getElementById("successPage");
+    const btnSuccessClose = document.getElementById("btnSuccessClose");
+    function showSuccessPage(){ successPage.classList.remove("hidden"); burst(innerWidth*0.5, innerHeight*0.28, 160); }
+    function hideSuccessPage(){ successPage.classList.add("hidden"); }
+    btnSuccessClose.addEventListener("click", hideSuccessPage);
+    successPage.addEventListener("click", (e) => { if (e.target === successPage) hideSuccessPage(); });
+
+    // ✅✅✅ FIXED: Send wish block đầy đủ dấu đóng
     btnSendWish.addEventListener("click", async () => {
       const message = (wishMsg.value || "").trim();
-      if (!message){ setStatus("⚠️ Bạn chưa nhập lời chúc.", true); return; }
+      if (!message){
+        setStatus("⚠️ Bạn chưa nhập lời chúc.", true);
+        return;
+      }
 
       try{
         btnSendWish.disabled = true;
@@ -676,9 +1300,10 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
           message
         });
 
-        if (result && result.savedToFirestore){
+        if (result && result.savedToFirestore) {
           wishMsg.value = "";
           showSuccessPage();
+
           if (result.emailed) setStatus("✅ Đã gửi email thành công! 💌", false);
           else setStatus("✅ Đã lưu lời chúc! (Email chưa gửi được — xem Console)", false);
         } else {
@@ -692,15 +1317,155 @@ Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖</p>
       }
     });
 
+    // ✅ các listener này PHẢI nằm ngoài sendWish
+    btnWish.addEventListener("click", showRandomWish);
+    btnHint.addEventListener("click", () => {
+      setStatus("Tip: Mật khẩu là dd/mm/yyyy", false);
+    });
+
+    // ===== fireworks =====
+    const canvas = document.getElementById("fx");
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let W = 0, H = 0, dpr = 1;
+    function resize(){
+      dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      W = Math.floor(window.innerWidth);
+      H = Math.floor(window.innerHeight);
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resize, { passive:true });
+    resize();
+
+    const particles = [];
+    const rockets = [];
+    const gravity = 0.065;
+    const palette = [
+      [255, 122, 182],[126, 231, 255],[255, 231, 153],
+      [197, 163, 255],[170, 255, 200],[255, 255, 255]
+    ];
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
+    function addRocket(x, y){
+      rockets.push({
+        x, y: H + 20, tx: x, ty: y,
+        vx: rand(-0.5, 0.5),
+        vy: rand(-10.2, -8.4),
+        life: 0,
+        color: palette[(Math.random()*palette.length)|0],
+      });
+    }
+    function burst(x, y, count = 90){
+      const col = palette[(Math.random()*palette.length)|0];
+      for (let i=0;i<count;i++){
+        const a = Math.random() * Math.PI * 2;
+        const sp = rand(1.1, 5.0);
+        particles.push({
+          x, y,
+          vx: Math.cos(a)*sp,
+          vy: Math.sin(a)*sp,
+          r: rand(1.2, 2.6),
+          drag: rand(0.985, 0.993),
+          alpha: 1,
+          fade: rand(0.010, 0.018),
+          col,
+          sparkle: Math.random() < 0.28
+        });
+      }
+    }
+    function drawGlow(x, y, r, col, a){
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${a})`;
+      ctx.arc(x, y, r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    function fadeFrame(){
+      ctx.fillStyle = "rgba(255,255,255,0.10)";
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    let lastPointer = {x: W*0.5, y: H*0.35};
+    function pointerPos(e){
+      if (e.touches && e.touches[0]) return {x: e.touches[0].clientX, y: e.touches[0].clientY};
+      return {x: e.clientX, y: e.clientY};
+    }
+    window.addEventListener("pointerdown", (e) => {
+      const p = pointerPos(e);
+      lastPointer = p;
+      addRocket(p.x, p.y);
+    }, { passive:true });
+    window.addEventListener("touchstart", (e) => {
+      const p = pointerPos(e);
+      lastPointer = p;
+      addRocket(p.x, p.y);
+    }, { passive:true });
+
+    const autoEl = document.getElementById("auto");
+    function step(){
+      fadeFrame();
+
+      if (autoEl.checked && Math.random() < (session.loggedIn ? 0.06 : 0.035)){
+        addRocket(rand(W*0.12, W*0.88), rand(H*0.10, session.loggedIn ? H*0.55 : H*0.45));
+      }
+
+      for (let i=rockets.length-1;i>=0;i--){
+        const r = rockets[i];
+        r.life++;
+        r.x += r.vx; r.y += r.vy;
+        r.vy += gravity * 0.35;
+
+        drawGlow(r.x, r.y, 2.2, r.color, 0.60);
+        drawGlow(r.x, r.y, 7.2, r.color, 0.16);
+
+        if (r.y <= r.ty || r.vy > -2.2 || r.life > 85){
+          burst(r.x, r.y, (session.loggedIn ? 95 : 70) + ((Math.random()*60)|0));
+          rockets.splice(i, 1);
+        }
+      }
+
+      for (let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.vx *= p.drag; p.vy *= p.drag;
+        p.vy += gravity;
+        p.x += p.vx; p.y += p.vy;
+
+        p.alpha -= p.fade;
+        if (p.alpha <= 0 || p.y > H+40 || p.x < -40 || p.x > W+40){
+          particles.splice(i, 1);
+          continue;
+        }
+        const flick = p.sparkle ? (0.6 + Math.random()*0.7) : 1;
+        drawGlow(p.x, p.y, p.r * flick, p.col, Math.max(0, p.alpha));
+        drawGlow(p.x, p.y, p.r * 3.4, p.col, Math.max(0, p.alpha)*0.10);
+      }
+
+      requestAnimationFrame(step);
+    }
+
     // ===== init =====
     (async function init(){
       try{
         await loadPeople();
+        renderMenu("");
+        if (PEOPLE.length){
+          selectedPerson = PEOPLE[0];
+          selectText.innerHTML = `<span>${escapeHtml(selectedPerson.label)} <small>(@${escapeHtml(selectedPerson.key)})</small></span>`;
+        }
         lockCard("👉 Chọn người + nhập mật khẩu để bắt đầu.");
-      }catch(e){
-        console.warn(e);
-        lockCard("⚠️ Không tải được people.json. Kiểm tra: ./avatars/people.json");
+      }catch(err){
+        console.warn(err);
+        lockCard("⚠️ Không tải được people.json. Kiểm tra: avatars/people.json");
       }
+
+      await loadPlaylist();
+
+      ctx.clearRect(0,0,W,H);
+      step();
+      setTimeout(() => burst(W*0.5, H*0.28, 90), 350);
+      try{ updateOwnerUI(); }catch(e){}
     })();
   </script>
 </body>
