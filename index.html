@@ -6,36 +6,27 @@
   <title>Thiệp Năm Mới 🎆</title>
 
   <style>
-    .ownerBtn{
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      line-height: 1;
-}
-      @media (max-width:520px){
-    .ownerBtn{ height:36px; }
-}
+    :root{
+      --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
+      --ink:#1c2240; --muted: rgba(28,34,64,.72);
+      --card: rgba(255,255,255,.72); --card2: rgba(255,255,255,.55);
+      --stroke: rgba(28,34,64,.10); --shadow: 0 18px 50px rgba(28,34,64,.14);
+      --accent:#ff7ab6; --accent2:#7ee7ff; --danger:#ff4d6d;
+      --radius: 24px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; overflow:hidden;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 800px at 18% 18%, rgba(255,122,182,.22), transparent 60%),
+        radial-gradient(1000px 700px at 80% 25%, rgba(126,231,255,.22), transparent 58%),
+        radial-gradient(900px 700px at 65% 85%, rgba(255,231,153,.25), transparent 58%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+    }
 
-    :root{
-      --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
-      --ink:#1c2240; --muted: rgba(28,34,64,.72);
-      --card: rgba(255,255,255,.72); --card2: rgba(255,255,255,.55);
-      --stroke: rgba(28,34,64,.10); --shadow: 0 18px 50px rgba(28,34,64,.14);
-      --accent:#ff7ab6; --accent2:#7ee7ff; --danger:#ff4d6d;
-      --radius: 24px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; overflow:hidden;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color: var(--ink);
-      background:
-        radial-gradient(1200px 800px at 18% 18%, rgba(255,122,182,.22), transparent 60%),
-        radial-gradient(1000px 700px at 80% 25%, rgba(126,231,255,.22), transparent 58%),
-        radial-gradient(900px 700px at 65% 85%, rgba(255,231,153,.25), transparent 58%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-    }
     canvas#fx{position:fixed; inset:0; width:100vw; height:100vh; display:block; pointer-events:none;}
     .sparkles{
       position:fixed; inset:0;
@@ -47,89 +38,23 @@
         radial-gradient(1.3px 1.3px at 12% 62%, rgba(255,255,255,.85) 40%, transparent 45%);
       opacity:.75; pointer-events:none; filter: blur(.15px); mix-blend-mode: soft-light;
     }
-    .wrap{position:fixed; inset:0; display:grid; place-items:center; padding:18px;}
-    .card{
-      width:min(920px, 100%); border-radius: var(--radius);
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      border: 1px solid var(--stroke);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      overflow:hidden; position:relative;
-    }
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:14px 16px;
-      background: linear-gradient(90deg, rgba(255,122,182,.35), rgba(126,231,255,.30));
-      border-bottom: 1px solid rgba(28,34,64,.10);
-      flex-wrap:wrap;
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      font-weight:800; letter-spacing:.2px; font-size:14px;
-      padding:8px 12px; border-radius:999px;
-      background: rgba(255,255,255,.65);
-      border: 1px solid rgba(28,34,64,.10);
-      white-space:nowrap;
-    }
-    .actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 8px 10px; border-radius:999px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(28,34,64,.10);
-      font-size:12px; color: rgba(28,34,64,.80);
-      user-select:none; white-space:nowrap;
-    }
-    .btnMusic{
-      padding: 8px 12px; border-radius:999px; border:0; cursor:pointer;
-      font-weight:900; color:#fff;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 22px rgba(255,122,182,.18);
-      transition: transform .12s ease, filter .12s ease;
-      white-space:nowrap;
-    }
-    :root{
-      --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
-      --ink:#1c2240; --muted: rgba(28,34,64,.72);
-      --card: rgba(255,255,255,.72); --card2: rgba(255,255,255,.55);
-      --stroke: rgba(28,34,64,.10); --shadow: 0 18px 50px rgba(28,34,64,.14);
-      --accent:#ff7ab6; --accent2:#7ee7ff; --danger:#ff4d6d;
-      --radius: 24px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; overflow:hidden;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color: var(--ink);
-      background:
-        radial-gradient(1200px 800px at 18% 18%, rgba(255,122,182,.22), transparent 60%),
-        radial-gradient(1000px 700px at 80% 25%, rgba(126,231,255,.22), transparent 58%),
-        radial-gradient(900px 700px at 65% 85%, rgba(255,231,153,.25), transparent 58%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-    }
-    canvas#fx{position:fixed; inset:0; width:100vw; height:100vh; display:block; pointer-events:none;}
-    .sparkles{
-      position:fixed; inset:0;
-      background:
-        radial-gradient(1.5px 1.5px at 22% 30%, rgba(255,255,255,.9) 40%, transparent 45%),
-        radial-gradient(1.2px 1.2px at 62% 12%, rgba(255,255,255,.9) 40%, transparent 45%),
-        radial-gradient(1.6px 1.6px at 82% 52%, rgba(255,255,255,.9) 40%, transparent 45%),
-        radial-gradient(1.1px 1.1px at 35% 75%, rgba(255,255,255,.85) 40%, transparent 45%),
-        radial-gradient(1.3px 1.3px at 12% 62%, rgba(255,255,255,.85) 40%, transparent 45%);
-      opacity:.75; pointer-events:none; filter: blur(.15px); mix-blend-mode: soft-light;
-    }
+
     .wrap{position:fixed; inset:0; display:grid; place-items:center; padding:12px;}
     .card{
-      width:min(920px, 100%); border-radius: var(--radius);
+      width:min(920px, 100%);
+      max-height: calc(100svh - 24px);
+      border-radius: var(--radius);
       background: linear-gradient(180deg, var(--card), var(--card2));
       border: 1px solid var(--stroke);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      overflow:hidden; position:relative;
-      display:flex; flex-direction:column;
-      max-height: calc(100svh - 24px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      flex-direction:column;
     }
+
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       padding:14px 16px;
@@ -145,7 +70,9 @@
       border: 1px solid rgba(28,34,64,.10);
       white-space:nowrap;
     }
-    .actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .actions{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding: 8px 10px; border-radius:999px;
@@ -165,6 +92,22 @@
     .btnMusic:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btnMusic:active{ transform: translateY(0px) scale(.99); }
 
+    .btnSecondary{
+      padding: 8px 12px; border-radius:999px; border:0; cursor:pointer;
+      background: rgba(28,34,64,.10);
+      color: rgba(28,34,64,.85);
+      box-shadow:none;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .ownerBtn{
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
     .musicSelect{
       padding: 8px 10px;
       border-radius: 999px;
@@ -177,24 +120,251 @@
       max-width: 220px;
     }
 
-    .content{display:grid; grid-template-columns: 1fr; gap:14px; padding:14px; overflow:auto; -webkit-overflow-scrolling: touch; flex:1 1 auto;}
-    
-    @media (max-width: 520px){
-      /* Mobile: full-bleed + compact music + avatar on top */
+    .content{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      padding:14px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      flex:1 1 auto;
+    }
+    @media (min-width: 780px){
+      .content{grid-template-columns: 1.05fr .95fr; align-items:center; gap:18px;}
+    }
+
+    h1{margin:6px 0; line-height:1.05; font-size: clamp(26px, 5vw, 44px);}
+    .sub{margin: 0 0 14px; color: var(--muted); font-size: clamp(14px, 2.6vw, 16px); line-height: 1.5;}
+
+    .wishBox{
+      padding:14px; border-radius:18px;
+      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(28,34,64,.10);
+    }
+    .wish{font-size: clamp(15px, 3.2vw, 18px); line-height: 1.55; margin:0; min-height:56px; white-space:pre-wrap;}
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    input{
+      flex:1 1 160px; min-width:160px;
+      padding:12px 12px; border-radius:14px;
+      border: 1px solid rgba(28,34,64,.14);
+      background: rgba(255,255,255,.75);
+      color: var(--ink); outline:none;
+    }
+    input::placeholder{color: rgba(28,34,64,.55)}
+    input:disabled{opacity:.6; cursor:not-allowed;}
+    button#btnWish{
+      padding:12px 14px; border-radius:14px; border:0; cursor:pointer;
+      font-weight:900; color:#fff;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(255,122,182,.18);
+      transition: transform .12s ease, filter .12s ease;
+      white-space:nowrap;
+    }
+    button#btnWish:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    button#btnWish:active{ transform: translateY(0px) scale(.99); }
+    button:disabled{opacity:.55; cursor:not-allowed; transform:none; filter:none;}
+
+    .side{display:flex; align-items:center; justify-content:center; padding:6px 0 0;}
+    .bubble{
+      width: min(340px, 82vw); aspect-ratio: 1/1;
+      border-radius:24px;
+      background: radial-gradient(220px 220px at 30% 30%, rgba(255,122,182,.20), rgba(255,255,255,.35));
+      border: 1px solid rgba(28,34,64,.10);
+      display:grid; place-items:center;
+      position:relative; overflow:hidden;
+    }
+    .blob{
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(126,231,255,.28), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,122,182,.24), transparent 40%),
+        radial-gradient(circle at 60% 20%, rgba(255,231,153,.25), transparent 45%);
+      filter: blur(14px);
+      animation: floaty 5s ease-in-out infinite;
+    }
+    @keyframes floaty{0%,100%{transform:translate(-2%,-1%) rotate(-2deg)} 50%{transform:translate(2%,1%) rotate(2deg)}}
+    .avatarImg{
+      position: relative;
+      width: 78%; height: 78%;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid rgba(28,34,64,.10);
+      box-shadow: 0 10px 25px rgba(28,34,64,.10);
+      background: rgba(255,255,255,.75);
+    }
+
+    .foot{
+      padding: 0 18px 16px;
+      color: rgba(28,34,64,.68);
+      font-size: 12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .toggle{display:inline-flex; align-items:center; gap:8px; user-select:none; white-space:nowrap;}
+    .toggle input{ width: 18px; height: 18px; }
+    .year{
+      font-weight: 950;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Lock overlay */
+    .lock{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      padding:18px;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(28,34,64,.10);
+      z-index: 20;
+    }
+    .lockPanel{
+      width: min(600px, 100%);
+      border-radius: 20px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 50px rgba(28,34,64,.16);
+      padding: 16px;
+    }
+    .lockTitle{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+    .lockTitle h2{margin:0; font-size:18px; letter-spacing:.2px;}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px; border-radius:999px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.65);
+      font-size: 12px; color: rgba(28,34,64,.75);
+      white-space:nowrap;
+    }
+    .mini{font-size:12px; color: rgba(28,34,64,.68); line-height:1.45; margin:0 0 10px;}
+    .status{
+      margin-top:10px;
+      padding:10px 12px; border-radius:14px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.72);
+      font-size: 13px; color: rgba(28,34,64,.85);
+      min-height: 42px; display:flex; align-items:center; gap:10px;
+    }
+    .status.bad{
+      border-color: rgba(255,77,109,.35);
+      background: rgba(255,77,109,.08);
+      color: rgba(155, 20, 55, .95);
+    }
+    .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+    .btnDanger{
+      padding:12px 14px; border-radius:14px; border:0; cursor:pointer;
+      font-weight:900; color:#fff;
+      background: linear-gradient(90deg, var(--danger), #ff9a7a);
+    }
+
+    /* Custom select menu */
+    .selectWrap{position:relative; flex: 1 1 280px; min-width:260px;}
+    .selectBtn{
+      width:100%;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border: 1px solid rgba(28,34,64,.14);
+      background: rgba(255,255,255,.75);
+      color: var(--ink);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .selectBtn small{font-weight:600; color: rgba(28,34,64,.55)}
+    .menu{
+      position:absolute;
+      top: calc(100% + 8px);
+      left:0; right:0;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 40px rgba(28,34,64,.18);
+      overflow:hidden;
+      z-index: 50;
+    }
+    .menuHead{padding:10px; border-bottom: 1px solid rgba(28,34,64,.10); background: rgba(255,255,255,.85);}
+    .menuList{max-height: 260px; overflow:auto;}
+    .item{
+      padding: 10px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      cursor:pointer;
+    }
+    .item:hover{ background: rgba(126,231,255,.18); }
+    .item .left{display:flex; flex-direction:column; gap:2px;}
+    .item .name{font-weight:800;}
+    .item .meta{font-size:12px; color: rgba(28,34,64,.62);}
+    .item .tag{
+      font-size: 11px; font-weight:800;
+      padding: 6px 8px; border-radius:999px;
+      border: 1px solid rgba(28,34,64,.10);
+      background: rgba(255,255,255,.8);
+      color: rgba(28,34,64,.78);
+      white-space:nowrap;
+    }
+    .hidden{display:none !important;}
+
+    /* Wish send box */
+    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
+    .wishSendHead{font-weight:800;margin-bottom:8px}
+    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
+    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
+    .muted{opacity:.75}
+
+    /* Owner modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
+    .modal.hidden{display:none}
+    .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .modalTitle{font-weight:900;font-size:16px}
+    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .modalBody{font-size:14px;line-height:1.45}
+    .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
+    .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
+    .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
+
+    /* Tap audio overlay */
+    .tapAudio{
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 18px;
+    }
+    .tapCard{
+      width: min(420px, 92vw);
+      border-radius: 20px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 50px rgba(28,34,64,.18);
+      padding: 16px;
+      text-align:center;
+    }
+    .tapTitle{font-weight:950; font-size:18px; margin-bottom:6px;}
+    .tapSub{font-size:13px; color: rgba(28,34,64,.72); line-height:1.45; margin-bottom:12px;}
+    .tapBtn{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color:#fff;
+      font-weight:950;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(255,122,182,.18);
+    }
+
+    /* Mobile */
+    @media (max-width:520px){
       .wrap{padding:0; place-items:stretch;}
       .card{width:100%; max-height:100svh; border-radius:0;}
       .topbar{padding:10px 12px;}
       .badge{font-size:12px}
       .pill{display:none}
-      h1{font-size:28px}
-      .sub{font-size:13px}
-      .row{gap:8px; flex-wrap:wrap;}
-      .row input, .row button, #btnWish{
-        width:100%;
-        flex: 1 1 100%;
-      }
+      .row{gap:8px}
+      .row input, .row button{width:100%; flex:1 1 100%}
 
-      /* Music bar: icons beside select */
       .actions{
         display:grid;
         grid-template-columns: 1fr auto auto auto;
@@ -221,469 +391,22 @@
         font-size:16px;
       }
       .btnMusic .txt{display:none;}
+      .ownerBtn{
+        grid-column: 1 / -1;
+        height:36px;
+      }
 
-      /* Avatar: move above greeting on mobile */
       .side{order:-1; padding:4px 0 0;}
       .bubble{width: min(240px, 70vw); border-radius:20px;}
       .avatarImg{width:84%; height:84%;}
-
-      .wishSend .row{align-items:stretch}
-      textarea#wishMsg{min-height:96px}
     }
 
-@media (min-width: 780px){
-      .content{grid-template-columns: 1.05fr .95fr; align-items:center; gap:18px;}
+    /* iOS safe area */
+    @supports (padding: max(0px)) {
+      .wrap{padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right)) max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));}
+      @media (max-width: 520px){ .wrap{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;} }
     }
-    h1{margin:6px 0; line-height:1.05; font-size: clamp(26px, 5vw, 44px);}
-    .sub{margin: 0 0 14px; color: var(--muted); font-size: clamp(14px, 2.6vw, 16px); line-height: 1.5;}
-
-    .wishBox{
-      padding:14px; border-radius:18px;
-      background: rgba(255,255,255,.60);
-      border: 1px solid rgba(28,34,64,.10);
-    }
-    .wish{font-size: clamp(15px, 3.2vw, 18px); line-height: 1.5; margin:0; min-height:56px;}
-    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
-    input{
-      flex:1 1 160px; min-width:160px;
-      padding:12px 12px; border-radius:14px;
-      border: 1px solid rgba(28,34,64,.14);
-      background: rgba(255,255,255,.75);
-      color: var(--ink); outline:none;
-    }
-    input::placeholder{color: rgba(28,34,64,.55)}
-    input:disabled{opacity:.6; cursor:not-allowed;}
-    button{
-      padding:12px 14px; border-radius:14px; border:0; cursor:pointer;
-      font-weight:900; color:#fff;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 25px rgba(255,122,182,.18);
-      transition: transform .12s ease, filter .12s ease;
-      white-space:nowrap;
-    }
-    button:hover{ transform: translateY(-1px); filter: brightness(1.03); }
-    button:active{ transform: translateY(0px) scale(.99); }
-    button:disabled{opacity:.55; cursor:not-allowed; transform:none; filter:none;}
-
-    .side{display:flex; align-items:center; justify-content:center; padding:6px 0 0;}
-    .bubble{
-      width: min(340px, 82vw); aspect-ratio: 1/1;
-      border-radius:24px;
-      background: radial-gradient(220px 220px at 30% 30%, rgba(255,122,182,.20), rgba(255,255,255,.35));
-      border: 1px solid rgba(28,34,64,.10);
-      display:grid; place-items:center;
-      position:relative; overflow:hidden;
-    }
-    .blob{
-      position:absolute; inset:-40%;
-      background:
-        radial-gradient(circle at 30% 35%, rgba(126,231,255,.28), transparent 40%),
-        radial-gradient(circle at 70% 60%, rgba(255,122,182,.24), transparent 40%),
-        radial-gradient(circle at 60% 20%, rgba(255,231,153,.25), transparent 45%);
-      filter: blur(14px);
-      animation: floaty 5s ease-in-out infinite;
-    }
-    @keyframes floaty{0%,100%{transform:translate(-2%,-1%) rotate(-2deg)} 50%{transform:translate(2%,1%) rotate(2deg)}}
-    .avatarImg{
-      position: relative;
-      width: 78%; height: 78%;
-      border-radius: 999px;
-      object-fit: cover;
-      border: 1px solid rgba(28,34,64,.10);
-      box-shadow: 0 10px 25px rgba(28,34,64,.10);
-      background: rgba(255,255,255,.75);
-    }
-
-    .foot{
-      padding: 0 18px 16px;
-      color: rgba(28,34,64,.68);
-      font-size: 12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    }
-    .toggle{display:inline-flex; align-items:center; gap:8px; user-select:none; white-space:nowrap;}
-    .toggle input{ width: 18px; height: 18px; }
-    .year{
-      font-weight: 950;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .lock{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      padding:18px;
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(28,34,64,.10);
-      z-index: 20;
-    }
-    .lockPanel{
-      width: min(600px, 100%);
-      border-radius: 20px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 50px rgba(28,34,64,.16);
-      padding: 16px;
-    }
-    .lockTitle{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
-    .lockTitle h2{margin:0; font-size:18px; letter-spacing:.2px;}
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 6px 10px; border-radius:999px;
-      border: 1px solid rgba(28,34,64,.12);
-      background: rgba(255,255,255,.65);
-      font-size: 12px; color: rgba(28,34,64,.75);
-      white-space:nowrap;
-    }
-    .mini{font-size:12px; color: rgba(28,34,64,.68); line-height:1.45; margin:0 0 10px;}
-    .status{
-      margin-top:10px;
-      padding:10px 12px; border-radius:14px;
-      border: 1px solid rgba(28,34,64,.12);
-      background: rgba(255,255,255,.72);
-      font-size: 13px; color: rgba(28,34,64,.85);
-      min-height: 42px; display:flex; align-items:center; gap:10px;
-    }
-    .status.bad{
-      border-color: rgba(255,77,109,.35);
-      background: rgba(255,77,109,.08);
-      color: rgba(155, 20, 55, .95);
-    }
-    .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
-    .btnSecondary{background: rgba(28,34,64,.10); color: rgba(28,34,64,.85); box-shadow:none;}
-    .btnDanger{background: linear-gradient(90deg, var(--danger), #ff9a7a);}
-
-    .selectWrap{position:relative; flex: 1 1 280px; min-width:260px;}
-    .selectBtn{
-      width:100%;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:12px 12px;
-      border-radius:14px;
-      border: 1px solid rgba(28,34,64,.14);
-      background: rgba(255,255,255,.75);
-      color: var(--ink);
-      cursor:pointer;
-      font-weight:700;
-    }
-    .selectBtn small{font-weight:600; color: rgba(28,34,64,.55)}
-    .menu{
-      position:absolute;
-      top: calc(100% + 8px);
-      left:0; right:0;
-      border-radius: 16px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 40px rgba(28,34,64,.18);
-      overflow:hidden;
-      z-index: 50;
-    }
-    .menuHead{padding:10px; border-bottom: 1px solid rgba(28,34,64,.10); background: rgba(255,255,255,.85);}
-    .menuList{max-height: 260px; overflow:auto;}
-    .item{
-      padding: 10px 12px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      cursor:pointer;
-    }
-    .item:hover{ background: rgba(126,231,255,.18); }
-    .item .left{display:flex; flex-direction:column; gap:2px;}
-    .item .name{font-weight:800;}
-    .item .meta{font-size:12px; color: rgba(28,34,64,.62);}
-    .item .tag{
-      font-size: 11px; font-weight:800;
-      padding: 6px 8px; border-radius:999px;
-      border: 1px solid rgba(28,34,64,.10);
-      background: rgba(255,255,255,.8);
-      color: rgba(28,34,64,.78);
-      white-space:nowrap;
-    }
-    .hidden{display:none !important;}
-
-    .tapAudio{
-      position:fixed; inset:0;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 999;
-      padding: 18px;
-    }
-    .tapCard{
-      width: min(420px, 92vw);
-      border-radius: 20px;
-      background: rgba(255,255,255,.85);
-      border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 50px rgba(28,34,64,.18);
-      padding: 16px;
-      text-align:center;
-    }
-    .tapTitle{font-weight:950; font-size:18px; margin-bottom:6px;}
-    .tapSub{font-size:13px; color: rgba(28,34,64,.72); line-height:1.45; margin-bottom:12px;}
-    .tapBtn{
-      display:inline-block;
-      padding: 10px 14px;
-      border-radius: 999px;
-      color:#fff;
-      font-weight:950;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 25px rgba(255,122,182,.18);
-    }
-  
-    /* --- Wish send box --- */
-    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
-    .wishSendHead{font-weight:800;margin-bottom:8px}
-    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
-    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
-    .muted{opacity:.75}
-
-    /* --- Owner modal --- */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
-    .modal.hidden{display:none}
-    .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
-    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-    .modalTitle{font-weight:900;font-size:16px}
-    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-    .modalBody{font-size:14px;line-height:1.45}
-    .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
-    .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
-    .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
-
- 1px solid rgba(28,34,64,.10);
-      background: rgba(255,255,255,.65);
-      color: rgba(28,34,64,.85);
-      font-weight: 800;
-      font-size: 12px;
-      outline: none;
-      max-width: 220px;
-    }
-
-    .content{display:grid; grid-template-columns: 1fr; gap:14px; padding:18px;}
-    @media (min-width: 780px){
-      .content{grid-template-columns: 1.05fr .95fr; align-items:center; gap:18px;}
-    }
-    h1{margin:6px 0; line-height:1.05; font-size: clamp(26px, 5vw, 44px);}
-    .sub{margin: 0 0 14px; color: var(--muted); font-size: clamp(14px, 2.6vw, 16px); line-height: 1.5;}
-
-    .wishBox{
-      padding:14px; border-radius:18px;
-      background: rgba(255,255,255,.60);
-      border: 1px solid rgba(28,34,64,.10);
-    }
-    .wish{font-size: clamp(15px, 3.2vw, 18px); line-height: 1.5; margin:0; min-height:56px;}
-    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
-    input{
-      flex:1 1 160px; min-width:160px;
-      padding:12px 12px; border-radius:14px;
-      border: 1px solid rgba(28,34,64,.14);
-      background: rgba(255,255,255,.75);
-      color: var(--ink); outline:none;
-    }
-    input::placeholder{color: rgba(28,34,64,.55)}
-    input:disabled{opacity:.6; cursor:not-allowed;}
-    button{
-      padding:12px 14px; border-radius:14px; border:0; cursor:pointer;
-      font-weight:900; color:#fff;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 25px rgba(255,122,182,.18);
-      transition: transform .12s ease, filter .12s ease;
-      white-space:nowrap;
-    }
-    button:hover{ transform: translateY(-1px); filter: brightness(1.03); }
-    button:active{ transform: translateY(0px) scale(.99); }
-    button:disabled{opacity:.55; cursor:not-allowed; transform:none; filter:none;}
-
-    .side{display:flex; align-items:center; justify-content:center; padding:6px 0 0;}
-    .bubble{
-      width: min(340px, 82vw); aspect-ratio: 1/1;
-      border-radius:24px;
-      background: radial-gradient(220px 220px at 30% 30%, rgba(255,122,182,.20), rgba(255,255,255,.35));
-      border: 1px solid rgba(28,34,64,.10);
-      display:grid; place-items:center;
-      position:relative; overflow:hidden;
-    }
-    .blob{
-      position:absolute; inset:-40%;
-      background:
-        radial-gradient(circle at 30% 35%, rgba(126,231,255,.28), transparent 40%),
-        radial-gradient(circle at 70% 60%, rgba(255,122,182,.24), transparent 40%),
-        radial-gradient(circle at 60% 20%, rgba(255,231,153,.25), transparent 45%);
-      filter: blur(14px);
-      animation: floaty 5s ease-in-out infinite;
-    }
-    @keyframes floaty{0%,100%{transform:translate(-2%,-1%) rotate(-2deg)} 50%{transform:translate(2%,1%) rotate(2deg)}}
-    .avatarImg{
-      position: relative;
-      width: 78%; height: 78%;
-      border-radius: 999px;
-      object-fit: cover;
-      border: 1px solid rgba(28,34,64,.10);
-      box-shadow: 0 10px 25px rgba(28,34,64,.10);
-      background: rgba(255,255,255,.75);
-    }
-
-    .foot{
-      padding: 0 18px 16px;
-      color: rgba(28,34,64,.68);
-      font-size: 12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    }
-    .toggle{display:inline-flex; align-items:center; gap:8px; user-select:none; white-space:nowrap;}
-    .toggle input{ width: 18px; height: 18px; }
-    .year{
-      font-weight: 950;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .lock{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      padding:18px;
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(28,34,64,.10);
-      z-index: 20;
-    }
-    .lockPanel{
-      width: min(600px, 100%);
-      border-radius: 20px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 50px rgba(28,34,64,.16);
-      padding: 16px;
-    }
-    .lockTitle{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
-    .lockTitle h2{margin:0; font-size:18px; letter-spacing:.2px;}
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 6px 10px; border-radius:999px;
-      border: 1px solid rgba(28,34,64,.12);
-      background: rgba(255,255,255,.65);
-      font-size: 12px; color: rgba(28,34,64,.75);
-      white-space:nowrap;
-    }
-    .mini{font-size:12px; color: rgba(28,34,64,.68); line-height:1.45; margin:0 0 10px;}
-    .status{
-      margin-top:10px;
-      padding:10px 12px; border-radius:14px;
-      border: 1px solid rgba(28,34,64,.12);
-      background: rgba(255,255,255,.72);
-      font-size: 13px; color: rgba(28,34,64,.85);
-      min-height: 42px; display:flex; align-items:center; gap:10px;
-    }
-    .status.bad{
-      border-color: rgba(255,77,109,.35);
-      background: rgba(255,77,109,.08);
-      color: rgba(155, 20, 55, .95);
-    }
-    .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
-    .btnSecondary{background: rgba(28,34,64,.10); color: rgba(28,34,64,.85); box-shadow:none;}
-    .btnDanger{background: linear-gradient(90deg, var(--danger), #ff9a7a);}
-
-    .selectWrap{position:relative; flex: 1 1 280px; min-width:260px;}
-    .selectBtn{
-      width:100%;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:12px 12px;
-      border-radius:14px;
-      border: 1px solid rgba(28,34,64,.14);
-      background: rgba(255,255,255,.75);
-      color: var(--ink);
-      cursor:pointer;
-      font-weight:700;
-    }
-    .selectBtn small{font-weight:600; color: rgba(28,34,64,.55)}
-    .menu{
-      position:absolute;
-      top: calc(100% + 8px);
-      left:0; right:0;
-      border-radius: 16px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 40px rgba(28,34,64,.18);
-      overflow:hidden;
-      z-index: 50;
-    }
-    .menuHead{padding:10px; border-bottom: 1px solid rgba(28,34,64,.10); background: rgba(255,255,255,.85);}
-    .menuList{max-height: 260px; overflow:auto;}
-    .item{
-      padding: 10px 12px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      cursor:pointer;
-    }
-    .item:hover{ background: rgba(126,231,255,.18); }
-    .item .left{display:flex; flex-direction:column; gap:2px;}
-    .item .name{font-weight:800;}
-    .item .meta{font-size:12px; color: rgba(28,34,64,.62);}
-    .item .tag{
-      font-size: 11px; font-weight:800;
-      padding: 6px 8px; border-radius:999px;
-      border: 1px solid rgba(28,34,64,.10);
-      background: rgba(255,255,255,.8);
-      color: rgba(28,34,64,.78);
-      white-space:nowrap;
-    }
-    .hidden{display:none !important;}
-
-    .tapAudio{
-      position:fixed; inset:0;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 999;
-      padding: 18px;
-    }
-    .tapCard{
-      width: min(420px, 92vw);
-      border-radius: 20px;
-      background: rgba(255,255,255,.85);
-      border: 1px solid rgba(28,34,64,.12);
-      box-shadow: 0 18px 50px rgba(28,34,64,.18);
-      padding: 16px;
-      text-align:center;
-    }
-    .tapTitle{font-weight:950; font-size:18px; margin-bottom:6px;}
-    .tapSub{font-size:13px; color: rgba(28,34,64,.72); line-height:1.45; margin-bottom:12px;}
-    .tapBtn{
-      display:inline-block;
-      padding: 10px 14px;
-      border-radius: 999px;
-      color:#fff;
-      font-weight:950;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 25px rgba(255,122,182,.18);
-    }
-  
-    /* --- Wish send box --- */
-    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
-    .wishSendHead{font-weight:800;margin-bottom:8px}
-    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
-    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
-    .muted{opacity:.75}
-
-    /* --- Owner modal --- */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
-    .modal.hidden{display:none}
-    .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
-    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-    .modalTitle{font-weight:900;font-size:16px}
-    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-    .modalBody{font-size:14px;line-height:1.45}
-    .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
-    .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
-    .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
-
-
-  /* iOS safe area */
-  @supports (padding: max(0px)) {
-    .wrap{padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right)) max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));}
-    @media (max-width: 520px){ .wrap{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;} }
-  }
-</style>
+  </style>
 </head>
 
 <body>
@@ -693,6 +416,7 @@
   <div class="wrap">
     <div class="card">
 
+      <!-- LOCK -->
       <div class="lock" id="lock">
         <div class="lockPanel">
           <div class="lockTitle">
@@ -722,7 +446,7 @@
           </div>
 
           <div class="row2">
-            <button id="btnUnlock">Mở thiệp ✨</button>
+            <button id="btnUnlock" class="btnMusic" type="button">Mở thiệp ✨</button>
             <button class="btnSecondary" id="btnOwnerView" type="button" disabled>Xem thiệp người này (Owner)</button>
             <button class="btnSecondary" id="btnHint" type="button">Tip đặt ảnh</button>
           </div>
@@ -730,26 +454,30 @@
           <div class="row2">
             <button class="btnDanger hidden" id="btnLogout" type="button">Đăng xuất</button>
           </div>
+
           <div class="status" id="status">👉 Chọn người + nhập mật khẩu để bắt đầu.</div>
         </div>
       </div>
 
+      <!-- TOPBAR -->
       <div class="topbar">
         <div class="badge" id="badge">🐴 Thiệp Năm Mới • Pastel Cute</div>
         <div class="actions">
           <span class="pill">Chạm / click để bắn pháo hoa 🎆</span>
           <select id="musicSelect" class="musicSelect" aria-label="Chọn nhạc"></select>
-          <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
-          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc"><span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span></button>
-          <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
+          <button class="btnMusic" id="btnPrev" title="Bài trước" type="button">⏮</button>
+          <button class="btnMusic" id="btnMusic" type="button" aria-label="Bật/Tắt nhạc">
+            <span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span>
+          </button>
+          <button class="btnMusic" id="btnNext" title="Bài tiếp" type="button">⏭</button>
+
           <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
           <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogout" type="button">🔓 Owner Logout</button>
           <button class="btnSecondary hidden ownerBtn" id="btnOwnerDashboard" type="button">📊 Dashboard</button>
-
-          
         </div>
       </div>
 
+      <!-- MAIN -->
       <div class="content">
         <div>
           <h1>Chúc Mừng Năm Mới <span class="year" id="yearText">2026</span> ✨</h1>
@@ -761,7 +489,7 @@
             <div class="row">
               <input id="viewerName" placeholder="Tên (tự điền sau khi mở)" disabled />
               <input id="yearInput" maxlength="6" inputmode="numeric" placeholder="Năm (vd: 2026)" />
-              <button id="btnWish" disabled>Đổi lời chúc</button>
+              <button id="btnWish" disabled type="button">Đổi lời chúc</button>
             </div>
 
             <div class="wishSend">
@@ -772,6 +500,7 @@
                 <small class="muted" id="wishSendHint">* Bấm “Gửi” để gửi thẳng về Gmail chủ sở hữu (nếu đã cấu hình).</small>
               </div>
             </div>
+
           </div>
         </div>
 
@@ -793,7 +522,6 @@
     </div>
   </div>
 
-
   <!-- Owner Dashboard Modal -->
   <div id="ownerModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Owner Dashboard">
     <div class="modalCard">
@@ -803,7 +531,7 @@
           <button class="btnSecondary" id="btnTabViews" type="button">Lượt xem</button>
           <button class="btnSecondary" id="btnTabWishes" type="button">Lời chúc</button>
           <button class="btnSecondary" id="btnRefreshOwner" type="button">Làm mới</button>
-          <button class="btn" id="btnCloseOwner" type="button">Đóng</button>
+          <button class="btnMusic" id="btnCloseOwner" type="button">Đóng</button>
         </div>
       </div>
       <div id="ownerBody" class="modalBody">Đang tải...</div>
@@ -828,6 +556,7 @@
   <script type="module" src="services.js"></script>
 
   <script>
+    // ===== YEAR =====
     const yearText = document.getElementById("yearText");
     const yearInput = document.getElementById("yearInput");
     const defaultYear = new Date().getFullYear();
@@ -839,6 +568,7 @@
       if (v) yearText.textContent = v;
     });
 
+    // ===== MUSIC =====
     const music = document.getElementById("music");
     const btnMusic = document.getElementById("btnMusic");
     const btnPrev = document.getElementById("btnPrev");
@@ -849,80 +579,45 @@
     let PLAYLIST = [];
     let trackIndex = 0;
     let musicOn = false;
-    let userChangedTrack = false; // set true when user manually changes track
+    let userChangedTrack = false;
 
     function setMusicButton(state, label){
-      // state: true = on, false = off
       const ico = btnMusic.querySelector(".ico");
       const txt = btnMusic.querySelector(".txt");
       if (!ico || !txt) {
-        // fallback for old markup
         btnMusic.textContent = label || (state ? "⏸ Tạm dừng" : "▶️ Phát nhạc");
         return;
       }
       if (label){
-        // when showing errors like "❗ Chưa có nhạc"
         ico.textContent = "❗";
         txt.textContent = label.replace(/^❗\s*/,'');
         return;
       }
       if (state){
-        // playing
         ico.textContent = "⏸";
         txt.textContent = "Tạm dừng";
       }else{
-        // paused
         ico.textContent = "▶️";
         txt.textContent = "Phát nhạc";
       }
     }
 
-    async function loadPlaylist(){
-      try{
-        const res = await fetch("music/playlist.json", { cache: "no-store" });
-        if (!res.ok) throw new Error("Cannot load music/playlist.json");
-        PLAYLIST = await res.json();
-
-        musicSelect.innerHTML = PLAYLIST.map((t, i) =>
-          `<option value="${i}">${t.title}</option>`
-        ).join("");
-
-        trackIndex = getDefaultTrackIndexForViewer(null);
-        userChangedTrack = false;
-        setTrack(trackIndex, false);
-      }catch(e){
-        console.warn(e);
-        PLAYLIST = [];
-        musicSelect.innerHTML = `<option value="">(Không có playlist)</option>`;
-        setMusicButton(false, "❗ Chưa có nhạc");
-      }
-    }
-
-
     function getDefaultTrackIndexForViewer(viewer){
-      // Default track:
-      // - Anh Quỳnh (key 'ethereal') => '24h.mp4'
-      // - Everyone else => keep the original default song
       const specialFile = (viewer && viewer.key === "ethereal") ? "24h.mp4" : "";
       const defaultFile = "nam-qua-da-lam-gi.mp3";
-
       const pickByFile = (file) => {
         if (!file || !PLAYLIST.length) return -1;
         const idx = PLAYLIST.findIndex(t => t.file === file);
         return idx >= 0 ? idx : -1;
       };
-
       const specialIdx = pickByFile(specialFile);
       if (specialIdx >= 0) return specialIdx;
-
       const defIdx = pickByFile(defaultFile);
       if (defIdx >= 0) return defIdx;
-
       return 0;
     }
 
     function applyDefaultTrackForViewer(viewer){
-      // Only apply default if user hasn't manually changed track yet
       if (!PLAYLIST.length) return;
       if (userChangedTrack) return;
       const desired = getDefaultTrackIndexForViewer(viewer);
@@ -986,14 +681,33 @@
       const i = parseInt(e.target.value, 10);
       if (!Number.isNaN(i)) setTrack(i, true);
     });
-    // NOTE: Autoplay is blocked by modern browsers.
-    // We do NOT try to auto-unlock audio on page load or first touch.
-    // Music will start ONLY after the user taps the “Bật nhạc” button.
     tapAudio.addEventListener("click", async () => {
       const ok = await tryPlayFromGesture();
       if (ok) burst(innerWidth*0.5, innerHeight*0.25, 120);
     });
 
+    async function loadPlaylist(){
+      try{
+        const res = await fetch("music/playlist.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Cannot load music/playlist.json");
+        PLAYLIST = await res.json();
+
+        musicSelect.innerHTML = PLAYLIST.map((t, i) =>
+          `<option value="${i}">${t.title}</option>`
+        ).join("");
+
+        trackIndex = getDefaultTrackIndexForViewer(null);
+        userChangedTrack = false;
+        setTrack(trackIndex, false);
+      }catch(e){
+        console.warn(e);
+        PLAYLIST = [];
+        musicSelect.innerHTML = `<option value="">(Không có playlist)</option>`;
+        setMusicButton(false, "❗ Chưa có nhạc");
+      }
+    }
+
+    // ===== UI ELEMENTS =====
     const lock = document.getElementById("lock");
     const statusEl = document.getElementById("status");
     const chip = document.getElementById("chip");
@@ -1019,7 +733,6 @@
 
     const wishMsg = document.getElementById("wishMsg");
     const btnSendWish = document.getElementById("btnSendWish");
-    const wishSendHint = document.getElementById("wishSendHint");
 
     const ownerModal = document.getElementById("ownerModal");
     const ownerBody = document.getElementById("ownerBody");
@@ -1027,28 +740,68 @@
     const btnTabViews = document.getElementById("btnTabViews");
     const btnTabWishes = document.getElementById("btnTabWishes");
     const btnRefreshOwner = document.getElementById("btnRefreshOwner");
-
-    let ownerTab = "views"; // 'views' | 'wishes'
-
+    let ownerTab = "views";
 
     const viewerName = document.getElementById("viewerName");
     const btnWish = document.getElementById("btnWish");
     const wishEl = document.getElementById("wish");
     const avatarImg = document.getElementById("avatarImg");
 
+    // ===== 40 RANDOM WISHES =====
     const DEFAULT_WISHES = [
-      "Chúc {name} năm mới {year} bình an dịu dàng, vui như Tết và may mắn đầy nhà! 🌸✨",
-      "Năm {year} chúc {name} sức khỏe dồi dào, tinh thần phơi phới, mọi thứ hanh thông! 💪🌈",
-      "Chúc {name} {year} tiền vào “rẹo rẹo”, tiền ra “nhỏ giọt” thôi nha! 💰😄",
-      "Chúc {name} {year} học gì hiểu đó, làm gì cũng tới, deadline nào cũng qua! 📚🚀",
-      "Chúc {name} {year} rực rỡ theo cách của riêng mình, không cần so sánh! 🌟🫧",
-      "Chúc {name} {year} mọi dự định đều “đúng tiến độ”, mọi mục tiêu đều “đúng đích”! ⏳🎯"
+      "Chúc {name} năm {year} bình an thật nhiều, vui vẻ thật lâu, may mắn thật đầy! ✨🌸",
+      "Năm {year} chúc {name} sức khỏe dồi dào, tinh thần rực rỡ, mọi việc hanh thông! 💪🌈",
+      "Chúc {name} {year} tiền vào như nước, tiền ra nhỏ giọt thôi nha! 💰😆",
+      "Năm {year} chúc {name} ngủ ngon – ăn ngon – làm gì cũng suôn sẻ! 🍜🛌",
+      "Chúc {name} {year} gặp đúng người, đúng việc, đúng thời điểm! 🎯✨",
+      "Năm {year} chúc {name} luôn được yêu thương, được trân trọng và thật hạnh phúc! 💖😊",
+      "Chúc {name} năm {year} rực rỡ theo cách riêng, không cần so sánh! 🌟🫧",
+      "Năm {year} chúc {name} mọi mục tiêu đều về đích ngon ơ! 🏆🎯",
+      "Chúc {name} {year} bình tĩnh sống, nhẹ nhàng yêu, vui vẻ làm điều mình thích! ☁️🌷",
+      "Năm {year} chúc {name} học/việc mượt mà, deadline nào cũng qua! 📚🚀",
+      "Chúc {name} {year} cười nhiều hơn, lo ít hơn, vui nhiều hơn! 😄🌸",
+      "Năm {year} chúc {name} mở mắt là niềm vui, nhắm mắt là bình yên! 🕊️✨",
+      "Chúc {name} {year} ngày nào cũng có chuyện nhỏ xíu đáng yêu để vui! 🧸💗",
+      "Năm {year} chúc {name} đi đâu cũng gặp may, về đâu cũng thấy yên! 🏡🍀",
+      "Chúc {name} {year} làm gì cũng tới, gặp gì cũng qua, ngã đâu đứng đó! 🔥💪",
+      "Năm {year} chúc {name} trái tim ấm áp, cuộc đời dịu dàng! 💞🌷",
+      "Chúc {name} {year} gặp toàn điều tốt, chuyện xấu đi lạc hết! 😝🍀",
+      "Năm {year} chúc {name} tự tin tỏa sáng, càng ngày càng giỏi hơn! 🌟✅",
+      "Chúc {name} {year} có nhiều cơ hội tốt bất ngờ tìm đến! 🚀🎁",
+      "Năm {year} chúc {name} yêu đời hơn mỗi ngày, yêu mình hơn mỗi chút! 💖🌈",
+      "Chúc {name} {year} bình an ở trong tim, niềm vui ở quanh mình! 🌸🫶",
+      "Năm {year} chúc {name} mơ điều lớn, làm điều nhỏ, hạnh phúc điều vừa đủ! ✨☁️",
+      "Chúc {name} {year} cuộc sống “dễ thở”, tâm trạng “dễ thương”! 😆🌷",
+      "Năm {year} chúc {name} mọi dự định đều đúng tiến độ, đúng đích! ⏳🎯",
+      "Chúc {name} {year} có người thương, có bạn tốt, có mình bình yên! 🫶💖",
+      "Năm {year} chúc {name} làm ít hưởng nhiều, vui nhiều hơn mệt! 😄✨",
+      "Chúc {name} {year} đi đúng đường, gặp đúng người, nhận đúng điều mình xứng đáng! 🌟🎁",
+      "Năm {year} chúc {name} ngày càng xinh/đẹp, ngày càng giàu, ngày càng vui! 😎💸",
+      "Chúc {name} {year} thành công không áp lực, hạnh phúc không điều kiện! 🌈🕊️",
+      "Năm {year} chúc {name} mọi thứ “đúng ý”, mọi chuyện “đúng lúc”! ⏰✨",
+      "Chúc {name} {year} năng lượng tích cực đầy pin, buồn bã tự out! 🔋😆",
+      "Năm {year} chúc {name} bước chậm mà chắc, bình tĩnh mà thắng! 🧠🏆",
+      "Chúc {name} {year} có đủ kiên nhẫn, đủ bản lĩnh, đủ dịu dàng! 🌿✨",
+      "Năm {year} chúc {name} sáng mắt sáng lòng, sáng cả tương lai! ☀️🌟",
+      "Chúc {name} {year} yêu thương đầy nhà, may mắn đầy túi! 🏡🍀",
+      "Năm {year} chúc {name} mọi nỗ lực đều được đền đáp xứng đáng! 💪🎁",
+      "Chúc {name} {year} nhẹ nhàng như gió, mạnh mẽ như nắng! 🌬️☀️",
+      "Năm {year} chúc {name} luôn có người đồng hành và không cô đơn! 🫶✨",
+      "Chúc {name} {year} bình an thật lâu, hạnh phúc thật sâu! 💖🕊️",
+      "Năm {year} chúc {name} một năm mới đủ đầy: sức khỏe – tiền bạc – niềm vui! 💪💰😊"
     ];
 
+    // ===== DATA + SESSION =====
     let PEOPLE = [];
     let selectedPerson = null;
     let lastWishIndex = -1;
-    let session = { loggedIn:false, viewer:null, target:null };
+
+    let session = {
+      loggedIn:false,
+      viewer:null,
+      target:null,
+      firstWishShownMap: {} // per target.key
+    };
 
     function setStatus(msg, bad=false){
       statusEl.textContent = msg;
@@ -1065,18 +818,14 @@
     function isOwnerRole(){
       return !!(session.loggedIn && session.viewer && session.viewer.role === "owner");
     }
-
     function isOwnerAuthed(){
-      try{
-        return window.AppServices?.isOwnerAuthed?.() === true;
-      }catch{ return false; }
+      try{ return window.AppServices?.isOwnerAuthed?.() === true; }
+      catch{ return false; }
     }
 
     function updateOwnerUI(){
       const ownerRole = isOwnerRole();
       const authed = isOwnerAuthed();
-
-      // show owner buttons only for owner role
       btnOwnerLogin.classList.toggle("hidden", !ownerRole || authed);
       btnOwnerLogout.classList.toggle("hidden", !ownerRole || !authed);
       btnOwnerDashboard.classList.toggle("hidden", !ownerRole || !authed);
@@ -1089,7 +838,6 @@
       if (m <= 0) return s + "s";
       return m + "m " + s + "s";
     }
-
     function fmtTime(ts){
       try{
         if (!ts) return "";
@@ -1099,6 +847,13 @@
       }catch{ return ""; }
     }
 
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
+
+    // ===== OWNER MODAL =====
     function openOwnerModal(){
       ownerModal.classList.remove("hidden");
       renderOwnerTab();
@@ -1115,7 +870,7 @@
         ownerBody.innerHTML = `
           <div class="ownerRow">
             <div><b>🔐 Bạn chưa đăng nhập Google Owner</b></div>
-            <div class="ownerMeta">Hãy bấm “Owner Google Login”, đăng nhập xong rồi mở lại Dashboard.</div>
+            <div class="ownerMeta">Hãy bấm “Owner Login”, đăng nhập xong rồi mở lại Dashboard.</div>
             <div class="ownerMeta">Nếu bạn chưa set <code>window.OWNER_UID</code> trong <code>config.js</code> và Rules, hãy lấy UID trong Firebase Authentication → Users.</div>
           </div>
         `;
@@ -1179,12 +934,7 @@
       }
     }
 
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, m => ({
-        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-      }[m]));
-    }
-
+    // ===== PEOPLE LOAD =====
     async function loadPeople(){
       const res = await fetch("avatars/people.json", { cache: "no-store" });
       if (!res.ok) throw new Error("Cannot load avatars/people.json");
@@ -1197,10 +947,16 @@
         pass: String(p.pass || "").trim(),
         role: String(p.role || "guest").trim(),
         exts: Array.isArray(p.exts) ? p.exts : ["jpg","png","webp","jpeg"],
-        wishes: Array.isArray(p.wishes) ? p.wishes : null
+
+        // new fields
+        wishes: Array.isArray(p.wishes) ? p.wishes : null,
+        firstWish: typeof p.firstWish === "string" ? p.firstWish : "",
+        extraLine: typeof p.extraLine === "string" ? p.extraLine : "",
+        aliasName: typeof p.aliasName === "string" ? p.aliasName : ""
       })).filter(p => p.key && p.label && p.pass);
     }
 
+    // ===== MENU =====
     function openMenu(){
       menu.classList.remove("hidden");
       search.value = "";
@@ -1255,6 +1011,7 @@
       if (!selectWrap.contains(e.target)) closeMenu();
     });
 
+    // ===== AVATAR =====
     function tryLoadAvatarFromCandidates(candidates){
       let i = 0;
       const tryNext = () => {
@@ -1270,14 +1027,17 @@
       tryLoadAvatarFromCandidates(candidates);
     }
 
+    // ===== WISH LOGIC =====
     function formatWish(template, displayName){
       const name = (displayName || "bạn").trim();
       const year = (yearInput.value || yearText.textContent || defaultYear).trim();
       return template.replaceAll("{name}", name).replaceAll("{year}", year);
     }
+
     function getWishPoolForTarget(target){
       return (target && target.wishes && target.wishes.length) ? target.wishes : DEFAULT_WISHES;
     }
+
     function randomWish(pool){
       let idx;
       do { idx = Math.floor(Math.random() * pool.length); }
@@ -1285,28 +1045,50 @@
       lastWishIndex = idx;
       return pool[idx];
     }
+
+    function displayNameForWish(target){
+      if (!target) return "bạn";
+      if (target.aliasName && target.aliasName.trim()) return target.aliasName.trim(); // Xuân Mai => "chíp"
+      return target.label || "bạn";
+    }
+
+    function buildRandomWishText(target){
+      const pool = getWishPoolForTarget(target);
+      let text = formatWish(randomWish(pool), displayNameForWish(target));
+
+      // extraLine: Trâm / Tường Di / Đặng Thư
+      const extra = (target?.extraLine || "").trim();
+      if (extra) text += "\n" + extra;
+
+      return text;
+    }
+
+    function getFirstWishForTarget(target){
+      return (target && typeof target.firstWish === "string" && target.firstWish.trim())
+        ? target.firstWish.trim()
+        : "";
+    }
+
     function showWish(){
       if (!session.loggedIn || !session.target) return;
-      const pool = getWishPoolForTarget(session.target);
-      wishEl.textContent = formatWish(randomWish(pool), session.target.label);
+      // Bấm "Đổi lời chúc" => luôn random (không dùng firstWish)
+      wishEl.textContent = buildRandomWishText(session.target);
       burst(lastPointer.x || (innerWidth*0.5), lastPointer.y || (innerHeight*0.35), 120);
     }
 
-    function saveSession(){ /* session persistence disabled */ }
-    function restoreSession(){ return false; }
-
+    // ===== SESSION / LOCK =====
     function lockCard(msg){
-      session = { loggedIn:false, viewer:null, target:null };
+      session = { loggedIn:false, viewer:null, target:null, firstWishShownMap:{} };
+
       // Reset music selection for next user
       userChangedTrack = false;
       try{ music.pause(); }catch(e){}
       musicOn = false;
       setMusicButton(false);
       if (PLAYLIST.length) { trackIndex = 0; setTrack(0, false); }
+
       // Stop tracking view session
       try{ window.AppServices?.stopView?.(); }catch(e){}
-
-      localStorage.removeItem("card_session_v1");
 
       lock.classList.remove("hidden");
       chip.textContent = "Chưa mở";
@@ -1316,9 +1098,11 @@
       viewerName.value = "";
       viewerName.disabled = true;
       btnWish.disabled = true;
+
       btnSendWish.disabled = true;
       wishMsg.value = "";
       wishMsg.disabled = true;
+
       updateOwnerUI();
       wishEl.textContent = "🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.";
       avatarImg.src = "avatars/default.png";
@@ -1347,24 +1131,36 @@
         : "Chúc bạn một năm mới rực rỡ và thật bình an 🌸";
 
       setAvatar(t);
-      const pool = getWishPoolForTarget(t);
-      wishEl.textContent = formatWish(randomWish(pool), t.label);
+
+      // OPEN: ưu tiên firstWish (ethereal, yellowperson) chỉ 1 lần khi mở
+      const firstWish = getFirstWishForTarget(t);
+      session.firstWishShownMap = session.firstWishShownMap || {};
+      if (firstWish && !session.firstWishShownMap[t.key]){
+        wishEl.textContent = firstWish; // y nguyên bản gốc
+        session.firstWishShownMap[t.key] = true;
+      } else {
+        wishEl.textContent = buildRandomWishText(t);
+      }
 
       lock.classList.add("hidden");
 
-      // Apply default music for current viewer (Anh Quỳnh has a special default track)
+      // Apply default music for current viewer
       applyDefaultTrackForViewer(session.viewer);
-      
+
       // Enable wish sending
       btnSendWish.disabled = false;
       wishMsg.disabled = false;
+
       // Track view session (Firebase)
       try{ window.AppServices?.startView?.(session.viewer, session.target); }catch(e){}
+
       // Update owner buttons
       updateOwnerUI();
-burst(innerWidth*0.5, innerHeight*0.28, 180);
+
+      burst(innerWidth*0.5, innerHeight*0.28, 180);
     }
 
+    // ===== UNLOCK =====
     btnUnlock.addEventListener("click", () => {
       if (!selectedPerson){ setStatus("❌ Bạn chưa chọn người.", true); return; }
       const pw = (pass.value || "").trim();
@@ -1399,7 +1195,6 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
         await ensureServices();
         const info = await window.AppServices.ownerGoogleLogin();
         alert("✅ Owner Google Login OK\nUID: " + (info.uid || "") + "\nEmail: " + (info.email || ""));
-        // Hint: set window.OWNER_UID in config.js and Firestore Rules to this UID for owner-only read
       }catch(e){
         console.warn(e);
         alert("❌ Owner login lỗi. Xem Console (F12).\nNếu báo unauthorized-domain thì thêm domain trong Authentication → Settings → Authorized domains.");
@@ -1409,9 +1204,7 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
     });
 
     btnOwnerLogout.addEventListener("click", async () => {
-      try{
-        await window.AppServices.ownerGoogleLogout();
-      }catch(e){}
+      try{ await window.AppServices.ownerGoogleLogout(); }catch(e){}
       updateOwnerUI();
     });
 
@@ -1423,7 +1216,7 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
     btnTabWishes.addEventListener("click", () => { ownerTab = "wishes"; renderOwnerTab(); });
     btnRefreshOwner.addEventListener("click", () => renderOwnerTab());
 
-    // Send wish to owner (Firestore + EmailJS)
+    // Send wish to owner
     btnSendWish.addEventListener("click", async () => {
       const message = (wishMsg.value || "").trim();
       if (!message){
@@ -1461,9 +1254,11 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
       setStatus("Tip: Ảnh phải đặt đúng key. Ví dụ: avatars/bethucute.jpg + bắt buộc có avatars/default.png", false);
     });
 
+    // ===== FIREWORKS =====
     const canvas = document.getElementById("fx");
     const ctx = canvas.getContext("2d", { alpha: true });
     let W = 0, H = 0, dpr = 1;
+
     function resize(){
       dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
       W = Math.floor(window.innerWidth);
@@ -1495,6 +1290,7 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
         color: palette[(Math.random()*palette.length)|0],
       });
     }
+
     function burst(x, y, count = 90){
       const col = palette[(Math.random()*palette.length)|0];
       for (let i=0;i<count;i++){
@@ -1513,12 +1309,14 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
         });
       }
     }
+
     function drawGlow(x, y, r, col, a){
       ctx.beginPath();
       ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${a})`;
       ctx.arc(x, y, r, 0, Math.PI*2);
       ctx.fill();
     }
+
     function fadeFrame(){
       ctx.fillStyle = "rgba(255,255,255,0.10)";
       ctx.fillRect(0, 0, W, H);
@@ -1529,11 +1327,13 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
       if (e.touches && e.touches[0]) return {x: e.touches[0].clientX, y: e.touches[0].clientY};
       return {x: e.clientX, y: e.clientY};
     }
+
     window.addEventListener("pointerdown", (e) => {
       const p = pointerPos(e);
       lastPointer = p;
       addRocket(p.x, p.y);
     }, { passive:true });
+
     window.addEventListener("touchstart", (e) => {
       const p = pointerPos(e);
       lastPointer = p;
@@ -1582,6 +1382,7 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
       requestAnimationFrame(step);
     }
 
+    // ===== INIT =====
     (async function init(){
       try{
         await loadPeople();
@@ -1590,13 +1391,12 @@ burst(innerWidth*0.5, innerHeight*0.28, 180);
           selectedPerson = PEOPLE[0];
           selectText.innerHTML = `<span>${escapeHtml(selectedPerson.label)} <small>(@${escapeHtml(selectedPerson.key)})</small></span>`;
         }
-        // Force logout on every page load
-        try{ localStorage.removeItem("card_session_v1"); }catch(e){}
         lockCard("👉 Chọn người + nhập mật khẩu để bắt đầu.");
       }catch(err){
         console.warn(err);
         lockCard("⚠️ Không tải được people.json. Kiểm tra: avatars/people.json");
       }
+
       await loadPlaylist();
 
       ctx.clearRect(0,0,W,H);
