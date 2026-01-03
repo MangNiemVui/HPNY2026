@@ -26,6 +26,7 @@
         radial-gradient(900px 700px at 65% 85%, rgba(255,231,153,.25), transparent 58%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
     }
+
     canvas#fx{position:fixed; inset:0; width:100vw; height:100vh; display:block; pointer-events:none;}
     .sparkles{
       position:fixed; inset:0;
@@ -40,13 +41,16 @@
 
     .wrap{position:fixed; inset:0; display:grid; place-items:center; padding:12px;}
     .card{
-      width:min(920px, 100%); border-radius: var(--radius);
+      width:min(920px, 100%);
+      border-radius: var(--radius);
       background: linear-gradient(180deg, var(--card), var(--card2));
       border: 1px solid var(--stroke);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      overflow:hidden; position:relative;
-      display:flex; flex-direction:column;
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      flex-direction:column;
       max-height: calc(100svh - 24px);
     }
 
@@ -85,6 +89,23 @@
     .btnMusic:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btnMusic:active{ transform: translateY(0px) scale(.99); }
 
+    .btnSecondary{
+      padding: 8px 12px;
+      border-radius:999px;
+      border: 1px solid rgba(28,34,64,.12);
+      background: rgba(255,255,255,.65);
+      color: rgba(28,34,64,.85);
+      box-shadow:none;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .ownerBtn{
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
     .musicSelect{
       padding: 8px 10px;
       border-radius: 999px;
@@ -97,30 +118,13 @@
       max-width: 220px;
     }
 
-    .btnSecondary{
-      background: rgba(28,34,64,.10);
-      color: rgba(28,34,64,.85);
-      box-shadow:none;
-      border:0;
-      cursor:pointer;
-      padding:12px 14px;
-      border-radius:14px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .ownerBtn{
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      line-height: 1;
-      height: 38px;
-    }
-
     .content{
-      display:grid; grid-template-columns: 1fr;
-      gap:14px; padding:14px;
-      overflow:auto; -webkit-overflow-scrolling: touch;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      padding:14px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
       flex:1 1 auto;
     }
     @media (min-width: 780px){
@@ -136,7 +140,6 @@
       border: 1px solid rgba(28,34,64,.10);
     }
     .wish{font-size: clamp(15px, 3.2vw, 18px); line-height: 1.5; margin:0; min-height:56px;}
-
     .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
     input{
       flex:1 1 160px; min-width:160px;
@@ -204,7 +207,7 @@
       color: transparent;
     }
 
-    /* Lock overlay */
+    /* LOCK */
     .lock{
       position:absolute; inset:0;
       display:flex; align-items:center; justify-content:center;
@@ -215,15 +218,26 @@
       z-index: 20;
     }
     .lockPanel{
-      width: min(600px, 100%);
+      width: min(620px, 100%);
       border-radius: 20px;
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.85);
       border: 1px solid rgba(28,34,64,.12);
       box-shadow: 0 18px 50px rgba(28,34,64,.16);
       padding: 16px;
+      max-height: calc(100svh - 56px);
+      overflow:auto;
     }
-    .lockTitle{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
-    .lockTitle h2{margin:0; font-size:18px; letter-spacing:.2px;}
+    .lockTitle{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:10px; flex-wrap:wrap; margin-bottom:8px;
+    }
+    .lockTitle h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+      line-height:1.2;
+      word-break: break-word;
+    }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding: 6px 10px; border-radius:999px;
@@ -247,8 +261,8 @@
       color: rgba(155, 20, 55, .95);
     }
     .row2{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+    .btnDanger{background: linear-gradient(90deg, var(--danger), #ff9a7a);}
 
-    /* custom dropdown */
     .selectWrap{position:relative; flex: 1 1 280px; min-width:260px;}
     .selectBtn{
       width:100%;
@@ -294,7 +308,26 @@
     }
     .hidden{display:none !important;}
 
-    /* Tap-to-play overlay (iOS) */
+    /* Wish send */
+    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
+    .wishSendHead{font-weight:800;margin-bottom:8px}
+    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
+    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
+    .muted{opacity:.75}
+
+    /* Owner modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
+    .modal.hidden{display:none}
+    .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .modalTitle{font-weight:900;font-size:16px}
+    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .modalBody{font-size:14px;line-height:1.45}
+    .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
+    .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
+    .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
+
+    /* Tap audio overlay */
     .tapAudio{
       position:fixed; inset:0;
       display:grid; place-items:center;
@@ -325,34 +358,16 @@
       box-shadow: 0 10px 25px rgba(255,122,182,.18);
     }
 
-    /* Wish send */
-    .wishSend{margin-top:14px;padding:12px;border:1px solid rgba(28,34,64,.10);border-radius:16px;background:rgba(255,255,255,.70)}
-    .wishSendHead{font-weight:800;margin-bottom:8px}
-    .wishSend textarea{width:100%;resize:vertical;min-height:88px;border-radius:14px;border:1px solid rgba(28,34,64,.16);padding:10px 12px;font:inherit;outline:none}
-    .wishSend textarea:focus{border-color:rgba(255,122,182,.65);box-shadow:0 0 0 4px rgba(255,122,182,.18)}
-    .muted{opacity:.75}
-
-    /* Owner modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
-    .modal.hidden{display:none}
-    .modalCard{width:min(980px,100%);max-height:82vh;overflow:auto;background:#fff;border-radius:20px;padding:14px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
-    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-    .modalTitle{font-weight:900;font-size:16px}
-    .modalBtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-    .modalBody{font-size:14px;line-height:1.45}
-    .ownerRow{border:1px solid rgba(28,34,64,.10);border-radius:16px;padding:10px 12px;margin:10px 0}
-    .ownerMeta{opacity:.78;font-size:12px;margin-bottom:6px}
-    .pillMini{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(126,231,255,.25);border:1px solid rgba(126,231,255,.45);font-size:12px}
-
-    /* Mobile */
+    /* Mobile tweaks */
     @media (max-width: 520px){
       .wrap{padding:0; place-items:stretch;}
       .card{width:100%; max-height:100svh; border-radius:0;}
       .topbar{padding:10px 12px;}
       .badge{font-size:12px}
       .pill{display:none}
-      .row{gap:8px; flex-wrap:wrap;}
-      .row input, .row button, #btnWish{width:100%; flex: 1 1 100%;}
+      .side{order:-1; padding:4px 0 0;}
+      .bubble{width: min(240px, 70vw); border-radius:20px;}
+      .avatarImg{width:84%; height:84%;}
 
       .actions{
         display:grid;
@@ -361,20 +376,47 @@
         align-items:center;
         width:100%;
       }
-      .musicSelect{width:100%; min-width:0; max-width:none; height:36px; font-size:13px; padding:8px 10px;}
-      .btnMusic{width:36px; height:36px; padding:0; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; font-size:16px;}
+      .musicSelect{
+        width:100%;
+        min-width:0;
+        max-width:none;
+        height:36px;
+        font-size:13px;
+        padding:8px 10px;
+      }
+      .btnMusic{
+        width:36px;
+        height:36px;
+        padding:0;
+        border-radius:12px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        font-size:16px;
+      }
       .btnMusic .txt{display:none;}
       .ownerBtn{grid-column: 1 / -1; height:36px;}
-      .side{order:-1; padding:4px 0 0;}
-      .bubble{width: min(240px, 70vw); border-radius:20px;}
-      .avatarImg{width:84%; height:84%;}
+
+      .row input, .row button, #btnWish{width:100%; flex: 1 1 100%;}
       textarea#wishMsg{min-height:96px}
+
+      .lockPanel{max-height: calc(100svh - 24px);}
+      .lockTitle h2{font-size:16px;}
+      .row2 > *{width:100%; flex: 1 1 100%;}
+      .selectWrap{min-width:0;}
     }
 
     /* iOS safe area */
     @supports (padding: max(0px)) {
-      .wrap{padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right)) max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));}
-      @media (max-width: 520px){ .wrap{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;} }
+      .wrap{
+        padding: max(0px, env(safe-area-inset-top))
+                 max(0px, env(safe-area-inset-right))
+                 max(0px, env(safe-area-inset-bottom))
+                 max(0px, env(safe-area-inset-left));
+      }
+      @media (max-width: 520px){
+        .wrap{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0;}
+      }
     }
   </style>
 </head>
@@ -392,6 +434,7 @@
             <h2>🔒 Mở thiệp bằng TÊN + MẬT KHẨU</h2>
             <span class="chip" id="chip">Chưa mở</span>
           </div>
+
           <p class="mini">
             Chọn người cần xem, nhập mật khẩu rồi bấm <b>Mở thiệp</b>.
             Nếu bạn đăng nhập <b>Owner</b>, bạn có thể xem thiệp của người khác mà không cần mật khẩu của họ.
@@ -421,7 +464,7 @@
           </div>
 
           <div class="row2">
-            <button class="btnSecondary hidden" id="btnLogout" type="button">Đăng xuất</button>
+            <button class="btnDanger hidden" id="btnLogout" type="button">Đăng xuất</button>
           </div>
 
           <div class="status" id="status">👉 Chọn người + nhập mật khẩu để bắt đầu.</div>
@@ -434,7 +477,9 @@
           <span class="pill">Chạm / click để bắn pháo hoa 🎆</span>
           <select id="musicSelect" class="musicSelect" aria-label="Chọn nhạc"></select>
           <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
-          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc"><span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span></button>
+          <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc">
+            <span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span>
+          </button>
           <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
 
           <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
@@ -462,7 +507,7 @@
               <textarea id="wishMsg" rows="3" placeholder="Bạn hãy nhập vào đây gửi lời chúc đến chủ sở hữu nhé..."></textarea>
               <div class="row">
                 <button class="btnSecondary" id="btnSendWish" type="button" disabled>Gửi lời chúc</button>
-                <small class="muted" id="wishSendHint">* Bấm “Gửi” để gửi thẳng về Gmail chủ sở hữu (nếu đã cấu hình).</small>
+                <small class="muted" id="wishSendHint">* Bấm “Gửi” để lưu Firestore + gửi EmailJS (nếu đã cấu hình).</small>
               </div>
             </div>
           </div>
@@ -487,7 +532,7 @@
   </div>
 
   <!-- Owner Dashboard Modal -->
-  <div id="ownerModal" class="modal hidden" role="dialog" ariaџь-modal="true" aria-label="Owner Dashboard">
+  <div id="ownerModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Owner Dashboard">
     <div class="modalCard">
       <div class="modalHead">
         <div class="modalTitle">📊 Owner Dashboard</div>
@@ -512,12 +557,12 @@
 
   <audio id="music" preload="metadata" loop playsinline webkit-playsinline></audio>
 
-  <!-- EmailJS (send wish to owner's Gmail) -->
+  <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <!-- Project config (Firebase + EmailJS ids) -->
-  <script src="config.js"></script>
-  <!-- Services (Firebase view tracking + wish sending + owner auth) -->
-  <script type="module" src="services.js"></script>
+
+  <!-- ✅ QUAN TRỌNG: trên GitHub Pages nên dùng ./ để không lệch path -->
+  <script src="./config.js"></script>
+  <script type="module" src="./services.js"></script>
 
   <script>
     // ===== Year =====
@@ -548,22 +593,13 @@
     function setMusicButton(state, label){
       const ico = btnMusic.querySelector(".ico");
       const txt = btnMusic.querySelector(".txt");
-      if (!ico || !txt) {
-        btnMusic.textContent = label || (state ? "⏸ Tạm dừng" : "▶️ Phát nhạc");
-        return;
-      }
       if (label){
         ico.textContent = "❗";
         txt.textContent = label.replace(/^❗\s*/,'');
         return;
       }
-      if (state){
-        ico.textContent = "⏸";
-        txt.textContent = "Tạm dừng";
-      }else{
-        ico.textContent = "▶️";
-        txt.textContent = "Phát nhạc";
-      }
+      if (state){ ico.textContent = "⏸"; txt.textContent = "Tạm dừng"; }
+      else { ico.textContent = "▶️"; txt.textContent = "Phát nhạc"; }
     }
 
     async function loadPlaylist(){
@@ -571,11 +607,7 @@
         const res = await fetch("music/playlist.json", { cache: "no-store" });
         if (!res.ok) throw new Error("Cannot load music/playlist.json");
         PLAYLIST = await res.json();
-
-        musicSelect.innerHTML = PLAYLIST.map((t, i) =>
-          `<option value="${i}">${t.title}</option>`
-        ).join("");
-
+        musicSelect.innerHTML = PLAYLIST.map((t, i) => `<option value="${i}">${t.title}</option>`).join("");
         trackIndex = 0;
         userChangedTrack = false;
         setTrack(trackIndex, false);
@@ -587,34 +619,6 @@
       }
     }
 
-    function getDefaultTrackIndexForViewer(viewer){
-      const specialFile = (viewer && viewer.key === "ethereal") ? "24h.mp4" : "";
-      const defaultFile = "nam-qua-da-lam-gi.mp3";
-
-      const pickByFile = (file) => {
-        if (!file || !PLAYLIST.length) return -1;
-        const idx = PLAYLIST.findIndex(t => t.file === file);
-        return idx >= 0 ? idx : -1;
-      };
-
-      const specialIdx = pickByFile(specialFile);
-      if (specialIdx >= 0) return specialIdx;
-
-      const defIdx = pickByFile(defaultFile);
-      if (defIdx >= 0) return defIdx;
-
-      return 0;
-    }
-
-    function applyDefaultTrackForViewer(viewer){
-      if (!PLAYLIST.length) return;
-      if (userChangedTrack) return;
-      const desired = getDefaultTrackIndexForViewer(viewer);
-      if (Number.isInteger(desired) && desired >= 0 && desired < PLAYLIST.length){
-        setTrack(desired, false);
-      }
-    }
-
     function setTrack(i, autoplay=true){
       if (!PLAYLIST.length) return;
       trackIndex = (i + PLAYLIST.length) % PLAYLIST.length;
@@ -623,7 +627,6 @@
       music.volume = 0.9;
       if (musicOn && autoplay) music.play().catch(()=>{});
     }
-
     function showTapOverlay(){ tapAudio.classList.remove("hidden"); }
     function hideTapOverlay(){ tapAudio.classList.add("hidden"); }
 
@@ -641,27 +644,18 @@
         return false;
       }
     }
-
     async function toggleMusic(){
-      if (!PLAYLIST.length){
-        setMusicButton(false, "❗ Chưa có nhạc");
-        return;
-      }
+      if (!PLAYLIST.length){ setMusicButton(false, "❗ Chưa có nhạc"); return; }
       if (!musicOn){
         const ok = await tryPlayFromGesture();
-        if (!ok){
-          showTapOverlay();
-          setMusicButton(false);
-        }else{
-          burst(innerWidth*0.5, innerHeight*0.25, 140);
-        }
+        if (!ok){ showTapOverlay(); setMusicButton(false); }
+        else { burst(innerWidth*0.5, innerHeight*0.25, 140); }
       }else{
         music.pause();
         musicOn = false;
         setMusicButton(false);
       }
     }
-
     btnMusic.addEventListener("click", toggleMusic);
     btnPrev.addEventListener("click", () => { userChangedTrack = true; setTrack(trackIndex - 1, true); });
     btnNext.addEventListener("click", () => { userChangedTrack = true; setTrack(trackIndex + 1, true); });
@@ -675,7 +669,7 @@
       if (ok) burst(innerWidth*0.5, innerHeight*0.25, 120);
     });
 
-    // ===== Lock / UI refs =====
+    // ===== UI refs =====
     const lock = document.getElementById("lock");
     const statusEl = document.getElementById("status");
     const chip = document.getElementById("chip");
@@ -701,7 +695,6 @@
 
     const wishMsg = document.getElementById("wishMsg");
     const btnSendWish = document.getElementById("btnSendWish");
-    const wishSendHint = document.getElementById("wishSendHint");
 
     const ownerModal = document.getElementById("ownerModal");
     const ownerBody = document.getElementById("ownerBody");
@@ -709,7 +702,6 @@
     const btnTabViews = document.getElementById("btnTabViews");
     const btnTabWishes = document.getElementById("btnTabWishes");
     const btnRefreshOwner = document.getElementById("btnRefreshOwner");
-
     let ownerTab = "views";
 
     const viewerName = document.getElementById("viewerName");
@@ -717,66 +709,67 @@
     const wishEl = document.getElementById("wish");
     const avatarImg = document.getElementById("avatarImg");
 
-    // ===== 40+ random wishes =====
-    const DEFAULT_WISHES = [
-      "Chúc {name} năm mới {year} bình an dịu dàng, vui như Tết và may mắn đầy nhà! 🌸✨",
-      "Năm {year} chúc {name} sức khỏe dồi dào, tinh thần phơi phới, mọi thứ hanh thông! 💪🌈",
-      "Chúc {name} {year} tiền vào “rẹo rẹo”, tiền ra “nhỏ giọt” thôi nha! 💰😄",
-      "Chúc {name} {year} học gì hiểu đó, làm gì cũng tới, deadline nào cũng qua! 📚🚀",
-      "Chúc {name} {year} rực rỡ theo cách của riêng mình, không cần so sánh! 🌟🫧",
-      "Chúc {name} {year} mọi dự định đều “đúng tiến độ”, mọi mục tiêu đều “đúng đích”! ⏳🎯",
-
-      "Năm {year} chúc {name} sáng dậy thấy vui, tối ngủ thấy yên, ngày nào cũng đáng yêu! ☀️🛌",
-      "Chúc {name} {year} gặp người tốt, gặp việc tốt, gặp cơ hội tốt — đủ combo luôn! 🍀✨",
-      "Năm {year} chúc {name} bớt lo xa, bớt mệt lòng, thêm thật nhiều nụ cười! 😊🌷",
-      "Chúc {name} {year} đi đâu cũng gặp may, quay lại cũng gặp thương! 💞🍀",
-      "Năm {year} chúc {name} ăn ngon ngủ ngon, da đẹp dáng xinh, tiền rủ nhau tới! 🍜💅💸",
-      "Chúc {name} {year} làm gì cũng “mượt”, nói gì cũng “duyên”, yêu gì cũng “bền”! 🎀✨",
-      "Năm {year} chúc {name} nhẹ nhàng vượt mọi sóng gió, mạnh mẽ theo cách riêng! 🌊🧡",
-      "Chúc {name} {year} học/việc thăng hoa, tâm trạng nở hoa, ví tiền cũng nở hoa! 🌸💼💰",
-      "Năm {year} chúc {name} mở mắt ra là may mắn, nhắm mắt lại là bình yên! 🍀🕊️",
-      "Chúc {name} {year} yêu bản thân nhiều hơn, và được đời yêu lại còn nhiều hơn nữa! 💗✨",
-      "Năm {year} chúc {name} đi đúng đường, gặp đúng người, đúng thời điểm, đúng cảm xúc! 🎯💫",
-      "Chúc {name} {year} kế hoạch chạy ầm ầm, kết quả về rần rần! 🚀📈",
-      "Năm {year} chúc {name} không thiếu động lực, không thiếu may mắn, không thiếu tiền! 😆💪💸",
-      "Chúc {name} {year} vui vẻ như pháo hoa, lung linh như đèn lồng! 🎆🏮",
-      "Năm {year} chúc {name} mọi chuyện khó rồi sẽ qua, chuyện vui thì ở lại thật lâu! 🌈🫶",
-      "Chúc {name} {year} bớt “overthink”, thêm “over-happy”! 😄🧠",
-      "Năm {year} chúc {name} tình cảm đủ đầy, công việc đủ tiền, cuộc sống đủ chill! 🧋💼💖",
-      "Chúc {name} {year} cứ bước đi, may mắn sẽ chạy theo sau! 👣🍀",
-      "Năm {year} chúc {name} rạng rỡ mỗi ngày, và tự hào về chính mình! 🌟😊",
-      "Chúc {name} {year} làm ít hiểu nhiều, làm nhiều được nhiều! 📚💰",
-      "Năm {year} chúc {name} tinh thần “pin trâu”, sức khỏe “siêu bền”! 🔋💪",
-      "Chúc {name} {year} bỏ lại chuyện buồn, nhặt lấy chuyện vui, ôm trọn bình an! 🧺🌸",
-      "Năm {year} chúc {name} mọi thứ “đúng người đúng việc”, trái tim “đúng nhịp đúng rung”! 💓🎯",
-      "Chúc {name} {year} đi làm đi học gì cũng thuận, về nhà là thấy yên! 🏡✨",
-      "Năm {year} chúc {name} có thêm trải nghiệm hay, bạn bè tốt, và thật nhiều kỷ niệm! 📸🎉",
-      "Chúc {name} {year} nói ít trúng nhiều, làm ít trúng lớn! 😎🎯",
-      "Năm {year} chúc {name} được yêu thương đúng cách, và yêu thương đúng người! 💞✨",
-      "Chúc {name} {year} tự tin hơn một chút mỗi ngày, rồi sẽ giỏi hơn rất nhiều! 🌱🌟",
-      "Năm {year} chúc {name} vui vẻ không lý do, hạnh phúc không deadline! 🥳⏳",
-      "Chúc {name} {year} gặp quý nhân, tránh tiểu nhân, tiền tài tăng nhanh! 👑💸",
-      "Năm {year} chúc {name} mọi cánh cửa tốt đều mở ra, mọi điều xấu đều tự đóng lại! 🚪✨",
-      "Chúc {name} {year} trái tim ấm, đầu óc sáng, và cuộc sống thật “đáng”! 💡💗",
-      "Năm {year} chúc {name} có nhiều điều để mong, và nhiều điều để nhớ! 🎁📌",
-      "Chúc {name} {year} mỗi ngày đều là một phiên bản tốt hơn của hôm qua! 📈🌟",
-      "Năm {year} chúc {name} bình an trong lòng, đủ đầy ngoài đời! 🕊️💖",
-      "Chúc {name} {year} yêu đời hơn chút, yêu mình hơn nhiều! 🌷💗",
-      "Năm {year} chúc {name} gặp niềm vui nhỏ mỗi ngày, và niềm vui lớn mỗi tháng! 😊✨",
-      "Chúc {name} {year} làm gì cũng có người hỗ trợ, đi đâu cũng có người thương! 🫶🍀",
-      "Năm {year} chúc {name} thành công rực rỡ, nhưng vẫn luôn nhẹ nhàng! 🌟🌸",
-      "Chúc {name} {year} mọi dự định đều có kết quả đẹp, mọi cố gắng đều được đáp! 🎯💝",
-      "Năm {year} chúc {name} “đủ duyên” với điều tốt, “đủ sức” vượt điều khó! 🍀💪",
-      "Chúc {name} {year} cười nhiều hơn một chút, và mọi thứ sẽ ổn hơn rất nhiều! 😊✨",
-      "Năm {year} chúc {name} bình yên đi cùng, may mắn đi kèm, hạnh phúc đi sát! 🕊️🍀💖",
-      "Chúc {name} {year} mở mắt thấy hy vọng, bước đi thấy cơ hội, về nhà thấy an yên! ☀️🚪🏡"
+    // ===== 40+ lời chúc random chung =====
+    const GLOBAL_WISHES = [
+      "Chúc {name} năm {year} bình an, vui khỏe và gặp nhiều điều tốt đẹp bất ngờ! ✨",
+      "Năm {year} chúc {name} mọi dự định đều thuận lợi, làm đâu thắng đó! 🚀",
+      "Chúc {name} {year} tiền vào như nước, tiền ra nhỏ giọt thôi nha! 💰😄",
+      "Năm {year} chúc {name} ngủ ngon, ăn ngon, tinh thần lúc nào cũng sáng! 🌙🍜",
+      "Chúc {name} {year} gặp đúng người, đúng việc, đúng thời điểm! 🎯",
+      "Năm {year} chúc {name} cười nhiều hơn, lo ít hơn, yêu đời hơn! 😊🌷",
+      "Chúc {name} {year} sức khỏe dồi dào, năng lượng đầy pin cả năm! 🔋💪",
+      "Năm {year} chúc {name} học gì hiểu đó, làm gì cũng tới! 📚✅",
+      "Chúc {name} {year} mọi deadline đều qua nhẹ như lông hồng! ⏳🪽",
+      "Năm {year} chúc {name} may mắn tới tấp, niềm vui ngập tràn! 🍀🎉",
+      "Chúc {name} {year} rực rỡ theo cách của riêng mình, không cần so sánh! 🌟",
+      "Năm {year} chúc {name} đi đâu cũng gặp điều lành, về đâu cũng thấy yên! 🏡✨",
+      "Chúc {name} {year} công việc hanh thông, lương thưởng tăng đều! 💼📈",
+      "Năm {year} chúc {name} tình cảm ấm áp, gia đình bình an! 💖🫶",
+      "Chúc {name} {year} mọi chuyện khó rồi sẽ hóa dễ! 🌈",
+      "Năm {year} chúc {name} luôn tự tin, mạnh mẽ, và được yêu thương! 💪💗",
+      "Chúc {name} {year} sáng tạo bùng nổ, ý tưởng ra như suối! 💡🌊",
+      "Năm {year} chúc {name} điềm tĩnh trước bão, bình yên trong tim! 🌿",
+      "Chúc {name} {year} mỗi ngày đều có lý do để vui! 😄✨",
+      "Năm {year} chúc {name} mở mắt ra là thấy may mắn! 🍀👀",
+      "Chúc {name} {year} gặp nhiều cơ hội tốt, nắm là trúng! 🎯💫",
+      "Năm {year} chúc {name} đam mê dẫn đường, kiên trì đưa tới đích! 🧭🏁",
+      "Chúc {name} {year} mọi kế hoạch đều chạy “mượt” như ý! ✅",
+      "Năm {year} chúc {name} chill hết cỡ, vui hết nấc! 🎶😎",
+      "Chúc {name} {year} đi xa có bạn, về nhà có yêu thương! 🧳💞",
+      "Năm {year} chúc {name} bớt căng, thêm thảnh thơi! 🧘‍♀️",
+      "Chúc {name} {year} những điều tốt tự tìm đến, điều xấu tự đi lạc! 😝🍀",
+      "Năm {year} chúc {name} yêu bản thân nhiều hơn mỗi ngày! 💖",
+      "Chúc {name} {year} làm gì cũng “đúng tiến độ”, đạt gì cũng “đúng đích”! ⏳🎯",
+      "Năm {year} chúc {name} mưa cũng hóa nắng, buồn cũng hóa vui! ☔☀️",
+      "Chúc {name} {year} tinh thần vững vàng, trái tim ấm áp! ❤️‍🔥",
+      "Năm {year} chúc {name} mọi sự nhẹ nhàng như gió, dịu dàng như mây! ☁️🌸",
+      "Chúc {name} {year} thân khỏe – tâm an – trí sáng! 🌿🧠",
+      "Năm {year} chúc {name} bước nào cũng có người nâng đỡ! 🤝✨",
+      "Chúc {name} {year} kiếm được nhiều tiền nhưng vẫn ngủ đủ giấc! 💸😴",
+      "Năm {year} chúc {name} có thêm nhiều trải nghiệm đáng nhớ! 🗺️✨",
+      "Chúc {name} {year} vui vẻ trong điều nhỏ, hạnh phúc trong điều thường! 🌷",
+      "Năm {year} chúc {name} mọi nỗ lực đều được đền đáp xứng đáng! 🏆",
+      "Chúc {name} {year} nói ít trúng nhiều, làm ít hiệu quả cao! 😆✅",
+      "Năm {year} chúc {name} gặp quý nhân, tránh tiểu nhân! 🧿🍀",
+      "Chúc {name} {year} mỗi ngày đều có chút “wow”! ✨😆",
+      "Năm {year} chúc {name} luôn được trân trọng và yêu thương đúng cách! 💗",
+      "Chúc {name} {year} bình an là chính, vui vẻ là nhất! 🕊️",
+      "Năm {year} chúc {name} sống nhẹ nhàng mà vẫn rực rỡ! 🌸🌟"
     ];
 
-    // ===== Data =====
+    // ===== People + session =====
     let PEOPLE = [];
     let selectedPerson = null;
     let lastWishIndex = -1;
+
     let session = { loggedIn:false, viewer:null, target:null };
+    const firstWishShown = new Set(); // track firstWish per key
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
 
     function setStatus(msg, bad=false){
       statusEl.textContent = msg;
@@ -784,44 +777,26 @@
     }
 
     async function ensureServices(){
-      try{
-        if (!window.AppServices) return;
-        await window.AppServices.initFirebaseIfNeeded();
-      }catch(e){}
+      // nếu services.js chưa load => window.AppServices chưa có
+      if (!window.AppServices){
+        throw new Error("AppServices chưa sẵn sàng (services.js chưa load hoặc lỗi).");
+      }
+      await window.AppServices.initFirebaseIfNeeded?.();
     }
 
     function isOwnerRole(){
       return !!(session.loggedIn && session.viewer && session.viewer.role === "owner");
     }
     function isOwnerAuthed(){
-      try{
-        return window.AppServices?.isOwnerAuthed?.() === true;
-      }catch{ return false; }
+      try{ return window.AppServices?.isOwnerAuthed?.() === true; }
+      catch{ return false; }
     }
-
     function updateOwnerUI(){
       const ownerRole = isOwnerRole();
       const authed = isOwnerAuthed();
       btnOwnerLogin.classList.toggle("hidden", !ownerRole || authed);
       btnOwnerLogout.classList.toggle("hidden", !ownerRole || !authed);
       btnOwnerDashboard.classList.toggle("hidden", !ownerRole || !authed);
-    }
-
-    function formatDuration(sec){
-      sec = Math.max(0, Number(sec||0));
-      const m = Math.floor(sec/60);
-      const s = sec%60;
-      if (m <= 0) return s + "s";
-      return m + "m " + s + "s";
-    }
-
-    function fmtTime(ts){
-      try{
-        if (!ts) return "";
-        if (typeof ts.toDate === "function") return ts.toDate().toLocaleString();
-        if (ts.seconds) return new Date(ts.seconds*1000).toLocaleString();
-        return new Date(ts).toLocaleString();
-      }catch{ return ""; }
     }
 
     function openOwnerModal(){
@@ -832,22 +807,40 @@
       ownerModal.classList.add("hidden");
     }
 
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, m => ({
-        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-      }[m]));
+    function formatDuration(sec){
+      sec = Math.max(0, Number(sec||0));
+      const m = Math.floor(sec/60);
+      const s = sec%60;
+      if (m <= 0) return s + "s";
+      return m + "m " + s + "s";
+    }
+    function fmtTime(ts){
+      try{
+        if (!ts) return "";
+        if (typeof ts.toDate === "function") return ts.toDate().toLocaleString();
+        if (ts.seconds) return new Date(ts.seconds*1000).toLocaleString();
+        return new Date(ts).toLocaleString();
+      }catch{ return ""; }
     }
 
     async function renderOwnerTab(){
       ownerBody.textContent = "Đang tải...";
-      await ensureServices();
+      try{
+        await ensureServices();
+      }catch(e){
+        ownerBody.innerHTML = `
+          <div class="ownerRow">
+            <div><b>⚠️ ${escapeHtml(e.message || "Lỗi services")}</b></div>
+            <div class="ownerMeta">Mở DevTools → Console/Network để xem file services.js có bị 404 hoặc lỗi JS không.</div>
+          </div>`;
+        return;
+      }
 
       if (!isOwnerAuthed()){
         ownerBody.innerHTML = `
           <div class="ownerRow">
             <div><b>🔐 Bạn chưa đăng nhập Google Owner</b></div>
-            <div class="ownerMeta">Hãy bấm “Owner Login”, đăng nhập xong rồi mở lại Dashboard.</div>
-            <div class="ownerMeta">Nếu báo <code>auth/unauthorized-domain</code> thì thêm domain GitHub Pages vào Authentication → Settings → Authorized domains.</div>
+            <div class="ownerMeta">Bấm “Owner Login” ở góc trên để đăng nhập.</div>
           </div>
         `;
         return;
@@ -858,11 +851,7 @@
           const list = await window.AppServices.getLatestViews(200);
           const ownerKey = window.OWNER_KEY || "";
           const filtered = list.filter(v => (v.ownerKey||"") === ownerKey);
-
-          if (!filtered.length){
-            ownerBody.textContent = "Chưa có lượt xem nào.";
-            return;
-          }
+          if (!filtered.length){ ownerBody.textContent = "Chưa có lượt xem nào."; return; }
 
           ownerBody.innerHTML = filtered.map(v => `
             <div class="ownerRow">
@@ -882,11 +871,7 @@
           const list = await window.AppServices.getLatestWishes(200);
           const ownerKey = window.OWNER_KEY || "";
           const filtered = list.filter(w => (w.ownerKey||"") === ownerKey);
-
-          if (!filtered.length){
-            ownerBody.textContent = "Chưa có lời chúc nào.";
-            return;
-          }
+          if (!filtered.length){ ownerBody.textContent = "Chưa có lời chúc nào."; return; }
 
           ownerBody.innerHTML = filtered.map(w => `
             <div class="ownerRow">
@@ -904,13 +889,87 @@
         ownerBody.innerHTML = `
           <div class="ownerRow">
             <div><b>⚠️ Không tải được dữ liệu</b></div>
-            <div class="ownerMeta">Kiểm tra Firestore Rules (owner-only read), hoặc bạn chưa login Google Owner.</div>
+            <div class="ownerMeta">Kiểm tra Firestore Rules (owner-only read) hoặc Owner chưa login.</div>
           </div>
         `;
       }
     }
 
-    // ===== People =====
+    function randomWish(pool){
+      let idx;
+      do { idx = Math.floor(Math.random() * pool.length); }
+      while (pool.length > 1 && idx === lastWishIndex);
+      lastWishIndex = idx;
+      return pool[idx];
+    }
+
+    function getDisplayNameForTarget(t){
+      if (!t) return "bạn";
+      const override = (t.nameOverride || "").trim();
+      return override || t.label || "bạn";
+    }
+
+    function formatWish(template, displayName){
+      const name = (displayName || "bạn").trim();
+      const year = (yearInput.value || yearText.textContent || defaultYear).trim();
+      return template.replaceAll("{name}", name).replaceAll("{year}", year);
+    }
+
+    function buildWishText(template, target){
+      const name = getDisplayNameForTarget(target);
+      let text = formatWish(template, name);
+      const suffix = (target?.suffix || "").trim();
+      if (suffix) text += " " + suffix;
+      return text;
+    }
+
+    function getWishPoolForTarget(target){
+      // default: random global
+      if (!target) return GLOBAL_WISHES;
+
+      // Nếu có useGlobalRandomOnly => luôn dùng global khi bấm đổi
+      if (target.useGlobalRandomOnly) return GLOBAL_WISHES;
+
+      // Nếu người đó có wishes riêng (ví dụ owner) => dùng riêng
+      if (Array.isArray(target.wishes) && target.wishes.length) return target.wishes;
+
+      return GLOBAL_WISHES;
+    }
+
+    function showRandomWish(){
+      if (!session.loggedIn || !session.target) return;
+      const pool = getWishPoolForTarget(session.target);
+      const t = randomWish(pool);
+      wishEl.textContent = buildWishText(t, session.target);
+      burst(lastPointer.x || (innerWidth*0.5), lastPointer.y || (innerHeight*0.35), 120);
+    }
+
+    function showInitialWishIfAny(target){
+      // chỉ show firstWish 1 lần cho mỗi key trong phiên này
+      if (!target?.firstWish) return false;
+      if (firstWishShown.has(target.key)) return false;
+      firstWishShown.add(target.key);
+
+      wishEl.textContent = buildWishText(target.firstWish, target);
+      return true;
+    }
+
+    function tryLoadAvatarFromCandidates(candidates){
+      let i = 0;
+      const tryNext = () => {
+        if (i >= candidates.length){ avatarImg.src = "avatars/default.png"; return; }
+        avatarImg.onerror = tryNext;
+        avatarImg.src = candidates[i++];
+      };
+      tryNext();
+    }
+    function setAvatar(person){
+      if (!person){ avatarImg.src = "avatars/default.png"; return; }
+      const exts = person.exts || ["jpg","png","webp","jpeg"];
+      const candidates = exts.map(ext => `avatars/${person.key}.${ext}`);
+      tryLoadAvatarFromCandidates(candidates);
+    }
+
     async function loadPeople(){
       const res = await fetch("avatars/people.json", { cache: "no-store" });
       if (!res.ok) throw new Error("Cannot load avatars/people.json");
@@ -923,9 +982,13 @@
         pass: String(p.pass || "").trim(),
         role: String(p.role || "guest").trim(),
         exts: Array.isArray(p.exts) ? p.exts : ["jpg","png","webp","jpeg"],
-        // NEW:
+
+        // optional:
+        wishes: Array.isArray(p.wishes) ? p.wishes : null,
         firstWish: p.firstWish ? String(p.firstWish) : "",
-        displayAs: p.displayAs ? String(p.displayAs) : ""
+        useGlobalRandomOnly: !!p.useGlobalRandomOnly,
+        suffix: p.suffix ? String(p.suffix) : "",
+        nameOverride: p.nameOverride ? String(p.nameOverride) : ""
       })).filter(p => p.key && p.label && p.pass);
     }
 
@@ -983,65 +1046,15 @@
       if (!selectWrap.contains(e.target)) closeMenu();
     });
 
-    function tryLoadAvatarFromCandidates(candidates){
-      let i = 0;
-      const tryNext = () => {
-        if (i >= candidates.length){ avatarImg.src = "avatars/default.png"; return; }
-        avatarImg.onerror = tryNext;
-        avatarImg.src = candidates[i++];
-      };
-      tryNext();
-    }
-    function setAvatar(person){
-      if (!person){ avatarImg.src = "avatars/default.png"; return; }
-      const candidates = (person.exts || ["jpg","png","webp","jpeg"]).map(ext => `avatars/${person.key}.${ext}`);
-      tryLoadAvatarFromCandidates(candidates);
-    }
-
-    function displayNameForTarget(target){
-      if (!target) return "bạn";
-      const as = (target.displayAs || "").trim();
-      return as ? as : target.label;
-    }
-
-    function formatWish(template, target){
-      const name = displayNameForTarget(target).trim();
-      const year = (yearInput.value || yearText.textContent || defaultYear).trim();
-      return String(template || "")
-        .replaceAll("{name}", name)
-        .replaceAll("{year}", year);
-    }
-
-    function randomWish(pool){
-      let idx;
-      do { idx = Math.floor(Math.random() * pool.length); }
-      while (pool.length > 1 && idx === lastWishIndex);
-      lastWishIndex = idx;
-      return pool[idx];
-    }
-
-    function getInitialWishForTarget(target){
-      // If target has a firstWish, show it on open.
-      if (target && target.firstWish && String(target.firstWish).trim()){
-        return formatWish(target.firstWish, target);
-      }
-      // Otherwise random.
-      return formatWish(randomWish(DEFAULT_WISHES), target);
-    }
-
-    function showWish(){
-      if (!session.loggedIn || !session.target) return;
-      wishEl.textContent = formatWish(randomWish(DEFAULT_WISHES), session.target);
-      burst(lastPointer.x || (innerWidth*0.5), lastPointer.y || (innerHeight*0.35), 120);
-    }
-
     function lockCard(msg){
       session = { loggedIn:false, viewer:null, target:null };
+      firstWishShown.clear();
+
       userChangedTrack = false;
       try{ music.pause(); }catch(e){}
       musicOn = false;
       setMusicButton(false);
-      if (PLAYLIST.length) { trackIndex = 0; setTrack(0, false); }
+
       try{ window.AppServices?.stopView?.(); }catch(e){}
 
       lock.classList.remove("hidden");
@@ -1052,9 +1065,11 @@
       viewerName.value = "";
       viewerName.disabled = true;
       btnWish.disabled = true;
+
       btnSendWish.disabled = true;
       wishMsg.value = "";
       wishMsg.disabled = true;
+
       updateOwnerUI();
 
       wishEl.textContent = "🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.";
@@ -1072,7 +1087,7 @@
       chip.textContent = v.role === "owner" ? "Đã mở • Owner" : "Đã mở";
       badge.textContent = v.role === "owner" ? "👑 Owner Mode • Pastel Cute" : "🐴 Thiệp Năm Mới • Pastel Cute";
 
-      viewerName.value = displayNameForTarget(t);
+      viewerName.value = t.label;
       viewerName.disabled = true;
 
       btnWish.disabled = false;
@@ -1085,22 +1100,21 @@
 
       setAvatar(t);
 
-      // IMPORTANT: initial wish (special for some)
-      lastWishIndex = -1;
-      wishEl.textContent = getInitialWishForTarget(t);
+      // ✅ nếu người này có firstWish thì show khi mở lần đầu
+      const didShowFirst = showInitialWishIfAny(t);
+      if (!didShowFirst){
+        // không có firstWish => random bình thường
+        const pool = getWishPoolForTarget(t);
+        const template = randomWish(pool);
+        wishEl.textContent = buildWishText(template, t);
+      }
 
       lock.classList.add("hidden");
 
-      // Apply default music (Anh Quỳnh special)
-      applyDefaultTrackForViewer(session.viewer);
-
-      // Enable wish sending
       btnSendWish.disabled = false;
       wishMsg.disabled = false;
 
-      // Track view session
       try{ window.AppServices?.startView?.(session.viewer, session.target); }catch(e){}
-
       updateOwnerUI();
       burst(innerWidth*0.5, innerHeight*0.28, 180);
     }
@@ -1133,22 +1147,16 @@
 
     btnLogout.addEventListener("click", () => lockCard("👋 Đã đăng xuất."));
 
-    // ===== Owner Google Login / Logout / Dashboard =====
+    // Owner Login/Logout/Dashboard
     btnOwnerLogin.addEventListener("click", async () => {
       try{
         await ensureServices();
         const info = await window.AppServices.ownerGoogleLogin();
         alert("✅ Owner Google Login OK\nUID: " + (info.uid || "") + "\nEmail: " + (info.email || ""));
       }catch(e){
-        console.error("Owner login error:", e);
-        const code = e?.code || "";
-        const msg = e?.message || String(e);
-        alert(
-          "❌ Owner login lỗi.\n" +
-          (code ? ("Code: " + code + "\n") : "") +
-          "Msg: " + msg + "\n\n" +
-          "Nếu là auth/unauthorized-domain: Firebase Console → Authentication → Settings → Authorized domains → Add: mangniemvui.github.io"
-        );
+        console.warn(e);
+        alert("❌ Owner login lỗi.\nMsg: " + (e.message || e) +
+          "\n\nNếu là auth/unauthorized-domain: Firebase Console → Authentication → Settings → Authorized domains → Add: mangniemvui.github.io");
       }finally{
         updateOwnerUI();
       }
@@ -1167,7 +1175,7 @@
     btnTabWishes.addEventListener("click", () => { ownerTab = "wishes"; renderOwnerTab(); });
     btnRefreshOwner.addEventListener("click", () => renderOwnerTab());
 
-    // ===== Send wish to owner (Firestore + EmailJS) =====
+    // Send wish to owner (Firestore + EmailJS)
     btnSendWish.addEventListener("click", async () => {
       const message = (wishMsg.value || "").trim();
       if (!message){
@@ -1200,12 +1208,12 @@
       }
     });
 
-    btnWish.addEventListener("click", showWish);
+    btnWish.addEventListener("click", showRandomWish);
     btnHint.addEventListener("click", () => {
-      setStatus("Tip: Ảnh phải đặt đúng key. Ví dụ: avatars/bethucute.jpg và bắt buộc có avatars/default.png", false);
+      setStatus("Tip: Ảnh phải đặt đúng key. Ví dụ: avatars/bethucute.jpg + bắt buộc có avatars/default.png", false);
     });
 
-    // ===== Fireworks =====
+    // ===== fireworks =====
     const canvas = document.getElementById("fx");
     const ctx = canvas.getContext("2d", { alpha: true });
     let W = 0, H = 0, dpr = 1;
@@ -1327,6 +1335,7 @@
       requestAnimationFrame(step);
     }
 
+    // ===== init =====
     (async function init(){
       try{
         await loadPeople();
