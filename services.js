@@ -138,13 +138,21 @@ async function deleteWish(docId){
   await deleteDoc(doc(db, "wishes", String(docId)));
 }
 
+// ✅ helper: init EmailJS compatible mọi version
+function emailjsInitSafe(EJ, publicKey){
+  const pk = String(publicKey || "").trim();
+  if (!pk) return;
+  try { EJ.init({ publicKey: pk }); return; } catch (e) {}
+  try { EJ.init(pk); return; } catch (e) {}
+}
+
 async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, message }){
   await initFirebaseIfNeeded();
   let savedToFirestore = false;
   let emailed = false;
 
-  // 1) Save to Firestore
-   try {
+  // 1) Save to Firestore (fail cũng không chặn gửi mail)
+  try {
     await addDoc(collection(db, "wishes"), {
       ownerKey: window.OWNER_KEY || "",
       viewerKey, viewerLabel,
@@ -157,47 +165,47 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
     console.warn("Firestore addDoc failed => still try EmailJS:", e);
   }
 
-  // 2) Try EmailJS
-try {
-  const EJ =
-    (window.emailjs && window.emailjs.default && typeof window.emailjs.default.send === "function")
-      ? window.emailjs.default
-      : window.emailjs;
+  // 2) Try EmailJS (gửi kiểu “test” cho chắc)
+  try {
+    const EJ =
+      (window.emailjs && window.emailjs.default && typeof window.emailjs.default.send === "function")
+        ? window.emailjs.default
+        : window.emailjs;
 
-  if (EJ && window.EMAILJS_PUBLIC_KEY && window.EMAILJS_SERVICE_ID && window.EMAILJS_TEMPLATE_ID) {
-    // ✅ init đúng chuẩn docs
-    EJ.init({ publicKey: String(window.EMAILJS_PUBLIC_KEY).trim() });
+    if (!EJ || typeof EJ.send !== "function") {
+      console.warn("EmailJS script not loaded");
+      return { savedToFirestore, emailed: false };
+    }
 
-    await EJ.send(
-      String(window.EMAILJS_SERVICE_ID).trim(),
-      String(window.EMAILJS_TEMPLATE_ID).trim(),
-      {
-        from_name: viewerLabel || viewerKey || "Ẩn danh",
-        from_key: viewerKey || "",
-        card_target: targetLabel || targetKey || "",
-        time: new Date().toLocaleString("vi-VN"),
-        message: message || "",
-        to_email: "phanthu27112002@gmail.com",
-        // nếu template bạn có field reply-to hoặc to_email động thì dùng:
-        // to_email: window.OWNER_EMAIL || "",
-        // reply_to: window.OWNER_EMAIL || "",
-      },
-      // ✅ set publicKey ở options luôn cho chắc
-      { publicKey: String(window.EMAILJS_PUBLIC_KEY).trim() }
-    );
+    // init compatible (nếu có public key thì init, không có vẫn thử send như test)
+    if (window.EMAILJS_PUBLIC_KEY) {
+      emailjsInitSafe(EJ, window.EMAILJS_PUBLIC_KEY);
+    }
+
+    // Ưu tiên config từ window, nếu thiếu thì fallback đúng service/template bạn test
+    const serviceId = String(window.EMAILJS_SERVICE_ID || "service_s5ecpfq").trim();
+    const templateId = String(window.EMAILJS_TEMPLATE_ID || "template_zpr88bw").trim();
+
+    await EJ.send(serviceId, templateId, {
+      from_name: viewerLabel || viewerKey || "Ẩn danh",
+      from_key: viewerKey || "",
+      card_target: targetLabel || targetKey || "",
+      time: new Date().toLocaleString("vi-VN"),
+      message: message || "",
+      to_email: "phanthu27112002@gmail.com",
+    });
 
     emailed = true;
-  } else {
-    console.warn("EmailJS missing config or script not loaded");
+  } catch (e) {
+    console.warn("EmailJS send failed:", e);
+    console.warn("status:", e?.status);
+    console.warn("text:", e?.text);
   }
-} catch (e) {
-  console.warn("EmailJS send failed:", e);
-  console.warn("status:", e?.status);
-  console.warn("text:", e?.text);
+
+  // ✅ trả đúng kết quả thật
+  return { savedToFirestore, emailed };
 }
 
-return { savedToFirestore: true, emailed };
-}
 // expose to window
 window.AppServices = {
   initFirebaseIfNeeded,
