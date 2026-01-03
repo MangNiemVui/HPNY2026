@@ -32,42 +32,47 @@
     "pass": "23032001",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-    "firstWish": "💼 Chúc chị tìm được công việc tốt nhiều tiền, lun lun xinh đẹp như giờ nha...hihihihi!"
+    "firstWish": "💼 Chúc chị tìm được công việc tốt nhiều tiền, lun lun xinh đẹp như giờ nha.Chúc chị lun hạnh phúc và tìm được người iu thương nha...vẫn câu nói đó nghe chửi thì vui nhưng đừng khó tính với em quáaa...hihihihi!"
   },
   {
     "key": "baisau",
     "label": "Thảo chó",
     "pass": "07052002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+    "firstWish": "Chúc mày hạnh phúc bên lựa chọn của mày nha cưới thì t để giành đi mà giờ không đi vàng được rồi kkk thông cảm nho. Phải hạnh phúc nho nhỏ ơi"
   },
   {
     "key": "cholongnach",
     "label": "Linh Nhi",
     "pass": "02032002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+    "firstWish": "Mau mau cưới lẹ dùm tao đi nhanh lên quá lâu rồi. Hạnh phúc nhiều tiền có tiển mở shop cho t thẻ VIP giảm 50% nhóa"
   },
   {
     "key": "nguyenthu",
     "label": "Minh Thư",
     "pass": "12062002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+     "firstWish": " Công việc thuận lợi hơn nhiều tiền nhé lun cười nhiều sống thoải mái không áp lực không khóc nhè nữa nghe chưa"
   },
   {
     "key": "lovisong2",
     "label": "Như Ngọc",
     "pass": "22052001",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+     "firstWish": " HẠNH PHÚC, GIÀU CÓ, NHIỀU TIỀN, TÌM ĐC 1 NGƯỜI THƯƠNG MÌNH NHÉ CHỊ GIÀ, thương tôi nhiều hơn nhéee kkkk"
   },
   {
     "key": "chanhiu",
     "label": "Châu Anh",
     "pass": "02072002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+     "firstWish": " Mong mày hạnh phúc tìm được người iu thương mày thật lòng có thể bảo vệ và phù hợp với mày iu mày siêu nhiều nhé, có công việc thuận lợi hơn phù hợp hơn... thương tao nhiều hơn nè cho tao 1 chỉ vàng là được kkkk"
   },
   {
     "key": "cogaitamlinh",
@@ -82,14 +87,15 @@
     "pass": "15122003",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-    "firstWish": "🎓 Chúc em tốt nghiệp thạc sĩ thành công!"
+    "firstWish": "🎓 Chúc em tốt nghiệp thạc sĩ thành công! Chúc em lun vui vẻ bên người iu  nè bớt bắt nạt con bé lại nè. Tìm được công việc phù hợp và em yêu thích nhé."
   },
   {
     "key": "nhuy",
     "label": "Như Ý",
     "pass": "28012004",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+     "firstWish": " Khóa luận được A+ nhé cố lên nè!!. Lun xinh đẹp và vui vẻ như giờ nha, kkk không biết sao còn chơi mà coi như còn duyên đi. Thương chị mày nhiều hơn nhé kkk"
   },
   {
     "key": "baodepgai",
@@ -104,14 +110,15 @@
     "pass": "08112001",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-    "firstWish": "💎 Chúc bà mau làm phú bà, phú bà, phú bà cái gì quan trọng nhắc lạilại!"
+    "firstWish": "💎 Chúc bà mau làm phú bà, phú bà, phú bà cái gì quan trọng nhắc lại lại!"
   },
   {
     "key": "cotbao",
     "label": "Tiến",
     "pass": "22122002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+     "firstWish": " TỐT NGHIỆP! TỐT NGHIỆP! TỐT NGHIỆP! cái  gì quan trọng nhắc lại 3 lần nhé. Mong mày tìm được người mà yêu mày nhiều như mày yêu họ và phải hạnh phúc nha nếu mà về di linh lun tao xuống di linh nhớ đón tiếp đó nghe chưa bro"
   },
   {
     "key": "xuanmai",
