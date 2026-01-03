@@ -7,48 +7,42 @@
 
   <style>
     .successPage{
-  position:fixed; inset:0;
-  display:grid; place-items:center;
-  padding:18px;
-  background: rgba(255,255,255,.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 99999;
-}
-.successCard{
-  width:min(520px, 92vw);
-  border-radius: 22px;
-  background: rgba(255,255,255,.86);
-  border: 1px solid rgba(28,34,64,.12);
-  box-shadow: 0 18px 55px rgba(28,34,64,.20);
-  padding: 18px 16px;
-  text-align:center;
-}
-.successTick{
-  width: 92px; height: 92px;
-  border-radius: 999px;
-  margin: 4px auto 12px;
-  display:grid; place-items:center;
-  background: linear-gradient(135deg, rgba(255,122,182,.35), rgba(126,231,255,.35));
-  border: 1px solid rgba(28,34,64,.10);
-  box-shadow: 0 14px 30px rgba(255,122,182,.14);
-}
-.successTick span{
-  font-size: 52px;
-  line-height: 1;
-}
-.successTitle{
-  font-weight: 950;
-  font-size: 18px;
-  margin: 0 0 8px;
-}
-.successText{
-  font-size: 14px;
-  line-height: 1.55;
-  color: rgba(28,34,64,.78);
-  margin: 0 0 14px;
-  white-space: pre-wrap;
-}
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      padding:18px;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+    }
+    .successCard{
+      width:min(520px, 92vw);
+      border-radius: 22px;
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(28,34,64,.12);
+      box-shadow: 0 18px 55px rgba(28,34,64,.20);
+      padding: 18px 16px;
+      text-align:center;
+    }
+    .successTick{
+      width: 92px; height: 92px;
+      border-radius: 999px;
+      margin: 4px auto 12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(255,122,182,.35), rgba(126,231,255,.35));
+      border: 1px solid rgba(28,34,64,.10);
+      box-shadow: 0 14px 30px rgba(255,122,182,.14);
+    }
+    .successTick span{ font-size: 52px; line-height: 1; }
+    .successTitle{ font-weight: 950; font-size: 18px; margin: 0 0 8px; }
+    .successText{
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(28,34,64,.78);
+      margin: 0 0 14px;
+      white-space: pre-wrap;
+    }
+
     :root{
       --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
       --ink:#1c2240; --muted: rgba(28,34,64,.72);
@@ -590,11 +584,27 @@
     </div>
   </div>
 
+  <!-- Tap audio overlay -->
   <div id="tapAudio" class="tapAudio hidden" role="button" aria-label="Chạm để bật nhạc">
     <div class="tapCard">
       <div class="tapTitle">🔊 Chạm để bật nhạc</div>
       <div class="tapSub">iPhone cần thao tác 1 lần để cho phép phát nhạc 🎶</div>
       <div class="tapBtn">Chạm ngay ✨</div>
+    </div>
+  </div>
+
+  <!-- ✅ Success overlay (PHẢI để ngoài <script>) -->
+  <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true" aria-label="Gửi lời chúc thành công">
+    <div class="successCard">
+      <div class="successTick"><span>✅</span></div>
+      <h3 class="successTitle">Gửi lời chúc thành công!</h3>
+      <p class="successText">
+Cảm ơn bạn năm qua đã ở bên cạnh tôi nhé.
+Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
+      </p>
+      <div class="row" style="justify-content:center">
+        <button id="btnSuccessClose" type="button">Quay lại thiệp</button>
+      </div>
     </div>
   </div>
 
@@ -820,7 +830,6 @@
     }
 
     async function ensureServices(){
-      // nếu services.js chưa load => window.AppServices chưa có
       if (!window.AppServices){
         throw new Error("AppServices chưa sẵn sàng (services.js chưa load hoặc lỗi).");
       }
@@ -967,15 +976,9 @@
     }
 
     function getWishPoolForTarget(target){
-      // default: random global
       if (!target) return GLOBAL_WISHES;
-
-      // Nếu có useGlobalRandomOnly => luôn dùng global khi bấm đổi
       if (target.useGlobalRandomOnly) return GLOBAL_WISHES;
-
-      // Nếu người đó có wishes riêng (ví dụ owner) => dùng riêng
       if (Array.isArray(target.wishes) && target.wishes.length) return target.wishes;
-
       return GLOBAL_WISHES;
     }
 
@@ -988,11 +991,9 @@
     }
 
     function showInitialWishIfAny(target){
-      // chỉ show firstWish 1 lần cho mỗi key trong phiên này
       if (!target?.firstWish) return false;
       if (firstWishShown.has(target.key)) return false;
       firstWishShown.add(target.key);
-
       wishEl.textContent = buildWishText(target.firstWish, target);
       return true;
     }
@@ -1026,7 +1027,6 @@
         role: String(p.role || "guest").trim(),
         exts: Array.isArray(p.exts) ? p.exts : ["jpg","png","webp","jpeg"],
 
-        // optional:
         wishes: Array.isArray(p.wishes) ? p.wishes : null,
         firstWish: p.firstWish ? String(p.firstWish) : "",
         useGlobalRandomOnly: !!p.useGlobalRandomOnly,
@@ -1143,10 +1143,8 @@
 
       setAvatar(t);
 
-      // ✅ nếu người này có firstWish thì show khi mở lần đầu
       const didShowFirst = showInitialWishIfAny(t);
       if (!didShowFirst){
-        // không có firstWish => random bình thường
         const pool = getWishPoolForTarget(t);
         const template = randomWish(pool);
         wishEl.textContent = buildWishText(template, t);
@@ -1218,65 +1216,49 @@
     btnTabWishes.addEventListener("click", () => { ownerTab = "wishes"; renderOwnerTab(); });
     btnRefreshOwner.addEventListener("click", () => renderOwnerTab());
 
-    // Send wish to owner (Firestore + EmailJS)
+    // ===== Success overlay handlers =====
     const successPage = document.getElementById("successPage");
-const btnSuccessClose = document.getElementById("btnSuccessClose");
+    const btnSuccessClose = document.getElementById("btnSuccessClose");
 
-function showSuccessPage(){
-  successPage.classList.remove("hidden");
-  burst(innerWidth*0.5, innerHeight*0.28, 160);
-}
-function hideSuccessPage(){
-  successPage.classList.add("hidden");
-}
-
-btnSuccessClose.addEventListener("click", hideSuccessPage);
-successPage.addEventListener("click", (e) => { if (e.target === successPage) hideSuccessPage(); });
-
-btnSendWish.addEventListener("click", async () => {
-  const message = (wishMsg.value || "").trim();
-  if (!message){ setStatus("⚠️ Bạn chưa nhập lời chúc.", true); return; }
-
-  try{
-    btnSendWish.disabled = true;
-    await ensureServices();
-
-    const result = await window.AppServices.sendWish({
-      viewerKey: session.viewer?.key || "",
-      viewerLabel: session.viewer?.label || "",
-      targetKey: session.target?.key || "",
-      targetLabel: session.target?.label || "",
-      message
-    });
-
-    // ✅ Thành công CHỈ khi email gửi được
-    if (result && result.emailed){
-      wishMsg.value = "";
-      setStatus("✅ Đã gửi email thành công! 💌", false);
-      showSuccessPage();
-    } else {
-      // ❌ Email không gửi được
-      setStatus("❌ Không gửi thư thành công. Kiểm tra EmailJS (service/template/public key) và Console (F12).", true);
+    function showSuccessPage(){
+      successPage.classList.remove("hidden");
+      burst(innerWidth*0.5, innerHeight*0.28, 160);
+    }
+    function hideSuccessPage(){
+      successPage.classList.add("hidden");
     }
 
-  }catch(e){
-    console.warn(e);
-    setStatus("❌ Không gửi thư thành công. Vui lòng thử lại.", true);
-  }finally{
-    btnSendWish.disabled = false;
-  }
-});
-        wishMsg.value = "";
+    btnSuccessClose.addEventListener("click", hideSuccessPage);
+    successPage.addEventListener("click", (e) => { if (e.target === successPage) hideSuccessPage(); });
+
+    // Send wish to owner (Firestore + EmailJS)
+    btnSendWish.addEventListener("click", async () => {
+      const message = (wishMsg.value || "").trim();
+      if (!message){ setStatus("⚠️ Bạn chưa nhập lời chúc.", true); return; }
+
+      try{
+        btnSendWish.disabled = true;
+        await ensureServices();
+
+        const result = await window.AppServices.sendWish({
+          viewerKey: session.viewer?.key || "",
+          viewerLabel: session.viewer?.label || "",
+          targetKey: session.target?.key || "",
+          targetLabel: session.target?.label || "",
+          message
+        });
+
+        // ✅ Thành công CHỈ khi email gửi được
         if (result && result.emailed){
-          setStatus("✅ Đã gửi email đến Gmail chủ sở hữu! 💌", false);
-        }else if (result && result.savedToFirestore){
-          setStatus("✅ Đã lưu lời chúc (chưa gửi email vì chưa cấu hình EmailJS).", false);
-        }else{
-          setStatus("✅ Đã gửi! (Hãy kiểm tra cấu hình EmailJS/Firebase).", false);
+          wishMsg.value = "";
+          setStatus("✅ Đã gửi email thành công! 💌", false);
+          showSuccessPage();
+        } else {
+          setStatus("❌ Không gửi thư thành công. Kiểm tra EmailJS (service/template/public key) và Console (F12).", true);
         }
       }catch(e){
         console.warn(e);
-        setStatus("⚠️ Gửi thất bại. Kiểm tra EmailJS/Firebase và Console (F12).", true);
+        setStatus("❌ Không gửi thư thành công. Vui lòng thử lại.", true);
       }finally{
         btnSendWish.disabled = false;
       }
@@ -1423,6 +1405,7 @@ btnSendWish.addEventListener("click", async () => {
         console.warn(err);
         lockCard("⚠️ Không tải được people.json. Kiểm tra: avatars/people.json");
       }
+
       await loadPlaylist();
 
       ctx.clearRect(0,0,W,H);
@@ -1430,20 +1413,6 @@ btnSendWish.addEventListener("click", async () => {
       setTimeout(() => burst(W*0.5, H*0.28, 90), 350);
       try{ updateOwnerUI(); }catch(e){}
     })();
-    <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true">
-  <div class="successCard">
-    <div class="successTick"><span>✅</span></div>
-    <h3 class="successTitle">Gửi lời chúc thành công!</h3>
-    <p class="successText">
-Cảm ơn bạn năm qua đã ở bên cạnh tôi nhé.
-Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
-    </p>
-    <div class="row" style="justify-content:center">
-      <button class="primary" id="btnSuccessClose" type="button">Quay lại thiệp</button>
-    </div>
-  </div>
-</div>
-
   </script>
 </body>
 </html>
