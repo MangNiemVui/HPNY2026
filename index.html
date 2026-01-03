@@ -6,6 +6,16 @@
   <title>Thiệp Năm Mới 🎆</title>
 
   <style>
+    .ownerBtn{
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+}
+      @media (max-width:520px){
+    .ownerBtn{ height:36px; }
+}
+
     :root{
       --bg1:#ffe6f2; --bg2:#e8fbff; --bg3:#fff7da;
       --ink:#1c2240; --muted: rgba(28,34,64,.72);
@@ -720,13 +730,6 @@
           <div class="row2">
             <button class="btnDanger hidden" id="btnLogout" type="button">Đăng xuất</button>
           </div>
-
-          <div class="row2">
-            <button class="btnSecondary hidden" id="btnOwnerLogin" type="button">🔐 Owner Google Login</button>
-            <button class="btnSecondary hidden" id="btnOwnerLogout" type="button">🔓 Owner Google Logout</button>
-            <button class="btnSecondary hidden" id="btnOwnerDashboard" type="button">📊 Owner Dashboard</button>
-          </div>
-
           <div class="status" id="status">👉 Chọn người + nhập mật khẩu để bắt đầu.</div>
         </div>
       </div>
@@ -739,6 +742,11 @@
           <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
           <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc"><span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span></button>
           <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogout" type="button">🔓 Owner Logout</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerDashboard" type="button">📊 Dashboard</button>
+
+          
         </div>
       </div>
 
