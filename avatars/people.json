@@ -1,0 +1,233 @@
+[
+  {
+    "key": "bethucute",
+    "label": "Chủ sở hữu",
+    "pass": "29090302",
+    "role": "owner",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "👑 {name} ơi, năm {year} chúc bạn bình an – vui vẻ – giàu có, mọi điều như ý! ✨💖",
+      "👑 Chúc {name} năm {year} rực rỡ như pháo hoa, nhẹ nhàng như pastel, hạnh phúc thật nhiều! 🎆🌸"
+    ]
+  },
+  {
+    "key": "ethereal",
+    "label": "Anh Quỳnh",
+    "pass": "29092003",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} làm gì cũng thuận lợi, gặp đúng người đúng lúc, vui vẻ mỗi ngày! ✨",
+      "Năm {year} chúc {name} sức khỏe dồi dào, tinh thần phơi phới, may mắn tới tấp! 💪🍀"
+    ]
+  },
+  {
+    "key": "yellowperson",
+    "label": "Hồng Nhung",
+    "pass": "07102002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} luôn được yêu thương, cười nhiều, ngủ ngon và an yên! 😊💖",
+      "Năm {year} chúc {name} ví dày lên, tâm trạng sáng lên, mọi thứ hanh thông! 💰🌈"
+    ]
+  },
+  {
+    "key": "cogaitamlinh",
+    "label": "Nguyễn Ngọc",
+    "pass": "11102002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} nhẹ nhàng như gió, bình an như mây, vui vẻ mỗi ngày! ☁️🌸",
+      "Năm {year} chúc {name} mọi dự định đều chạy mượt, mọi lo lắng đều nhỏ lại! 🧘‍♀️✨"
+    ]
+  },
+  {
+    "key": "dangthu",
+    "label": "Đặng Thư",
+    "pass": "15122003",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} rực rỡ theo cách riêng, tự tin tỏa sáng và hạnh phúc thật nhiều! 🌟",
+      "Năm {year} chúc {name} học/việc đều thuận, gặp nhiều điều tốt lành tìm đến! 🍀📈"
+    ]
+  },
+  {
+    "key": "cholongnach",
+    "label": "Linh Nhi",
+    "pass": "02032002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} cười nhiều hơn, lo ít hơn, vui nhiều hơn nha! 😄🌷",
+      "Năm {year} chúc {name} đi đâu cũng gặp may, về đâu cũng thấy bình yên! 🏡✨"
+    ]
+  },
+  {
+    "key": "nguyenthu",
+    "label": "Minh Thư",
+    "pass": "12062002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} tiền vào như nước, tiền ra nhỏ giọt thôi nha! 💰😝",
+      "Năm {year} chúc {name} mọi mục tiêu đều về đích ngon ơ, thành tựu tăng đều! 🎯🏆"
+    ]
+  },
+  {
+    "key": "nhuy",
+    "label": "Như Ý",
+    "pass": "28012004",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} đúng như tên: mọi điều như ý, mọi chuyện như mơ! ✨💖",
+      "Năm {year} chúc {name} bình an ở trong tim, niềm vui ở quanh mình! 🌸🫶"
+    ]
+  },
+  {
+    "key": "baodepgai",
+    "label": "Huỳnh Như",
+    "pass": "02052003",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} xinh hơn, vui hơn, giàu hơn và yêu đời hơn! 😎💸",
+      "Năm {year} chúc {name} mọi điều tốt đẹp tự tìm đến, hạnh phúc không cần lý do! 🎁😊"
+    ]
+  },
+  {
+    "key": "chidep",
+    "label": "Tường Di",
+    "pass": "08112001",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} luôn được trân trọng, yêu thương và tỏa sáng thật dịu dàng! 🌷✨",
+      "Năm {year} chúc {name} công việc/ học hành thuận lợi, tinh thần phơi phới! 💪🌈"
+    ]
+  },
+  {
+    "key": "cotbao",
+    "label": "Bùi Ngọc Tiến",
+    "pass": "22122002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} bản lĩnh vững vàng, làm gì cũng tới, gặp gì cũng qua! 🧠🔥",
+      "Năm {year} chúc {name} sức khỏe, may mắn và nhiều cơ hội tốt bất ngờ! 🍀🚀"
+    ]
+  },
+  {
+    "key": "xuanmai",
+    "label": "Xuân Mai",
+    "pass": "16062003",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} dịu dàng như mùa xuân, rực rỡ như nắng mai! 🌼☀️",
+      "Năm {year} chúc {name} an yên thật nhiều, hạnh phúc thật lâu! 🕊️💖"
+    ]
+  },
+  {
+    "key": "tramkelly",
+    "label": "Trâm Kelly",
+    "pass": "23032001",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} luôn đáng yêu, xinh xắn và gặp toàn chuyện vui! 🧸💗",
+      "Năm {year} chúc {name} mọi dự định đều “đúng tiến độ”, mọi điều đều “đúng ý”! ⏳🎯"
+    ]
+  },
+  {
+    "key": "thuyhiencocuocgoikhac",
+    "label": "Thúy Hiền",
+    "pass": "18122002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} bình an, vững vàng, yêu đời và gặp nhiều điều tốt! 🌿✨",
+      "Năm {year} chúc {name} ngủ ngon, ăn ngon, làm gì cũng suôn sẻ! 🍜🛌"
+    ]
+  },
+  {
+    "key": "lovisong2",
+    "label": "Như Ngọc",
+    "pass": "22052000",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} trái tim luôn ấm, nụ cười luôn tươi và hạnh phúc thật đầy! 💖😊",
+      "Năm {year} chúc {name} gặp đúng người, đúng việc, đúng thời điểm! 🎯✨"
+    ]
+  },
+  {
+    "key": "baisau",
+    "label": "Thảo chó",
+    "pass": "07052002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} vui như Tết, chill như nhạc, giàu như mơ! 🎶💸",
+      "Năm {year} chúc {name} gặp toàn chuyện tốt, chuyện xấu… đi lạc hết! 😝🍀"
+    ]
+  },
+  {
+    "key": "chanhiu",
+    "label": "Châu Anh",
+    "pass": "02072002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} tỏa sáng kiểu nhẹ nhàng mà ai cũng phải “wow”! ✨😆",
+      "Năm {year} chúc {name} học/việc đều mượt, tinh thần luôn tích cực! ✅🌈"
+    ]
+  },
+  {
+    "key": "congai",
+    "label": "Minh Thư",
+    "pass": "18092006",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} lớn lên vui vẻ, học giỏi và luôn được yêu thương! 🧸💖",
+      "Năm {year} chúc {name} tự tin hơn mỗi ngày, làm gì cũng đạt điểm cao! 📚🌟"
+    ]
+  },
+  {
+    "key": "sapdautrunghi",
+    "label": "Cát Tường",
+    "pass": "13072002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} cát tường như tên: may mắn đủ đầy, bình an trọn vẹn! 🍀✨",
+      "Năm {year} chúc {name} đi đâu cũng gặp điều lành, về nhà là thấy yên! 🏡🌸"
+    ]
+  },
+  {
+    "key": "lemon",
+    "label": "Mỹ Anh",
+    "pass": "21062002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} ngọt ngào như lemon, vui vẻ như pháo hoa! 🍋🎆",
+      "Năm {year} chúc {name} rực rỡ, mạnh mẽ và hạnh phúc theo cách riêng! 🌟💖"
+    ]
+  },
+  {
+    "key": "giaquy",
+    "label": "Gia Quý",
+    "pass": "26092002",
+    "role": "guest",
+    "exts": ["jpg","png","webp","jpeg"],
+    "wishes": [
+      "Chúc {name} năm {year} sang xịn mịn, may mắn nhiều và thành công rực rỡ! 👑✨",
+      "Năm {year} chúc {name} công việc hanh thông, tài lộc vượng phát! 💼💰"
+    ]
+  }
+]
