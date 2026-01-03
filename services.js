@@ -15,7 +15,9 @@ import {
   query,
   orderBy,
   limit,
-  getDocs
+  getDocs,
+  doc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 let app = null;
@@ -41,7 +43,11 @@ async function initFirebaseIfNeeded(){
   auth = getAuth(app);
   db = getFirestore(app);
 
-  onAuthStateChanged(auth, (u) => { ownerUser = u || null; });
+  // chỉ gắn listener 1 lần
+  if (!initFirebaseIfNeeded._subscribed){
+    initFirebaseIfNeeded._subscribed = true;
+    onAuthStateChanged(auth, (u) => { ownerUser = u || null; });
+  }
 }
 
 function isOwnerAuthed(){
@@ -56,8 +62,6 @@ async function ownerGoogleLogin(){
   const cred = await signInWithPopup(auth, provider);
   const u = cred.user;
   ownerUser = u;
-
-  // nếu login đúng UID thì OK, không đúng UID vẫn login được nhưng không phải Owner
   return { uid: u.uid, email: u.email || "" };
 }
 
@@ -69,7 +73,7 @@ async function ownerGoogleLogout(){
 
 async function startView(viewer, target){
   await initFirebaseIfNeeded();
-  // lưu bắt đầu view (ai xem ai)
+
   const payload = {
     ownerKey: window.OWNER_KEY || "",
     viewerKey: viewer?.key || "",
@@ -81,18 +85,13 @@ async function startView(viewer, target){
     durationSec: 0,
     userAgent: navigator.userAgent || ""
   };
+
   const ref = await addDoc(collection(db, "views"), payload);
-  viewSession = {
-    docId: ref.id,
-    startedAtMs: Date.now(),
-    viewer,
-    target
-  };
+  viewSession = { docId: ref.id, startedAtMs: Date.now(), viewer, target };
 }
 
 async function stopView(){
-  // demo đơn giản: không update endedAt để tránh cần quyền update
-  // nếu bạn muốn update, mình sẽ viết thêm (cần Firestore rules cho update)
+  // demo: không update endedAt để tránh cần quyền update
   viewSession = null;
 }
 
@@ -112,10 +111,24 @@ async function getLatestWishes(n=200){
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
+// ✅ Owner delete
+async function deleteView(docId){
+  await initFirebaseIfNeeded();
+  if (!isOwnerAuthed()) throw new Error("Not owner authed");
+  if (!docId) throw new Error("Missing docId");
+  await deleteDoc(doc(db, "views", String(docId)));
+}
+
+async function deleteWish(docId){
+  await initFirebaseIfNeeded();
+  if (!isOwnerAuthed()) throw new Error("Not owner authed");
+  if (!docId) throw new Error("Missing docId");
+  await deleteDoc(doc(db, "wishes", String(docId)));
+}
+
 async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, message }){
   await initFirebaseIfNeeded();
 
-  // 1) Save to Firestore (ai gửi lời chúc khi đang xem ai)
   const payload = {
     ownerKey: window.OWNER_KEY || "",
     viewerKey, viewerLabel,
@@ -126,14 +139,11 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
 
   await addDoc(collection(db, "wishes"), payload);
 
-  // 2) Try EmailJS (nếu config đủ)
   let emailed = false;
   try{
     if (window.emailjs && window.EMAILJS_PUBLIC_KEY && window.EMAILJS_SERVICE_ID && window.EMAILJS_TEMPLATE_ID){
       window.emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
 
-      // Bạn map template EmailJS theo các biến dưới:
-      // to_email, viewer_label, target_label, message
       await window.emailjs.send(
         window.EMAILJS_SERVICE_ID,
         window.EMAILJS_TEMPLATE_ID,
@@ -153,7 +163,7 @@ async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, messag
   return { savedToFirestore: true, emailed };
 }
 
-// expose to window (✅ để tránh lỗi undefined)
+// expose to window
 window.AppServices = {
   initFirebaseIfNeeded,
   isOwnerAuthed,
@@ -163,5 +173,8 @@ window.AppServices = {
   stopView,
   getLatestViews,
   getLatestWishes,
+  deleteView,
+  deleteWish,
   sendWish
 };
+
