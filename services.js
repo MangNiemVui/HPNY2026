@@ -1,254 +1,197 @@
-// services.js (ES module)
-// Firebase: view tracking + saving wishes + owner-only dashboard helpers
-// EmailJS: send wish -> owner's Gmail
-
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js';
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import {
   getAuth,
-  signInAnonymously,
   GoogleAuthProvider,
   signInWithPopup,
-  signOut
-} from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js';
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
 import {
-  getFirestore, collection, addDoc, serverTimestamp, updateDoc, doc,
-  getDocs, query, orderBy, limit
-} from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js';
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 let app = null;
 let db = null;
 let auth = null;
 
+let ownerUser = null;
+
+// view session tracking
 let viewDocRef = null;
 let viewStartMs = 0;
-let pingTimer = null;
 
-function hasFirebaseConfig() {
-  const c = window.FIREBASE_CONFIG || {};
-  return !!(c.apiKey && c.projectId && c.appId);
+function mustConfig() {
+  if (!window.FIREBASE_CONFIG) throw new Error("Thiếu FIREBASE_CONFIG trong config.js");
+  if (!window.OWNER_KEY) throw new Error("Thiếu OWNER_KEY trong config.js");
 }
 
-async function initFirebaseIfNeeded() {
-  if (db) return { db, auth };
-  if (!hasFirebaseConfig()) return { db: null, auth: null };
+async function initFirebaseIfNeeded(){
+  mustConfig();
+  if (app && db && auth) return;
 
-  app = initializeApp(window.FIREBASE_CONFIG);
+  if (!getApps().length){
+    app = initializeApp(window.FIREBASE_CONFIG);
+  } else {
+    app = getApps()[0];
+  }
   db = getFirestore(app);
   auth = getAuth(app);
 
-  // anonymous sign-in so writes can be secured by request.auth != null
-  try {
-    await signInAnonymously(auth);
-  } catch (e) {
-    console.warn('Firebase anonymous auth failed:', e);
-  }
-
-  return { db, auth };
+  onAuthStateChanged(auth, (u) => {
+    ownerUser = u || null;
+  });
 }
 
-function initEmailJSIfNeeded() {
-  try {
-    if (!window.emailjs) return false;
-    if (!window.EMAILJS_PUBLIC_KEY) return false;
-    window.emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
-    return true;
-  } catch (e) {
-    console.warn('EmailJS init failed:', e);
-    return false;
-  }
+function isOwnerAuthed(){
+  return !!ownerUser;
 }
 
-function safeNowIso() {
-  return new Date().toISOString();
-}
-
-// ============ View tracking (Firestore: views) ============
-async function startView(viewer, target) {
+async function ownerGoogleLogin(){
   await initFirebaseIfNeeded();
-  if (!db) return; // Firebase not configured
-
-  await stopView(); // stop previous session if any
-
-  viewStartMs = Date.now();
-  const payload = {
-    ownerKey: window.OWNER_KEY || '',
-    viewerKey: viewer?.key || '',
-    viewerLabel: viewer?.label || '',
-    viewerRole: viewer?.role || 'guest',
-    viewerAuthUid: auth?.currentUser?.uid || '',
-    targetKey: target?.key || '',
-    targetLabel: target?.label || '',
-    startedAt: serverTimestamp(),
-    lastPingAt: serverTimestamp(),
-    endedAt: null,
-    durationSec: 0,
-    userAgent: navigator.userAgent || '',
-    referrer: document.referrer || '',
-  };
-
-  viewDocRef = await addDoc(collection(db, 'views'), payload);
-
-  // heartbeat update every 10s
-  pingTimer = setInterval(async () => {
-    try {
-      if (!viewDocRef) return;
-      const durationSec = Math.max(0, Math.floor((Date.now() - viewStartMs) / 1000));
-      await updateDoc(doc(db, 'views', viewDocRef.id), {
-        lastPingAt: serverTimestamp(),
-        durationSec,
-      });
-    } catch (e) {
-      // ignore transient errors
-    }
-  }, 10000);
-
-  // best-effort flush on leaving
-  window.addEventListener('pagehide', stopView, { once: true });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopView();
-  }, { once: true });
+  const provider = new GoogleAuthProvider();
+  const res = await signInWithPopup(auth, provider);
+  ownerUser = res.user;
+  return { uid: ownerUser.uid, email: ownerUser.email };
 }
 
-async function stopView() {
-  try {
-    if (pingTimer) {
-      clearInterval(pingTimer);
-      pingTimer = null;
-    }
-    await initFirebaseIfNeeded();
-    if (!db || !viewDocRef) return;
+async function ownerGoogleLogout(){
+  await initFirebaseIfNeeded();
+  await signOut(auth);
+  ownerUser = null;
+}
 
-    const durationSec = Math.max(0, Math.floor((Date.now() - viewStartMs) / 1000));
-    await updateDoc(doc(db, 'views', viewDocRef.id), {
-      endedAt: serverTimestamp(),
-      lastPingAt: serverTimestamp(),
-      durationSec,
+function isOwnerUID(){
+  return !!ownerUser && !!window.OWNER_UID && ownerUser.uid === window.OWNER_UID;
+}
+
+// ===== Views tracking =====
+async function startView(viewer, target){
+  try{
+    await initFirebaseIfNeeded();
+    viewStartMs = Date.now();
+    viewDocRef = await addDoc(collection(db, "views"), {
+      ownerKey: window.OWNER_KEY,
+      viewerKey: viewer?.key || "",
+      viewerLabel: viewer?.label || "",
+      targetKey: target?.key || "",
+      targetLabel: target?.label || "",
+      startedAt: serverTimestamp(),
+      endedAt: null,
+      durationSec: 0,
+      userAgent: navigator.userAgent || ""
     });
-  } catch (e) {
-    // ignore
-  } finally {
+  }catch(e){
+    // views fail is not fatal
+    console.warn("startView failed:", e);
+  }
+}
+
+async function stopView(){
+  try{
+    if (!db || !viewDocRef) return;
+    const durationSec = Math.max(0, Math.round((Date.now() - viewStartMs)/1000));
+    await updateDoc(doc(db, "views", viewDocRef.id), {
+      endedAt: serverTimestamp(),
+      durationSec
+    });
+  }catch(e){
+    console.warn("stopView failed:", e);
+  }finally{
     viewDocRef = null;
     viewStartMs = 0;
   }
 }
 
-// ============ Wishes (Firestore: wishes) + EmailJS ============
-async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, message }) {
-  // Returns:
-  // { savedToFirestore: boolean, emailed: boolean }
+// ===== Wishes send =====
+async function sendWish({ viewerKey, viewerLabel, targetKey, targetLabel, message }){
   await initFirebaseIfNeeded();
+
+  const payload = {
+    ownerKey: window.OWNER_KEY,
+    viewerKey,
+    viewerLabel,
+    targetKey,
+    targetLabel,
+    message,
+    createdAt: serverTimestamp()
+  };
 
   let savedToFirestore = false;
   let emailed = false;
 
-  // 1) save wish to Firestore (recommended)
-  if (db) {
-    await addDoc(collection(db, 'wishes'), {
-      ownerKey: window.OWNER_KEY || '',
-      viewerKey: viewerKey || '',
-      viewerLabel: viewerLabel || '',
-      viewerAuthUid: auth?.currentUser?.uid || '',
-      targetKey: targetKey || '',
-      targetLabel: targetLabel || '',
-      message: message || '',
-      createdAt: serverTimestamp(),
-      ua: navigator.userAgent || '',
-    });
+  // Save to Firestore (public write)
+  try{
+    await addDoc(collection(db, "wishes"), payload);
     savedToFirestore = true;
+  }catch(e){
+    console.warn("save wish failed:", e);
   }
 
-  // 2) send to owner Gmail via EmailJS (optional)
-  const canEmail = !!(
-    window.EMAILJS_PUBLIC_KEY &&
-    window.EMAILJS_SERVICE_ID &&
-    window.EMAILJS_TEMPLATE_ID &&
-    window.OWNER_EMAIL
-  );
-  if (canEmail) {
-    const ok = initEmailJSIfNeeded();
-    if (ok) {
-      const templateParams = {
-        to_email: window.OWNER_EMAIL,
-        from_name: viewerLabel || viewerKey || 'Ẩn danh',
-        from_key: viewerKey || '',
-        card_target: targetLabel || targetKey || '',
-        message: message || '',
-        time: safeNowIso(),
+  // EmailJS (optional)
+  try{
+    if (window.emailjs && window.EMAILJS_PUBLIC_KEY && window.EMAILJS_SERVICE_ID && window.EMAILJS_TEMPLATE_ID){
+      window.emailjs.init(window.EMAILJS_PUBLIC_KEY);
+
+      // bạn map field theo template emailjs của bạn
+      const params = {
+        to_email: window.OWNER_EMAIL_TO || "",
+        viewer_key: viewerKey,
+        viewer_label: viewerLabel,
+        target_key: targetKey,
+        target_label: targetLabel,
+        message: message
       };
 
-      await window.emailjs.send(
-        window.EMAILJS_SERVICE_ID,
-        window.EMAILJS_TEMPLATE_ID,
-        templateParams
-      );
+      await window.emailjs.send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, params);
       emailed = true;
     }
+  }catch(e){
+    console.warn("emailjs send failed:", e);
   }
 
   return { savedToFirestore, emailed };
 }
 
-// ============ Owner auth (Google) ============
- (Google) ============
-function isOwnerAuthed() {
-  try {
-    if (!auth || !auth.currentUser) return false;
-    if (!window.OWNER_UID) return false;
-    return auth.currentUser.uid === window.OWNER_UID;
-  } catch {
-    return false;
-  }
-}
-
-async function ownerGoogleLogin() {
+// ===== Owner read =====
+async function getLatestViews(n=100){
   await initFirebaseIfNeeded();
-  if (!auth) throw new Error('Auth not initialized');
+  if (!isOwnerAuthed()) throw new Error("Owner chưa login.");
+  if (!isOwnerUID()) throw new Error("Owner login OK nhưng UID chưa khớp OWNER_UID trong config.js.");
 
-  const provider = new GoogleAuthProvider();
-  await signInWithPopup(auth, provider);
-
-  return {
-    uid: auth.currentUser?.uid || '',
-    email: auth.currentUser?.email || '',
-    name: auth.currentUser?.displayName || '',
-  };
-}
-
-async function ownerGoogleLogout() {
-  await initFirebaseIfNeeded();
-  if (!auth) return;
-  await signOut(auth);
-
-  // Back to anonymous so normal visitors can still write views/wishes
-  try { await signInAnonymously(auth); } catch {}
-}
-
-// ============ Owner dashboard helpers ============
-async function getLatestViews(max = 200) {
-  await initFirebaseIfNeeded();
-  if (!db) return [];
-  const qy = query(collection(db, 'views'), orderBy('startedAt', 'desc'), limit(max));
+  const qy = query(collection(db, "views"), orderBy("startedAt", "desc"), limit(n));
   const snap = await getDocs(qy);
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
-async function getLatestWishes(max = 200) {
+async function getLatestWishes(n=100){
   await initFirebaseIfNeeded();
-  if (!db) return [];
-  const qy = query(collection(db, 'wishes'), orderBy('createdAt', 'desc'), limit(max));
+  if (!isOwnerAuthed()) throw new Error("Owner chưa login.");
+  if (!isOwnerUID()) throw new Error("Owner login OK nhưng UID chưa khớp OWNER_UID trong config.js.");
+
+  const qy = query(collection(db, "wishes"), orderBy("createdAt", "desc"), limit(n));
   const snap = await getDocs(qy);
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
-// Expose to window so index.html inline script can call
+// expose
 window.AppServices = {
   initFirebaseIfNeeded,
+  isOwnerAuthed,
+  ownerGoogleLogin,
+  ownerGoogleLogout,
   startView,
   stopView,
   sendWish,
   getLatestViews,
-  getLatestWishes,
-  ownerGoogleLogin,
-  ownerGoogleLogout,
-  isOwnerAuthed,
+  getLatestWishes
 };
